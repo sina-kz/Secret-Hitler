@@ -1,8 +1,10 @@
-package com.example.secretHitler;
+package com.example.secretHitler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.secretHitler.R;
 
 public class MainActivity extends AppCompatActivity {
 
