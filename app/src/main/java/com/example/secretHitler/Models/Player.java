@@ -7,16 +7,26 @@ public class Player {
     private String name;
     private Team team;
     private boolean isHitler;
+    private boolean isActive;
     private Role role;
 
-    public Player(String name) {
+    public Player() {
+    }
+
+    public Player(String name, Team team, boolean isHitler, boolean isActive, Role role) {
         this.name = name;
-        this.isHitler = false;
-        this.role = Role.SOLDIER;
+        this.team = team;
+        this.isHitler = isHitler;
+        this.isActive = isActive;
+        this.role = role;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Team getTeam() {
@@ -35,19 +45,19 @@ public class Player {
         isHitler = hitler;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public boolean isPresident(){
-        return this.role == Role.PRESIDENT;
-    }
-
-    public boolean isChancellor(){
-        return this.role == Role.CHANCELLOR;
     }
 }
