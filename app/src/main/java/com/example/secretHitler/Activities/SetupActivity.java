@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.secretHitler.R;
 
-public class MainActivity extends AppCompatActivity {
+public class SetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_setup);
     }
 }

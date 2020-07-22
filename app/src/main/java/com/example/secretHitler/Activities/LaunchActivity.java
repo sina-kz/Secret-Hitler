@@ -35,7 +35,7 @@ public class LaunchActivity extends AppCompatActivity {
                         }
                     });
                 }
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), SetupActivity.class));
             }
         }).start();
     }
