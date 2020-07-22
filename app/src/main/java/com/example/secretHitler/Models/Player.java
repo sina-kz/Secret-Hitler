@@ -8,6 +8,9 @@ public class Player {
     private Team team;
     private boolean isHitler;
     private boolean isActive;
+    private boolean isNewPresident;
+    private boolean previousPresident;
+    private boolean previousChancellor;
     private Role role;
 
     public Player() {
@@ -19,6 +22,9 @@ public class Player {
         this.isHitler = isHitler;
         this.isActive = isActive;
         this.role = role;
+        this.isNewPresident = false;
+        this.previousChancellor = false;
+        this.previousPresident = false;
     }
 
     public String getName() {
@@ -59,5 +65,29 @@ public class Player {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isNewPresident() {
+        return isNewPresident;
+    }
+
+    public void setNewPresident(boolean newPresident) {
+        isNewPresident = newPresident;
+    }
+
+    public boolean isPreviousPresident() {
+        return previousPresident;
+    }
+
+    public void setPreviousPresident(boolean previousPresident) {
+        this.previousPresident = previousPresident;
+    }
+
+    public boolean isPreviousChancellor() {
+        return previousChancellor;
+    }
+
+    public void setPreviousChancellor(boolean previousChancellor) {
+        this.previousChancellor = previousChancellor;
     }
 }
