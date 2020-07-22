@@ -36,56 +36,61 @@
             android:text="5" />
 
         <CheckBox
-            android:id="@+id/check5"
+            android:id="@+id/check6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:button="@drawable/checkbox"
-            android:checked="true"
-            android:text="5" />
+            android:button="@drawable/checkbox_selector"
+            android:checked="false"
+            android:text="6" />
 
         <CheckBox
-            android:id="@+id/check5"
+            android:id="@+id/check7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:button="@drawable/checkbox"
-            android:checked="true"
-            android:text="5" />
+            android:button="@drawable/checkbox_selector"
+            android:checked="false"
+            android:text="7" />
 
         <CheckBox
-            android:id="@+id/check5"
+            android:id="@+id/check8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:button="@drawable/checkbox"
-            android:checked="true"
-            android:text="5" />
+            android:button="@drawable/checkbox_selector"
+            android:checked="false"
+            android:text="8" />
 
         <CheckBox
-            android:id="@+id/check5"
+            android:id="@+id/check9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:button="@drawable/checkbox"
-            android:checked="true"
-            android:text="5" />
+            android:button="@drawable/checkbox_selector"
+            android:checked="false"
+            android:text="9" />
 
         <CheckBox
-            android:id="@+id/check5"
+            android:id="@+id/check10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:button="@drawable/checkbox"
-            android:checked="true"
-            android:text="5" />
+            android:button="@drawable/checkbox_selector"
+            android:checked="false"
+            android:text="10" />
     </LinearLayout>
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:background="@drawable/custom_button"
+        android:text="شروع بازی"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/gameRule"
@@ -93,6 +98,11 @@
         android:layout_height="60dp"
         android:layout_below="@id/startButton"
         android:layout_centerInParent="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_button"
+        android:text="مطالعه قوانین بازی"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
