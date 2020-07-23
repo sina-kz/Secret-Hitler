@@ -19,7 +19,7 @@ import java.util.List;
 public class SetupActivity extends AppCompatActivity {
     private CheckBox ch5, ch6, ch7, ch8, ch9, ch10;
     private Button startGameButton, gameRuleButton;
-    private int numOfPlayer;
+    private int numOfPlayer = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +142,7 @@ public class SetupActivity extends AppCompatActivity {
                     Intent intent = new Intent(getBaseContext(), addNameActivity.class);
                     intent.putExtra("NUM_OF_PLAYER", numOfPlayer);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(SetupActivity.this, "لطفا تعداد بازیکنان را انتخاب کنید", Toast.LENGTH_SHORT).show();
                 }
             }

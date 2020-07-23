@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,8 @@ public class addNameActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(myAdapter);
 
+        final int numberOfPlayers = getIntent().getIntExtra("NUM_OF_PLAYER", 10);
+        Log.d("sina", String.valueOf(numberOfPlayers));
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +46,9 @@ public class addNameActivity extends AppCompatActivity {
                 player.setName(nameText.getText().toString());
                 lstPlayer.add(player);
                 myAdapter.notifyItemInserted(lstPlayer.size() - 1);
+                if (numberOfPlayers == lstPlayer.size()) {
+                    addButton.setEnabled(false);
+                }
             }
         });
     }
