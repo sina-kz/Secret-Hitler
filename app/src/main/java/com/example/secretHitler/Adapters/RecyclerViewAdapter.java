@@ -1,9 +1,11 @@
 package com.example.secretHitler.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,8 +38,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.playerName.setText(mData.get(position).getName());
+        holder.imageEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 7/23/20  
+            }
+        });
+        holder.imageDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeAt(position);
+                Button button = (Button) ((Activity) mContext).findViewById(R.id.addButton);
+                button.setEnabled(true);
+            }
+        });
     }
 
     @Override
@@ -48,17 +64,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView playerName;
-        ImageView imageButton;
+        ImageView imageDelete;
         ImageView imageEdit;
         CardView cardView;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             playerName = (TextView) itemView.findViewById(R.id.name_text);
-            imageButton = (ImageView) itemView.findViewById(R.id.delete_button);
+            imageDelete = (ImageView) itemView.findViewById(R.id.delete_button);
             imageEdit = (ImageView) itemView.findViewById(R.id.edit_button);
             cardView = (CardView) itemView.findViewById(R.id.cardView_id);
         }
+    }
+
+
+    public void removeAt(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeRemoved(position, mData.size());
     }
 }

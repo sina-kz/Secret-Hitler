@@ -37,8 +37,8 @@ public class addNameActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(myAdapter);
 
+
         final int numberOfPlayers = getIntent().getIntExtra("NUM_OF_PLAYER", 10);
-        Log.d("sina", String.valueOf(numberOfPlayers));
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

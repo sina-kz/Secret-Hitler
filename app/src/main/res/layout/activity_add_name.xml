@@ -55,7 +55,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/linear"
         android:padding="16dp"
-        tools:itemCount="2"
+        app:spanCount="2"
         tools:listitem="@layout/cardview_item">
 
     </androidx.recyclerview.widget.RecyclerView>
