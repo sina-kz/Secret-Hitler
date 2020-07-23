@@ -65,7 +65,7 @@ public class addNameActivity extends AppCompatActivity {
         start_showing_role.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 7/23/20 
+                // kiram to agha daqiq
             }
         });
 
