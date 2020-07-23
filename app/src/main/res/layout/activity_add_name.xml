@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_2"
@@ -54,9 +55,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/linear"
+        android:layout_weight="11"
         android:padding="16dp"
         app:spanCount="2"
         tools:listitem="@layout/cardview_item">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/start_showing_role"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button_2"
+        android:gravity="center"
+        android:text="تعیین نقش ها"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.secretHitler.Adapters.RecyclerViewAdapter;
 import com.example.secretHitler.Models.Player;
@@ -20,7 +21,7 @@ import java.util.List;
 public class addNameActivity extends AppCompatActivity {
 
     List<Player> lstPlayer;
-    Button addButton;
+    Button addButton, start_showing_role;
     EditText nameText;
 
 
@@ -31,6 +32,7 @@ public class addNameActivity extends AppCompatActivity {
         lstPlayer = new ArrayList<>();
         addButton = findViewById(R.id.addButton);
         nameText = findViewById(R.id.name);
+        start_showing_role = findViewById(R.id.start_showing_role);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         final RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstPlayer);
@@ -42,14 +44,30 @@ public class addNameActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Player player = new Player();
-                player.setName(nameText.getText().toString());
-                lstPlayer.add(player);
-                myAdapter.notifyItemInserted(lstPlayer.size() - 1);
-                if (numberOfPlayers == lstPlayer.size()) {
-                    addButton.setEnabled(false);
+                boolean flag = true;
+                for (Player player : lstPlayer) {
+                    if (player.getName().equals(nameText.getText().toString())) {
+                        Toast.makeText(addNameActivity.this, "نام بازیکن قبلا وارد شده است", Toast.LENGTH_SHORT).show();
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    Player player = new Player();
+                    player.setName(nameText.getText().toString());
+                    lstPlayer.add(player);
+                    myAdapter.notifyItemInserted(lstPlayer.size() - 1);
+                    if (numberOfPlayers == lstPlayer.size()) {
+                        addButton.setEnabled(false);
+                    }
                 }
             }
         });
+        start_showing_role.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 7/23/20 
+            }
+        });
+
     }
 }
