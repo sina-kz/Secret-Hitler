@@ -24,4 +24,9 @@ public class GameMethods {
         }
     }
 
+//    public static ArrayList<PolicyCards> initializePolicies() {
+//        ArrayList<PolicyCards> policies = new ArrayList<>();
+//
+//    }
+
 }
