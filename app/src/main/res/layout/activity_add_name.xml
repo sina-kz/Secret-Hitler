@@ -14,7 +14,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="۷ بازیکن را وارد کنید"
+        android:text="لطفا نام بازیکنان بازی را وارد کنید"
         android:textSize="24sp"
         android:textStyle="bold" />
 

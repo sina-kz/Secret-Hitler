@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,7 @@ public class addNameActivity extends AppCompatActivity {
                 if (flag) {
                     Player player = new Player();
                     player.setName(nameText.getText().toString());
+                    nameText.setText("");
                     lstPlayer.add(player);
                     myAdapter.notifyItemInserted(lstPlayer.size() - 1);
                     if (numberOfPlayers == lstPlayer.size()) {
@@ -65,7 +67,8 @@ public class addNameActivity extends AppCompatActivity {
         start_showing_role.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // kiram to agha daqiq
+                Intent intent = new Intent(getBaseContext(), Show_Role.class);
+                startActivity(intent);
             }
         });
 
