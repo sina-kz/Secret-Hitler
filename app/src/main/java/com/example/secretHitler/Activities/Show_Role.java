@@ -2,10 +2,15 @@ package com.example.secretHitler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.secretHitler.Fragments.Show_Role_Fragment;
+import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
+
+import java.util.List;
 
 public class Show_Role extends AppCompatActivity {
 
@@ -19,5 +24,8 @@ public class Show_Role extends AppCompatActivity {
         fragment = new Show_Role_Fragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        Intent intent = getIntent();
+        List<Player> players = intent.getParcelableArrayListExtra("Players");
+
     }
 }

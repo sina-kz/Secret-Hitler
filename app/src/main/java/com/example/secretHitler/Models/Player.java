@@ -1,9 +1,12 @@
 package com.example.secretHitler.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.secretHitler.Enums.Role;
 import com.example.secretHitler.Enums.Team;
 
-public class Player {
+public class Player implements Parcelable {
     private String name;
     private Team team;
     private boolean isHitler;
@@ -20,6 +23,24 @@ public class Player {
         this.isActive = isActive;
         this.role = role;
     }
+
+    protected Player(Parcel in) {
+        name = in.readString();
+        isHitler = in.readByte() != 0;
+        isActive = in.readByte() != 0;
+    }
+
+    public static final Creator<Player> CREATOR = new Creator<Player>() {
+        @Override
+        public Player createFromParcel(Parcel in) {
+            return new Player(in);
+        }
+
+        @Override
+        public Player[] newArray(int size) {
+            return new Player[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -61,4 +82,15 @@ public class Player {
         this.role = role;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeByte((byte) (isHitler ? 1 : 0));
+        parcel.writeByte((byte) (isActive ? 1 : 0));
+    }
 }
