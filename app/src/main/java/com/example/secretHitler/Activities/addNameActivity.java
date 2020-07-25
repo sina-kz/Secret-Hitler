@@ -7,21 +7,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.secretHitler.Adapters.RecyclerViewAdapter;
+import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
+import com.example.secretHitler.Utils.Numbers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class addNameActivity extends AppCompatActivity {
 
-    List<Player> lstPlayer;
+    ArrayList<Player> lstPlayer;
     Button addButton, start_showing_role;
     EditText nameText;
 
@@ -67,6 +70,26 @@ public class addNameActivity extends AppCompatActivity {
         start_showing_role.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                switch (lstPlayer.size()) {
+                    case 5:
+                        GameMethods.assignTeams(lstPlayer, Numbers.fivePlayersGameNumberOfLiberals, Numbers.fivePlayersGameNumberOfFascists);
+                        break;
+                    case 6:
+                        GameMethods.assignTeams(lstPlayer, Numbers.sixPlayersGameNumberOfLiberals, Numbers.sixPlayersGameNumberOfFascists);
+                        break;
+                    case 7:
+                        GameMethods.assignTeams(lstPlayer, Numbers.sevenPlayersGameNumberOfLiberals, Numbers.sevenPlayersGameNumberOfFascists);
+                        break;
+                    case 8:
+                        GameMethods.assignTeams(lstPlayer, Numbers.eightPlayersGameNumberOfLiberals, Numbers.eightPlayersGameNumberOfFascists);
+                        break;
+                    case 9:
+                        GameMethods.assignTeams(lstPlayer, Numbers.ninePlayersGameNumberOfLiberals, Numbers.ninePlayersGameNumberOfFascists);
+                        break;
+                    case 10:
+                        GameMethods.assignTeams(lstPlayer, Numbers.tenPlayersGameNumberOfLiberals, Numbers.tenPlayersGameNumberOfFascists);
+                        break;
+                }
                 Intent intent = new Intent(getBaseContext(), Show_Role.class);
                 intent.putParcelableArrayListExtra("Players", (ArrayList<? extends Parcelable>) lstPlayer);
                 startActivity(intent);
