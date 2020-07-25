@@ -15,7 +15,6 @@ public class Show_Role_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.role_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.role_fragment, container, false);
     }
 }

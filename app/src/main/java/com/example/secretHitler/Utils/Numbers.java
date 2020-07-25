@@ -20,4 +20,6 @@ public class Numbers {
     public static final int liberalPoliciesToWin = 5;
     public static final int fascistsPoliciesToWin = 6;
     public static final int fascistsPolicesToActiveHitler = 3;
+    public static final int minNumberOfPlayers = 5;
+    public static final int maxNumberOfRejectedPresidents = 3;
 }

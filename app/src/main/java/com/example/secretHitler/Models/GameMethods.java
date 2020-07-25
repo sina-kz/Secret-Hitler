@@ -9,8 +9,12 @@ import java.util.Collections;
 import java.util.Random;
 
 public class GameMethods {
-    public static Player president;
-    public static Player Chancellor;
+    private static Player currentPresident;
+    private static Player currentChancellor;
+    private static Player previousPresident;
+    private static Player previousChancellor;
+    private static int presidentPointer = 0;
+    private static boolean selectablePresident = false;
     public static ArrayList<PolicyCard> skippedPolicies;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
@@ -69,9 +73,18 @@ public class GameMethods {
         return newPolicyCards;
     }
 
+    public static ArrayList<PolicyCard> usedPolicies(ArrayList<PolicyCard> policyCards) {
+        ArrayList<PolicyCard> usedPolicyCards = new ArrayList<>();
+        for (PolicyCard policyCard : policyCards) {
+            if (policyCard.getState() == PolicyState.USED) {
+                usedPolicyCards.add(policyCard);
+            }
+        }
+        return usedPolicyCards;
+    }
+
     public static void usePolicy(ArrayList<PolicyCard> policyCards, PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
-        policyCards.remove(policyCard);
     }
 
     public static void skipPolicy(PolicyCard policyCard) {
@@ -141,5 +154,116 @@ public class GameMethods {
             }
         }
         return liberals;
+    }
+
+    public static ArrayList<PolicyCard> pickThreePolicies(ArrayList<PolicyCard> activePolicies) {
+        ArrayList<PolicyCard> pickedPolicies = new ArrayList<>();
+        for (int i = 0; i < Numbers.accessibleNumberOfPolicies; i++) {
+            pickedPolicies.add(activePolicies.get(i));
+        }
+        return pickedPolicies;
+    }
+
+    public static boolean checkWinStateForLiberals(ArrayList<PolicyCard> policyCards, ArrayList<Player> players) {
+        ArrayList<PolicyCard> used = usedPolicies(policyCards);
+        int numOfLiberalPolicies = 0;
+        for (PolicyCard policyCard : used) {
+            if (policyCard.getType() == Team.LIBERAL) {
+                numOfLiberalPolicies++;
+            }
+        }
+        if (numOfLiberalPolicies == Numbers.liberalPoliciesToWin) {
+            return true;
+        }
+        Player hitler = new Player();
+        for (Player player : players) {
+            if (player.isHitler()) {
+                hitler = player;
+                break;
+            }
+        }
+        return !hitler.isActive();
+    }
+
+    public static boolean checkWinStateForFascists(ArrayList<PolicyCard> policyCards) {
+        ArrayList<PolicyCard> used = usedPolicies(policyCards);
+        int numOfFascistsPolicies = 0;
+        for (PolicyCard policyCard : used) {
+            if (policyCard.getType() == Team.FASCIST) {
+                numOfFascistsPolicies++;
+            }
+        }
+        if (numOfFascistsPolicies == Numbers.fascistsPoliciesToWin) {
+            return true;
+        }
+        return numOfFascistsPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler();
+    }
+
+    public static void initializePresident(ArrayList<Player> players) {
+        currentPresident = players.get(presidentPointer);
+    }
+
+    public static Player assignChancellor(ArrayList<Player> players, Player player) {
+        if (players.size() != Numbers.minNumberOfPlayers) {
+            if (previousChancellor == player || previousPresident == player) {
+                return null;
+            }
+        } else if (previousChancellor == player)
+            return null;
+        currentChancellor = player;
+        return player;
+    }
+
+    public static void completeAssignChancellor(Player player) {
+        previousChancellor = currentChancellor;
+        previousPresident = currentPresident;
+    }
+
+    public static void nextPresident(ArrayList<Player> players) {
+        presidentPointer = (presidentPointer + 1) % players.size();
+        currentPresident = players.get(presidentPointer);
+    }
+
+    public static void selectPresident(Player player) {
+        selectablePresident = false;
+        currentPresident = player;
+    }
+
+    public static Team askPlayersTeam(Player player) {
+        return player.getTeam();
+    }
+
+    public static Player getCurrentPresident() {
+        return currentPresident;
+    }
+
+    public static Player getCurrentChancellor() {
+        return currentChancellor;
+    }
+
+    public static Player getPreviousPresident() {
+        return previousPresident;
+    }
+
+    public static Player getPreviousChancellor() {
+        return previousChancellor;
+    }
+
+    public static boolean isSelectablePresident() {
+        return selectablePresident;
+    }
+
+    public static void setSelectablePresident(boolean selectablePresident) {
+        GameMethods.selectablePresident = selectablePresident;
+    }
+
+    public static ArrayList<Player> otherPlayers(ArrayList<Player> players, Player player) {
+        ArrayList<Player> others = new ArrayList<>();
+        for (Player otherPlayer : players) {
+            if (otherPlayer != player) {
+                others.add(otherPlayer);
+            }
+        }
+        return others;
     }
 }

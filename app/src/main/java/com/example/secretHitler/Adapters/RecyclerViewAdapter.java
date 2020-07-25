@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.secretHitler.Activities.addNameActivity;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 
