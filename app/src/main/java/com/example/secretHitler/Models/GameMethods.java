@@ -11,7 +11,7 @@ import java.util.Random;
 public class GameMethods {
     public static Player president;
     public static Player Chancellor;
-    public static ArrayList<PolicyCards> skipped;
+    public static ArrayList<PolicyCard> skippedPolicies;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
         ArrayList<Player> newPlayers = new ArrayList<>();
@@ -31,18 +31,18 @@ public class GameMethods {
         }
     }
 
-    public static ArrayList<PolicyCards> initializePolicies() {
-        ArrayList<PolicyCards> policies = new ArrayList<>();
+    public static ArrayList<PolicyCard> initializePolicies() {
+        ArrayList<PolicyCard> policies = new ArrayList<>();
         for (int i = 0; i < Numbers.numberOfLiberalPolicies; i++) {
-            PolicyCards policy = new PolicyCards(Team.LIBERAL);
+            PolicyCard policy = new PolicyCard(Team.LIBERAL);
             policies.add(policy);
         }
         for (int i = 0; i < Numbers.numberOfFascistPolicies; i++) {
-            PolicyCards policy = new PolicyCards(Team.FASCIST);
+            PolicyCard policy = new PolicyCard(Team.FASCIST);
             policies.add(policy);
         }
         Collections.shuffle(policies);
-        skipped = new ArrayList<>();
+        skippedPolicies = new ArrayList<>();
         return policies;
     }
 
@@ -59,9 +59,9 @@ public class GameMethods {
         return null;
     }
 
-    public static ArrayList<PolicyCards> activePolicies(ArrayList<PolicyCards> policyCards) {
-        ArrayList<PolicyCards> newPolicyCards = new ArrayList<>();
-        for (PolicyCards policyCard : policyCards) {
+    public static ArrayList<PolicyCard> activePolicies(ArrayList<PolicyCard> policyCards) {
+        ArrayList<PolicyCard> newPolicyCards = new ArrayList<>();
+        for (PolicyCard policyCard : policyCards) {
             if (policyCard.getState() == PolicyState.UNUSED) {
                 newPolicyCards.add(policyCard);
             }
@@ -69,24 +69,24 @@ public class GameMethods {
         return newPolicyCards;
     }
 
-    public static void usePolicy(ArrayList<PolicyCards> policyCards, PolicyCards policyCard) {
+    public static void usePolicy(ArrayList<PolicyCard> policyCards, PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
         policyCards.remove(policyCard);
     }
 
-    public static void skipPolicy(PolicyCards policyCard) {
+    public static void skipPolicy(PolicyCard policyCard) {
         policyCard.setState(PolicyState.PENDING);
-        skipped.add(policyCard);
+        skippedPolicies.add(policyCard);
     }
 
-    public static ArrayList<PolicyCards> reorderPolicies(ArrayList<PolicyCards> policyCards) {
-        policyCards.addAll(skipped);
-        skipped.clear();
+    public static ArrayList<PolicyCard> reorderPolicies(ArrayList<PolicyCard> policyCards) {
+        policyCards.addAll(skippedPolicies);
+        skippedPolicies.clear();
         Collections.shuffle(policyCards);
         return policyCards;
     }
 
-    public static void assignRoles(ArrayList<Player> players, int numOfLiberals, int numOfFascists) {
+    public static void assignTeams(ArrayList<Player> players, int numOfLiberals, int numOfFascists) {
         int i = 0;
         int j = 0;
         int counter = 0;
