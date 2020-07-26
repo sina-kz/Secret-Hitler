@@ -14,12 +14,28 @@
         android:layout_centerInParent="true" />
 
     <TextView
+        android:id="@+id/role_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/container"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="سینا"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/previous"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/container"
+        android:src="@drawable/previous" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/next"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/container"
+        android:src="@drawable/next" />
 </RelativeLayout>

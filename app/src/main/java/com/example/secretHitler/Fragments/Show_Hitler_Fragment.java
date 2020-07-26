@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.secretHitler.R;
 
-public class Show_Role_Fragment extends Fragment {
+public class Show_Hitler_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.role_fragment, container, false);
+        return inflater.inflate(R.layout.role_hitler_fragment, container, false);
     }
 }

@@ -26,6 +26,7 @@ public class Player implements Parcelable {
 
     protected Player(Parcel in) {
         name = in.readString();
+        team = Team.valueOf(in.readString());
         isHitler = in.readByte() != 0;
         isActive = in.readByte() != 0;
     }
@@ -90,6 +91,7 @@ public class Player implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
+        parcel.writeString(team.name());
         parcel.writeByte((byte) (isHitler ? 1 : 0));
         parcel.writeByte((byte) (isActive ? 1 : 0));
     }
