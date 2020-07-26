@@ -3,6 +3,7 @@ package com.example.secretHitler.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import java.util.List;
 public class Show_Role extends AppCompatActivity {
 
     private TextView textView;
-    private AppCompatImageView  next, previous;
+    private AppCompatImageView next, previous;
     private Fragment fragment;
     private int index;
 
@@ -42,12 +43,17 @@ public class Show_Role extends AppCompatActivity {
         checkTeam(players);
 
         textView.setText(players.get(index).getName());
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left
+                        , R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( index != 0){
+                if (index != 0) {
                     index--;
                     checkTeam(players);
                 }
@@ -57,7 +63,7 @@ public class Show_Role extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (index != players.size() - 1){
+                if (index != players.size() - 1) {
                     index++;
                     checkTeam(players);
                 }
@@ -66,18 +72,22 @@ public class Show_Role extends AppCompatActivity {
         });
 
     }
-    protected void checkTeam(List<Player> players){
-        if(players.get(index).getTeam().equals(Team.LIBERAL)){
+
+    protected void checkTeam(List<Player> players) {
+        if (players.get(index).getTeam().equals(Team.LIBERAL)) {
             fragment = new Show_Liberal_Fragment();
-        }
-        else{
-            if (players.get(index).isHitler()){
+        } else {
+            if (players.get(index).isHitler()) {
                 fragment = new Show_Hitler_Fragment();
-            }
-            else {
+            } else {
                 fragment = new Show_Fascist_Fragment();
             }
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left
+                        , R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
