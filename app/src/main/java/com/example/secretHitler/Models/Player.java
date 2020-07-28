@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.example.secretHitler.Enums.Role;
 import com.example.secretHitler.Enums.Team;
 
+import java.util.ArrayList;
+
 public class Player implements Parcelable {
     private String name;
     private Team team;
@@ -94,5 +96,29 @@ public class Player implements Parcelable {
         parcel.writeString(team.name());
         parcel.writeByte((byte) (isHitler ? 1 : 0));
         parcel.writeByte((byte) (isActive ? 1 : 0));
+    }
+
+    public String teammatesString(ArrayList<Player> playerTeammates) {
+        StringBuilder teammates = new StringBuilder();
+        if (this.getTeam() == Team.LIBERAL) {
+            return teammates.toString();
+        }
+        if (this.isHitler) {
+            teammates.append("تو هیتلر هستی!");
+            return teammates.toString();
+        }
+        Player hitler = new Player();
+        teammates.append("یاران تو");
+        String prefix = "";
+        for (Player player : playerTeammates) {
+            if (player.isHitler)
+                hitler = player;
+            teammates.append(prefix);
+            prefix = "،";
+            teammates.append(" ").append(player.getName());
+        }
+        teammates.append(" هستند.\n");
+        teammates.append(hitler.getName()).append(" هیتلر است!");
+        return teammates.toString();
     }
 }
