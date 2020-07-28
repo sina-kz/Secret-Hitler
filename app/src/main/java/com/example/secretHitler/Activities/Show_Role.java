@@ -38,7 +38,7 @@ public class Show_Role extends AppCompatActivity {
         previous = (AppCompatImageView) findViewById(R.id.previous);
         index = 0;
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final List<Player> players = intent.getParcelableArrayListExtra("Players");
         checkTeam(players);
 
@@ -50,14 +50,18 @@ public class Show_Role extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
 
+        previous.setVisibility(View.INVISIBLE);
+
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (index != 0) {
                     index--;
                     checkTeam(players);
+                    textView.setText(players.get(index).getName());
+                } else {
+                    previous.setVisibility(View.INVISIBLE);
                 }
-                textView.setText(players.get(index).getName());
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +70,12 @@ public class Show_Role extends AppCompatActivity {
                 if (index != players.size() - 1) {
                     index++;
                     checkTeam(players);
+                    textView.setText(players.get(index).getName());
+                    previous.setVisibility(View.VISIBLE);
+                } else {
+                    Intent boardGameIntent = new Intent(getBaseContext(), BoardGameActivity.class);
+                    startActivity(boardGameIntent);
                 }
-                textView.setText(players.get(index).getName());
             }
         });
 
