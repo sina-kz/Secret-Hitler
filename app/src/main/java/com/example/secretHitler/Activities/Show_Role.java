@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +20,9 @@ import com.example.secretHitler.Fragments.Show_Hitler_Fragment;
 import com.example.secretHitler.Fragments.Show_Liberal_Fragment;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Show_Role extends AppCompatActivity {
@@ -27,6 +31,7 @@ public class Show_Role extends AppCompatActivity {
     private AppCompatImageView next, previous;
     private Fragment fragment;
     private int index;
+    List<Player> players;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,8 @@ public class Show_Role extends AppCompatActivity {
         index = 0;
 
         final Intent intent = getIntent();
-        final List<Player> players = intent.getParcelableArrayListExtra("Players");
+        players = intent.getParcelableArrayListExtra("Players");
+        final Intent boardGameIntent = new Intent(getBaseContext(), BoardGameActivity.class);
         checkTeam(players);
 
         textView.setText(players.get(index).getName());
@@ -73,7 +79,12 @@ public class Show_Role extends AppCompatActivity {
                     textView.setText(players.get(index).getName());
                     previous.setVisibility(View.VISIBLE);
                 } else {
-                    Intent boardGameIntent = new Intent(getBaseContext(), BoardGameActivity.class);
+                    SharedPreferences sharedPreferences = getSharedPreferences("my shared", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(players);
+                    editor.putString("list", json);
+                    editor.apply();
                     startActivity(boardGameIntent);
                 }
             }

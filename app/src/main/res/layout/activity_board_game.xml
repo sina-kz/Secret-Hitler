@@ -17,6 +17,7 @@
         android:weightSum="2">
 
         <ImageView
+            android:id="@+id/facscist_board"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -24,6 +25,7 @@
             android:src="@drawable/facist_board" />
 
         <ImageView
+            android:id="@+id/liberal_board"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -31,26 +33,41 @@
             android:src="@drawable/lib_board" />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:weightSum="10">
 
         <TextView
             android:id="@+id/chanceler_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="لطفا چنسلر را انتخاب کنید"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_chanceler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/chanceler_text"
-            android:layout_margin="8dp" />
-    </RelativeLayout>
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:layout_weight="8"
+            tools:listitem="@layout/chanceler_item" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/recyclerview_chanceler"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_2"
+            android:text="انجام رای گیری"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>
