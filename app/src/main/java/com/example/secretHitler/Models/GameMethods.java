@@ -14,7 +14,7 @@ public class GameMethods {
     private static Player previousPresident;
     private static Player previousChancellor;
     private static int presidentPointer = 0;
-    private static boolean selectablePresident = false;
+    private static int numberOfRejects;
     public static ArrayList<PolicyCard> skippedPolicies;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
@@ -27,12 +27,8 @@ public class GameMethods {
         return newPlayers;
     }
 
-    public static void kill(ArrayList<Player> players, String name) {
-        for (Player player : players) {
-            if (player.getName().equals(name)) {
-                player.setActive(false);
-            }
-        }
+    public static void kill(Player player) {
+        player.setActive(false);
     }
 
     public static ArrayList<PolicyCard> initializePolicies() {
@@ -83,7 +79,7 @@ public class GameMethods {
         return usedPolicyCards;
     }
 
-    public static void usePolicy(ArrayList<PolicyCard> policyCards, PolicyCard policyCard) {
+    public static void usePolicy(PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
     }
 
@@ -200,6 +196,7 @@ public class GameMethods {
     }
 
     public static void initializePresident(ArrayList<Player> players) {
+        presidentPointer = new Random().nextInt(players.size());
         currentPresident = players.get(presidentPointer);
     }
 
@@ -214,7 +211,7 @@ public class GameMethods {
         return player;
     }
 
-    public static void completeAssignChancellor(Player player) {
+    public static void completeAssignChancellor() {
         previousChancellor = currentChancellor;
         previousPresident = currentPresident;
     }
@@ -225,7 +222,6 @@ public class GameMethods {
     }
 
     public static void selectPresident(Player player) {
-        selectablePresident = false;
         currentPresident = player;
     }
 
@@ -249,14 +245,6 @@ public class GameMethods {
         return previousChancellor;
     }
 
-    public static boolean isSelectablePresident() {
-        return selectablePresident;
-    }
-
-    public static void setSelectablePresident(boolean selectablePresident) {
-        GameMethods.selectablePresident = selectablePresident;
-    }
-
     public static ArrayList<Player> otherPlayers(ArrayList<Player> players, Player player) {
         ArrayList<Player> others = new ArrayList<>();
         for (Player otherPlayer : players) {
@@ -265,5 +253,37 @@ public class GameMethods {
             }
         }
         return others;
+    }
+
+    public static void useVetoPower(ArrayList<PolicyCard> policyCards) {
+        skipPolicy(policyCards.get(0));
+        skipPolicy(policyCards.get(1));
+    }
+
+    public static void usePresidentPower(String power, Player selectedPlayer, ArrayList<PolicyCard> activePolicies, ArrayList<PolicyCard> peekPolicies, Team selectedPlayerTeam) {
+        switch (power) {
+            case "EXECUTE":
+                kill(selectedPlayer);
+                break;
+            case "INVESTIGATE":
+                selectedPlayerTeam = askPlayersTeam(selectedPlayer);
+                break;
+            case "ELECTION":
+                selectPresident(selectedPlayer);
+                break;
+            case "POLICY_PEEK":
+                peekPolicies = pickThreePolicies(activePolicies);
+                break;
+        }
+    }
+
+    public static PolicyCard threeRejectsPolicy(ArrayList<Player> activePlayers, ArrayList<PolicyCard> activePolicies) {
+        nextPresident(activePlayers);
+        numberOfRejects++;
+        if(numberOfRejects < Numbers.maxNumberOfRejectedPresidents) {
+            return null;
+        }
+        numberOfRejects = 0;
+        return activePolicies.get(0);
     }
 }
