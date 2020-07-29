@@ -280,10 +280,30 @@ public class GameMethods {
     public static PolicyCard threeRejectsPolicy(ArrayList<Player> activePlayers, ArrayList<PolicyCard> activePolicies) {
         nextPresident(activePlayers);
         numberOfRejects++;
-        if(numberOfRejects < Numbers.maxNumberOfRejectedPresidents) {
+        if (numberOfRejects < Numbers.maxNumberOfRejectedPresidents) {
             return null;
         }
         numberOfRejects = 0;
         return activePolicies.get(0);
+    }
+
+    public static ArrayList<Player> assignableChancellors(ArrayList<Player> activePlayers) {
+        ArrayList<Player> others = otherPlayers(activePlayers, currentPresident);
+        if (activePlayers.size() != Numbers.minNumberOfPlayers) {
+            try {
+                others.remove(previousPresident);
+                others.remove(previousChancellor);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                others.remove(previousChancellor);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return others;
     }
 }

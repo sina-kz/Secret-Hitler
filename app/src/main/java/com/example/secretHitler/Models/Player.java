@@ -16,6 +16,8 @@ public class Player implements Parcelable {
     private Role role;
 
     public Player() {
+        isHitler = false;
+        isActive = true;
     }
 
     public Player(String name, Team team, boolean isHitler, boolean isActive, Role role) {

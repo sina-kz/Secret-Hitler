@@ -48,7 +48,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="لطفا چنسلر را انتخاب کنید"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -60,12 +60,13 @@
             tools:listitem="@layout/chanceler_item" />
 
         <Button
+            android:id="@+id/activate_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_below="@id/recyclerview_chanceler"
             android:layout_weight="1"
             android:background="@drawable/custom_button_2"
-            android:text="انجام رای گیری"
+            android:text="تایید"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
