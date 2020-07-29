@@ -3,19 +3,25 @@ package com.example.secretHitler.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Fragments.Show_Fascist_Fragment;
 import com.example.secretHitler.Fragments.Show_Hitler_Fragment;
 import com.example.secretHitler.Fragments.Show_Liberal_Fragment;
+import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 import com.google.gson.Gson;
+import com.wajahatkarim3.easyflipview.EasyFlipView;
+
 import java.util.ArrayList;
 
 public class Show_Role extends AppCompatActivity {
@@ -24,7 +30,7 @@ public class Show_Role extends AppCompatActivity {
     private AppCompatImageView next, previous;
     private Fragment fragment;
     private int index;
-    ArrayList<Player> players;
+    private ArrayList<Player> players;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -39,6 +45,7 @@ public class Show_Role extends AppCompatActivity {
 
         final Intent intent = getIntent();
         players = intent.getParcelableArrayListExtra("Players");
+        assert players != null;
         final Intent boardGameIntent = new Intent(getBaseContext(), BoardGameActivity.class);
         checkTeam(players);
 
@@ -91,7 +98,6 @@ public class Show_Role extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,6 +111,6 @@ public class Show_Role extends AppCompatActivity {
                 fragment = new Show_Fascist_Fragment();
             }
         }
-         if(index == 0) previous.setVisibility(View.INVISIBLE);
+        if (index == 0) previous.setVisibility(View.INVISIBLE);
     }
 }

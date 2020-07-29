@@ -70,29 +70,33 @@ public class addNameActivity extends AppCompatActivity {
         start_showing_role.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (lstPlayer.size()) {
-                    case 5:
-                        GameMethods.assignTeams(lstPlayer, Numbers.fivePlayersGameNumberOfLiberals, Numbers.fivePlayersGameNumberOfFascists);
-                        break;
-                    case 6:
-                        GameMethods.assignTeams(lstPlayer, Numbers.sixPlayersGameNumberOfLiberals, Numbers.sixPlayersGameNumberOfFascists);
-                        break;
-                    case 7:
-                        GameMethods.assignTeams(lstPlayer, Numbers.sevenPlayersGameNumberOfLiberals, Numbers.sevenPlayersGameNumberOfFascists);
-                        break;
-                    case 8:
-                        GameMethods.assignTeams(lstPlayer, Numbers.eightPlayersGameNumberOfLiberals, Numbers.eightPlayersGameNumberOfFascists);
-                        break;
-                    case 9:
-                        GameMethods.assignTeams(lstPlayer, Numbers.ninePlayersGameNumberOfLiberals, Numbers.ninePlayersGameNumberOfFascists);
-                        break;
-                    case 10:
-                        GameMethods.assignTeams(lstPlayer, Numbers.tenPlayersGameNumberOfLiberals, Numbers.tenPlayersGameNumberOfFascists);
-                        break;
+                if (lstPlayer.size() < numberOfPlayers) {
+                    Toast.makeText(addNameActivity.this, "تعداد بازیکنان برای تعیین نقش کافی نیست", Toast.LENGTH_SHORT).show();
+                } else {
+                    switch (lstPlayer.size()) {
+                        case 5:
+                            GameMethods.assignTeams(lstPlayer, Numbers.fivePlayersGameNumberOfLiberals, Numbers.fivePlayersGameNumberOfFascists);
+                            break;
+                        case 6:
+                            GameMethods.assignTeams(lstPlayer, Numbers.sixPlayersGameNumberOfLiberals, Numbers.sixPlayersGameNumberOfFascists);
+                            break;
+                        case 7:
+                            GameMethods.assignTeams(lstPlayer, Numbers.sevenPlayersGameNumberOfLiberals, Numbers.sevenPlayersGameNumberOfFascists);
+                            break;
+                        case 8:
+                            GameMethods.assignTeams(lstPlayer, Numbers.eightPlayersGameNumberOfLiberals, Numbers.eightPlayersGameNumberOfFascists);
+                            break;
+                        case 9:
+                            GameMethods.assignTeams(lstPlayer, Numbers.ninePlayersGameNumberOfLiberals, Numbers.ninePlayersGameNumberOfFascists);
+                            break;
+                        case 10:
+                            GameMethods.assignTeams(lstPlayer, Numbers.tenPlayersGameNumberOfLiberals, Numbers.tenPlayersGameNumberOfFascists);
+                            break;
+                    }
+                    Intent intent = new Intent(getBaseContext(), Show_Role.class);
+                    intent.putParcelableArrayListExtra("Players", (ArrayList<? extends Parcelable>) lstPlayer);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(getBaseContext(), Show_Role.class);
-                intent.putParcelableArrayListExtra("Players", (ArrayList<? extends Parcelable>) lstPlayer);
-                startActivity(intent);
             }
         });
 
