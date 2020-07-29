@@ -118,7 +118,7 @@ public class Player implements Parcelable {
             teammates.append(" ").append(player.getName());
         }
         teammates.append(" هستند.\n");
-        teammates.append(hitler.getName()).append(" هیتلر است!");
+        teammates.append("هیتلر ").append(hitler.getName()).append(" هست!");
         return teammates.toString();
     }
 }

@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.secretHitler.Enums.Team;
@@ -31,6 +30,8 @@ public class Show_Role extends AppCompatActivity {
     private Fragment fragment;
     private int index;
     private ArrayList<Player> players;
+    private Player player;
+    private int flipCounter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,10 +43,12 @@ public class Show_Role extends AppCompatActivity {
         next = findViewById(R.id.next);
         previous = findViewById(R.id.previous);
         index = 0;
+        flipCounter = 0;
 
         final Intent intent = getIntent();
         players = intent.getParcelableArrayListExtra("Players");
         assert players != null;
+        player = players.get(index);
         final Intent boardGameIntent = new Intent(getBaseContext(), BoardGameActivity.class);
         checkTeam(players);
 
@@ -64,6 +67,8 @@ public class Show_Role extends AppCompatActivity {
             public void onClick(View v) {
                 if (index != 0) {
                     index--;
+                    player = players.get(index);
+                    flipCounter = 0;
                     checkTeam(players);
                     textView.setText(players.get(index).getName());
                     getSupportFragmentManager().beginTransaction()
@@ -79,6 +84,8 @@ public class Show_Role extends AppCompatActivity {
             public void onClick(View v) {
                 if (index != players.size() - 1) {
                     index++;
+                    player = players.get(index);
+                    flipCounter = 0;
                     checkTeam(players);
                     textView.setText(players.get(index).getName());
                     previous.setVisibility(View.VISIBLE);
@@ -107,10 +114,17 @@ public class Show_Role extends AppCompatActivity {
         } else {
             if (players.get(index).isHitler()) {
                 fragment = new Show_Hitler_Fragment();
+                ((Show_Hitler_Fragment) fragment).setPlayer(player);
+                ((Show_Hitler_Fragment) fragment).setPlayers(players);
+                ((Show_Hitler_Fragment) fragment).setTextView(textView);
             } else {
                 fragment = new Show_Fascist_Fragment();
+                ((Show_Fascist_Fragment) fragment).setPlayer(player);
+                ((Show_Fascist_Fragment) fragment).setPlayers(players);
+                ((Show_Fascist_Fragment) fragment).setTextView(textView);
             }
         }
         if (index == 0) previous.setVisibility(View.INVISIBLE);
     }
+
 }
