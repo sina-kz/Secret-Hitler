@@ -30,17 +30,13 @@ public class Chancellor_Policy_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.president_policy_card_fragment, container, false);
+        View view = inflater.inflate(R.layout.chancellor_policy_card_fragment, container, false);
 
         card1_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_front);
         card2_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_front);
         card1_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_back);
         card2_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_back);
         reverse = (Button) view.findViewById(R.id.chancellor_reverse_cards_button);
-
-        if (card1_front == null) {
-            Log.d("sina", "kiram dahanet");
-        }
 
         double scale = getResources().getDisplayMetrics().density;
         card1_front.setCameraDistance((float) (8000 * scale));
@@ -59,19 +55,27 @@ public class Chancellor_Policy_Fragment extends Fragment {
             public void onClick(View view) {
                 if (isFront) {
                     front_anim.setTarget(card1_front);
-                    front_anim.setTarget(card2_front);
                     back_anim.setTarget(card1_back);
+                    front_anim.start();
+                    back_anim.start();
+
+                    front_anim.setTarget(card2_front);
                     back_anim.setTarget(card2_back);
                     front_anim.start();
                     back_anim.start();
+
                     isFront = false;
                 } else {
                     front_anim.setTarget(card1_back);
-                    front_anim.setTarget(card2_back);
                     back_anim.setTarget(card1_front);
+                    back_anim.start();
+                    front_anim.start();
+
+                    front_anim.setTarget(card2_back);
                     back_anim.setTarget(card2_front);
                     back_anim.start();
                     front_anim.start();
+
                     isFront = true;
                 }
             }

@@ -109,8 +109,7 @@ public class BoardGameActivity extends AppCompatActivity {
                 dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getBaseContext(), PolicyChoose.class);
-                        startActivity(intent);
+                        startActivity(new Intent(getBaseContext(), PolicyChoose.class));
                     }
                 });
                 dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
