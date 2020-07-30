@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,7 +36,6 @@ public class BoardGameActivity extends AppCompatActivity {
 
     ArrayList<Player> lstPlayer;
     ArrayList<CheckBox> lstCheckBoxes;
-    ArrayList<PolicyCard> policyCards;
     ArrayList<Player> activePlayers;
     ArrayList<Player> assignableChancellors;
     ArrayList<PolicyCard> activePolicies;
@@ -55,8 +55,10 @@ public class BoardGameActivity extends AppCompatActivity {
         }.getType();
         lstPlayer = gson.fromJson(json, type);
         assert lstPlayer != null;
-        GameMethods.initializePresident(lstPlayer);
-        policyCards = GameMethods.initializePolicies();
+        if (GameMethods.isFirstTimeCreated()) {
+            GameMethods.initializePresident(lstPlayer);
+            GameMethods.setFirstTimeCreated(false);
+        }
         showChancellors();
     }
 
@@ -80,7 +82,7 @@ public class BoardGameActivity extends AppCompatActivity {
     public void showChancellors() {
         activePlayers = GameMethods.activePlayers(lstPlayer);
         assignableChancellors = GameMethods.assignableChancellors(activePlayers);
-        activePolicies = GameMethods.activePolicies(policyCards);
+        activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
         RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(this, assignableChancellors, lstCheckBoxes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
@@ -123,7 +125,8 @@ public class BoardGameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         GameMethods.completeAssignChancellor();
-                        startActivity(new Intent(getBaseContext(), PolicyChoose.class));
+                        Intent intent = new Intent(getBaseContext(), PolicyChoose.class);
+                        startActivity(intent);
                     }
                 });
                 dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {

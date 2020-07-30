@@ -22,6 +22,6 @@ public class PolicyChoose extends AppCompatActivity {
         chancellorPolicyFragment = new Chancellor_Policy_Fragment();
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.policy_container, chancellorPolicyFragment).addToBackStack(null).commit();
+                .add(R.id.policy_container, presidentPolicyFragment).addToBackStack(null).commit();
     }
 }

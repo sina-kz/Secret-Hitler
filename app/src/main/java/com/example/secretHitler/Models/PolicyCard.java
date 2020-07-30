@@ -1,9 +1,12 @@
 package com.example.secretHitler.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.secretHitler.Enums.PolicyState;
 import com.example.secretHitler.Enums.Team;
 
-public class PolicyCard {
+public class PolicyCard implements Parcelable {
     private Team type;
     private PolicyState state;
 
@@ -11,6 +14,21 @@ public class PolicyCard {
         this.type = type;
         this.state = PolicyState.UNUSED;
     }
+
+    protected PolicyCard(Parcel in) {
+    }
+
+    public static final Creator<PolicyCard> CREATOR = new Creator<PolicyCard>() {
+        @Override
+        public PolicyCard createFromParcel(Parcel in) {
+            return new PolicyCard(in);
+        }
+
+        @Override
+        public PolicyCard[] newArray(int size) {
+            return new PolicyCard[size];
+        }
+    };
 
     public Team getType() {
         return type;
@@ -26,5 +44,16 @@ public class PolicyCard {
 
     public void setState(PolicyState state) {
         this.state = state;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(state.name());
+        parcel.writeString(type.name());
     }
 }

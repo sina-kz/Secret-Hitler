@@ -15,11 +15,9 @@ import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Fragments.Show_Fascist_Fragment;
 import com.example.secretHitler.Fragments.Show_Hitler_Fragment;
 import com.example.secretHitler.Fragments.Show_Liberal_Fragment;
-import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 import com.google.gson.Gson;
-import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.ArrayList;
 
@@ -31,7 +29,6 @@ public class Show_Role extends AppCompatActivity {
     private int index;
     private ArrayList<Player> players;
     private Player player;
-    private int flipCounter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,7 +40,6 @@ public class Show_Role extends AppCompatActivity {
         next = findViewById(R.id.next);
         previous = findViewById(R.id.previous);
         index = 0;
-        flipCounter = 0;
 
         final Intent intent = getIntent();
         players = intent.getParcelableArrayListExtra("Players");
@@ -68,7 +64,6 @@ public class Show_Role extends AppCompatActivity {
                 if (index != 0) {
                     index--;
                     player = players.get(index);
-                    flipCounter = 0;
                     checkTeam(players);
                     textView.setText(players.get(index).getName());
                     getSupportFragmentManager().beginTransaction()
@@ -85,7 +80,6 @@ public class Show_Role extends AppCompatActivity {
                 if (index != players.size() - 1) {
                     index++;
                     player = players.get(index);
-                    flipCounter = 0;
                     checkTeam(players);
                     textView.setText(players.get(index).getName());
                     previous.setVisibility(View.VISIBLE);

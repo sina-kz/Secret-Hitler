@@ -55,6 +55,10 @@ public class addNameActivity extends AppCompatActivity {
                         flag = false;
                     }
                 }
+                if(nameText.getText().toString().equals("")) {
+                    Toast.makeText(addNameActivity.this, "نام بازیکن خالی است", Toast.LENGTH_SHORT).show();
+                    flag = false;
+                }
                 if (flag) {
                     Player player = new Player();
                     player.setName(nameText.getText().toString());
@@ -73,6 +77,7 @@ public class addNameActivity extends AppCompatActivity {
                 if (lstPlayer.size() < numberOfPlayers) {
                     Toast.makeText(addNameActivity.this, "تعداد بازیکنان برای تعیین نقش کافی نیست", Toast.LENGTH_SHORT).show();
                 } else {
+                    GameMethods.initializePolicies();
                     switch (lstPlayer.size()) {
                         case 5:
                             GameMethods.assignTeams(lstPlayer, Numbers.fivePlayersGameNumberOfLiberals, Numbers.fivePlayersGameNumberOfFascists);

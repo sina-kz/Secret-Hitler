@@ -16,6 +16,10 @@ public class GameMethods {
     private static int presidentPointer = 0;
     private static int numberOfRejects;
     public static ArrayList<PolicyCard> skippedPolicies;
+    private static ArrayList<PolicyCard> allPolicies;
+    private static int numberOfFascistsUsedPolicies = 0;
+    private static int numberOfLiberalsUsedPolicies = 0;
+    private static boolean firstTimeCreated = true;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
         ArrayList<Player> newPlayers = new ArrayList<>();
@@ -31,7 +35,7 @@ public class GameMethods {
         player.setActive(false);
     }
 
-    public static ArrayList<PolicyCard> initializePolicies() {
+    public static void initializePolicies() {
         ArrayList<PolicyCard> policies = new ArrayList<>();
         for (int i = 0; i < Numbers.numberOfLiberalPolicies; i++) {
             PolicyCard policy = new PolicyCard(Team.LIBERAL);
@@ -43,7 +47,7 @@ public class GameMethods {
         }
         Collections.shuffle(policies);
         skippedPolicies = new ArrayList<>();
-        return policies;
+        allPolicies = policies;
     }
 
     public static ArrayList<Player> teammatesToBeShown(ArrayList<Player> players, Player player) {
@@ -81,6 +85,10 @@ public class GameMethods {
 
     public static void usePolicy(PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
+        if(policyCard.getType() == Team.LIBERAL)
+            numberOfLiberalsUsedPolicies++;
+        else
+            numberOfFascistsUsedPolicies++;
     }
 
     public static void skipPolicy(PolicyCard policyCard) {
@@ -161,14 +169,7 @@ public class GameMethods {
     }
 
     public static boolean checkWinStateForLiberals(ArrayList<PolicyCard> policyCards, ArrayList<Player> players) {
-        ArrayList<PolicyCard> used = usedPolicies(policyCards);
-        int numOfLiberalPolicies = 0;
-        for (PolicyCard policyCard : used) {
-            if (policyCard.getType() == Team.LIBERAL) {
-                numOfLiberalPolicies++;
-            }
-        }
-        if (numOfLiberalPolicies == Numbers.liberalPoliciesToWin) {
+        if (numberOfLiberalsUsedPolicies == Numbers.liberalPoliciesToWin) {
             return true;
         }
         Player hitler = new Player();
@@ -182,17 +183,10 @@ public class GameMethods {
     }
 
     public static boolean checkWinStateForFascists(ArrayList<PolicyCard> policyCards) {
-        ArrayList<PolicyCard> used = usedPolicies(policyCards);
-        int numOfFascistsPolicies = 0;
-        for (PolicyCard policyCard : used) {
-            if (policyCard.getType() == Team.FASCIST) {
-                numOfFascistsPolicies++;
-            }
-        }
-        if (numOfFascistsPolicies == Numbers.fascistsPoliciesToWin) {
+        if (numberOfFascistsUsedPolicies == Numbers.fascistsPoliciesToWin) {
             return true;
         }
-        return numOfFascistsPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler();
+        return numberOfFascistsUsedPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler();
     }
 
     public static void initializePresident(ArrayList<Player> players) {
@@ -305,5 +299,17 @@ public class GameMethods {
             }
         }
         return others;
+    }
+
+    public static ArrayList<PolicyCard> getAllPolicies() {
+        return allPolicies;
+    }
+
+    public static boolean isFirstTimeCreated() {
+        return firstTimeCreated;
+    }
+
+    public static void setFirstTimeCreated(boolean firstTimeCreated) {
+        GameMethods.firstTimeCreated = firstTimeCreated;
     }
 }

@@ -5,6 +5,7 @@
     android:background="@drawable/background_2">
 
     <TextView
+        android:id="@+id/president_message"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/r1"
@@ -28,7 +29,8 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="24dp"
             android:alpha="0"
-            android:src="@drawable/liberal_card" />
+            android:src="@drawable/liberal_card"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/president_policy_card_1_front"
@@ -62,7 +64,8 @@
             android:layout_alignParentRight="true"
             android:layout_margin="24dp"
             android:alpha="0"
-            android:src="@drawable/liberal_card" />
+            android:src="@drawable/liberal_card"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/president_policy_card_3_front"
