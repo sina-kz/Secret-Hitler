@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="بازی از تعدادی mission تشکیل شده، یک نفر به عنوان اولین رئیس جمهور انتخاب میشود و رئیس جمهورهای بعدی به ترتیب شماره انتخاب میشوند. رئیس جمهور یک فرد را به عنوان نخست وزیر انتخاب میکند و در صورتی که بیشتر از 50درصد افراد بازی موافق این ترکیب باشند، رئیس جمهور و صدراعظم mission را انجام میدهند" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="رئیس جمهور و صدراعظمی که آخرین missionرا انجام دادهاند، نمیتوانند در mission بعدی به عنوان صدراعظم انتخاب شوند. اگر فقط 5نفر در بازی باقی مانده بودند، رئیس جمهور آخرین mission میتواند صدراعظم شود" />
+
+
+</LinearLayout>
