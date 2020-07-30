@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.secretHitler.Adapters.RecyclerViewAdapter;
 import com.example.secretHitler.Adapters.RecyclerViewAdapterChanceler;
 import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
@@ -35,7 +34,6 @@ public class BoardGameActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView showPresidentTextView;
     Button activateButton;
-    CheckBox selected;
     Dialog mDialog;
 
     @Override
@@ -67,8 +65,8 @@ public class BoardGameActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void showChancellors() {
-        ArrayList<Player> activePlayers = GameMethods.activePlayers(lstPlayer);
-        ArrayList<Player> assignableChancellors = GameMethods.assignableChancellors(activePlayers);
+        final ArrayList<Player> activePlayers = GameMethods.activePlayers(lstPlayer);
+        final ArrayList<Player> assignableChancellors = GameMethods.assignableChancellors(activePlayers);
         RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(this, assignableChancellors, lstCheckBoxes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
@@ -76,37 +74,50 @@ public class BoardGameActivity extends AppCompatActivity {
         activateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean flag = false;
-                for (CheckBox checkBox : lstCheckBoxes) {
-                    if (checkBox.isChecked()) {
-                        selected = checkBox;
-                        flag = true;
-                        break;
-                    }
-                }
-                if (!flag) {
-                    Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را به عنوان چنسلر انتخاب کنید", Toast.LENGTH_SHORT).show();
-                } else {
-                    TextView dialog_president = (TextView) mDialog.findViewById(R.id.president_id_in_dialog);
-                    TextView dialog_chancellor = (TextView) mDialog.findViewById(R.id.chanceler_id_in_dialog);
-                    ImageView dialog_vote_yes_image = (ImageView) mDialog.findViewById(R.id.yes_vote_button);
-                    ImageView dialog_vote_no_image = (ImageView) mDialog.findViewById(R.id.no_vote_button);
-                    mDialog.show();
-
-                    dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            //yes action
-                        }
-                    });
-                    dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            //no action
-                        }
-                    });
-                }
+                showDialogBox(activePlayers, assignableChancellors);
             }
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void showDialogBox(ArrayList<Player> activePlayers, ArrayList<Player> assignableChancellors) {
+        boolean flag = false;
+        int i = 0;
+        for (; i < lstCheckBoxes.size(); i++) {
+            if (lstCheckBoxes.get(i).isChecked()) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را به عنوان چنسلر انتخاب کنید", Toast.LENGTH_SHORT).show();
+        } else {
+            Player selectedChancellor = assignableChancellors.get(i);
+            selectedChancellor = GameMethods.assignChancellor(activePlayers, selectedChancellor);
+            if (selectedChancellor == null) {
+                Toast.makeText(BoardGameActivity.this, "چنسلر قابل انتخاب نیست", Toast.LENGTH_SHORT).show();
+            } else {
+                TextView dialog_president = (TextView) mDialog.findViewById(R.id.president_id_in_dialog);
+                TextView dialog_chancellor = (TextView) mDialog.findViewById(R.id.chanceler_id_in_dialog);
+                dialog_president.setText("رئیس جمهور: " + GameMethods.getCurrentPresident().getName());
+                dialog_chancellor.setText("چنسلر: " + GameMethods.getCurrentChancellor().getName());
+                ImageView dialog_vote_yes_image = (ImageView) mDialog.findViewById(R.id.yes_vote_button);
+                ImageView dialog_vote_no_image = (ImageView) mDialog.findViewById(R.id.no_vote_button);
+                mDialog.show();
+
+                dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //yes action
+                    }
+                });
+                dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //no action
+                    }
+                });
+            }
+        }
     }
 }
