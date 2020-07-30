@@ -5,11 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ public class BoardGameActivity extends AppCompatActivity {
     TextView showPresidentTextView;
     Button activateButton;
     CheckBox selected;
+    Dialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,10 @@ public class BoardGameActivity extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Player>>() {
         }.getType();
         lstPlayer = gson.fromJson(json, type);
+
+        mDialog = new Dialog(this);
+        mDialog.setContentView(R.layout.dialog_vote);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         lstCheckBoxes = new ArrayList<>();
         for (CheckBox checkBox : lstCheckBoxes) {
@@ -78,8 +87,24 @@ public class BoardGameActivity extends AppCompatActivity {
                 if (!flag) {
                     Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را به عنوان چنسلر انتخاب کنید", Toast.LENGTH_SHORT).show();
                 } else {
-                    // assign the selected Chancellor by using GameMethods.assignChancellorFunction
-                    // Show the dialogBox (create a function for that part: handle "ya" and "nein")
+                    TextView dialog_president = (TextView) mDialog.findViewById(R.id.president_id_in_dialog);
+                    TextView dialog_chancellor = (TextView) mDialog.findViewById(R.id.chanceler_id_in_dialog);
+                    ImageView dialog_vote_yes_image = (ImageView) mDialog.findViewById(R.id.yes_vote_button);
+                    ImageView dialog_vote_no_image = (ImageView) mDialog.findViewById(R.id.no_vote_button);
+                    mDialog.show();
+
+                    dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //yes action
+                        }
+                    });
+                    dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //no action
+                        }
+                    });
                 }
             }
         });
