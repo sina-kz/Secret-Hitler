@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".Activities.BoardGameActivity"
+            android:name=".Activities.PolicyChoose"
             android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Activities.BoardGameActivity"
+            android:screenOrientation="landscape" />
         <activity android:name=".Activities.GameRulesActivity" />
         <activity android:name=".Activities.Show_Role" />
         <activity android:name=".Activities.addNameActivity" />

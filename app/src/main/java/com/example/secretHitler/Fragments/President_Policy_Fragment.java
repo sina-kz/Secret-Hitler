@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.secretHitler.R;
 
-public class president_policy_fragment extends Fragment {
+public class President_Policy_Fragment extends Fragment {
     ImageView card1, card2, card3;
     Button reverse;
 

@@ -22,30 +22,21 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/president_policy_card_1_front"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="24dp"
-            android:alpha="0"
-            android:src="@drawable/liberal_card" />
-
-        <ImageView
             android:id="@+id/president_policy_card_1_back"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_margin="24dp"
-            android:src="@drawable/back_of_policy_cards_temp" />
-
-        <ImageView
-            android:id="@+id/president_policy_card_2_front"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_margin="24dp"
             android:alpha="0"
             android:src="@drawable/liberal_card" />
+
+        <ImageView
+            android:id="@+id/president_policy_card_1_front"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="24dp"
+            android:src="@drawable/back_of_policy_cards_temp" />
 
         <ImageView
             android:id="@+id/president_policy_card_2_back"
@@ -53,10 +44,19 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_margin="24dp"
+            android:alpha="0"
+            android:src="@drawable/liberal_card" />
+
+        <ImageView
+            android:id="@+id/president_policy_card_2_front"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="24dp"
             android:src="@drawable/back_of_policy_cards_temp" />
 
         <ImageView
-            android:id="@+id/president_policy_card_3_front"
+            android:id="@+id/president_policy_card_3_back"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -65,7 +65,7 @@
             android:src="@drawable/liberal_card" />
 
         <ImageView
-            android:id="@+id/president_policy_card_3_back"
+            android:id="@+id/president_policy_card_3_front"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
