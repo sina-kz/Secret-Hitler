@@ -19,19 +19,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.secretHitler.Adapters.RecyclerViewAdapterChanceler;
+import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
+import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BoardGameActivity extends AppCompatActivity {
 
     ArrayList<Player> lstPlayer;
     ArrayList<CheckBox> lstCheckBoxes;
+    ArrayList<PolicyCard> policyCards;
+    ArrayList<Player> activePlayers;
+    ArrayList<Player> assignableChancellors;
+    ArrayList<PolicyCard> activePolicies;
     RecyclerView recyclerView;
     TextView showPresidentTextView;
     Button activateButton;
@@ -40,34 +47,40 @@ public class BoardGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board_game);
-
+        initializeActivity();
         SharedPreferences sharedPreferences = getSharedPreferences("my shared", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("list", null);
         Type type = new TypeToken<ArrayList<Player>>() {
         }.getType();
         lstPlayer = gson.fromJson(json, type);
+        assert lstPlayer != null;
+        GameMethods.initializePresident(lstPlayer);
+        policyCards = GameMethods.initializePolicies();
+        showChancellors();
+    }
+
+    public void initializeActivity() {
+        setContentView(R.layout.activity_board_game);
 
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.dialog_vote);
-        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(mDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         lstCheckBoxes = new ArrayList<>();
         for (CheckBox checkBox : lstCheckBoxes) {
             checkBox.setChecked(false);
         }
-        GameMethods.initializePresident(lstPlayer);
         recyclerView = findViewById(R.id.recyclerview_chanceler);
         showPresidentTextView = findViewById(R.id.chanceler_text);
         activateButton = findViewById(R.id.activate_button);
-        showChancellors();
     }
 
     @SuppressLint("SetTextI18n")
     public void showChancellors() {
-        final ArrayList<Player> activePlayers = GameMethods.activePlayers(lstPlayer);
-        final ArrayList<Player> assignableChancellors = GameMethods.assignableChancellors(activePlayers);
+        activePlayers = GameMethods.activePlayers(lstPlayer);
+        assignableChancellors = GameMethods.assignableChancellors(activePlayers);
+        activePolicies = GameMethods.activePolicies(policyCards);
         RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(this, assignableChancellors, lstCheckBoxes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
@@ -75,13 +88,13 @@ public class BoardGameActivity extends AppCompatActivity {
         activateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogBox(activePlayers, assignableChancellors);
+                showDialogBox();
             }
         });
     }
 
     @SuppressLint("SetTextI18n")
-    public void showDialogBox(ArrayList<Player> activePlayers, ArrayList<Player> assignableChancellors) {
+    public void showDialogBox() {
         boolean flag = false;
         int i = 0;
         for (; i < lstCheckBoxes.size(); i++) {
@@ -109,15 +122,36 @@ public class BoardGameActivity extends AppCompatActivity {
                 dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        GameMethods.completeAssignChancellor();
                         startActivity(new Intent(getBaseContext(), PolicyChoose.class));
                     }
                 });
                 dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //no action
+                        onRejectChancellor();
                     }
                 });
+            }
+        }
+    }
+
+    public void onRejectChancellor() {
+        PolicyCard rejectResult = GameMethods.threeRejectsPolicy(activePlayers, activePolicies);
+        if (rejectResult == null) {
+            mDialog.dismiss();
+            initializeActivity();
+            showChancellors();
+        } else {
+            GameMethods.usePolicy(rejectResult);
+            Toast.makeText(BoardGameActivity.this, "تعداد ریجکت های متوالی از حد مجاز عبور کرد، بنابراین آخرین سیاست استفاده نشده به صورت خودکار تصویب شد.", Toast.LENGTH_LONG).show();
+            mDialog.dismiss();
+            initializeActivity();
+            showChancellors();
+            if (rejectResult.getType() == Team.LIBERAL) {
+                //to be decided
+            } else {
+                //to be decided
             }
         }
     }
