@@ -45,9 +45,6 @@ public class Chancellor_Policy_Fragment extends Fragment {
         card2_back.setCameraDistance((float) (8000 * scale));
 
         front_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
-        front_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
-
-        back_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
         back_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
 
         reverse.setOnClickListener(new View.OnClickListener() {
