@@ -22,8 +22,8 @@ public class Chancellor_Policy_Fragment extends Fragment {
     ImageView card1_front, card2_front;
     ImageView card1_back, card2_back;
     Button reverse;
-    AnimatorSet front_anim;
-    AnimatorSet back_anim;
+    AnimatorSet front_anim1, front_anim2;
+    AnimatorSet back_anim1, back_anim2;
     boolean isFront = true;
 
 
@@ -44,34 +44,39 @@ public class Chancellor_Policy_Fragment extends Fragment {
         card1_back.setCameraDistance((float) (8000 * scale));
         card2_back.setCameraDistance((float) (8000 * scale));
 
-        front_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
-        back_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
+        front_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
+        back_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
+
+        front_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
+        back_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
 
         reverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isFront) {
-                    front_anim.setTarget(card1_front);
-                    back_anim.setTarget(card1_back);
-                    front_anim.start();
-                    back_anim.start();
+                    front_anim1.setTarget(card2_front);
+                    back_anim1.setTarget(card2_back);
+                    front_anim1.start();
+                    back_anim1.start();
 
-                    front_anim.setTarget(card2_front);
-                    back_anim.setTarget(card2_back);
-                    front_anim.start();
-                    back_anim.start();
+                    front_anim2.setTarget(card1_front);
+                    back_anim2.setTarget(card1_back);
+                    front_anim2.start();
+                    back_anim2.start();
+
 
                     isFront = false;
                 } else {
-                    front_anim.setTarget(card1_back);
-                    back_anim.setTarget(card1_front);
-                    back_anim.start();
-                    front_anim.start();
+                    front_anim1.setTarget(card2_back);
+                    back_anim1.setTarget(card2_front);
+                    back_anim1.start();
+                    front_anim1.start();
 
-                    front_anim.setTarget(card2_back);
-                    back_anim.setTarget(card2_front);
-                    back_anim.start();
-                    front_anim.start();
+                    front_anim2.setTarget(card1_back);
+                    back_anim2.setTarget(card1_front);
+                    back_anim2.start();
+                    front_anim2.start();
+
 
                     isFront = true;
                 }
