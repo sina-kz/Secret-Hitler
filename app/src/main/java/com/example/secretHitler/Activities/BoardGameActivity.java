@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -44,6 +46,7 @@ public class BoardGameActivity extends AppCompatActivity {
     TextView showPresidentTextView;
     Button activateButton;
     Dialog mDialog;
+    Dialog fascistDialog;
     ImageView fascistMap, liberalMap;
 
     @Override
@@ -188,6 +191,7 @@ public class BoardGameActivity extends AppCompatActivity {
                         break;
                     case FASCIST:
                         handleFascistMap();
+                        checkFascistCardApproval();
                         break;
                 }
             }
@@ -198,7 +202,25 @@ public class BoardGameActivity extends AppCompatActivity {
     }
 
     public void checkFascistCardApproval() {
-        //to be done
+        boolean fascistIsWon = GameMethods.checkWinStateForFascists();
+        if (fascistIsWon){
+            //TODO
+        }else {
+            switch (GameMethods.getNumberOfFascistsUsedPolicies()){
+                case 2:
+                    showFascistDialogBoxSecondOrder();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+            GameMethods.nextPresident(activePlayers);
+            showChancellors();
+        }
+
     }
 
     public void checkLiberalCardApproval() {
@@ -252,5 +274,68 @@ public class BoardGameActivity extends AppCompatActivity {
                 fascistMap.setImageResource(R.drawable.facist_board_five_fail_7_8);
                 break;
         }
+    }
+
+    public void showFascistDialogBoxSecondOrder(){
+        fascistDialog = new Dialog(this);
+        fascistDialog.setContentView(R.layout.dialog_player_team);
+        Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView subject = (TextView) fascistDialog.findViewById(R.id.fascistDialogHeader);
+        final Button button = (Button) fascistDialog.findViewById(R.id.fascistDialogButton);
+        RecyclerView otherPlayersRV = (RecyclerView) fascistDialog.findViewById(R.id.fascistDialogPlayers);
+
+        final ArrayList<CheckBox> fCheckBoxes = new ArrayList<>();
+        for (CheckBox checkBox: fCheckBoxes) {
+            checkBox.setChecked(false);
+        }
+
+        final ArrayList<Player> otherPlayers = GameMethods.otherPlayers(activePlayers, GameMethods.getCurrentPresident());
+        RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(this, otherPlayers, fCheckBoxes);
+        otherPlayersRV.setLayoutManager(new LinearLayoutManager(this));
+        otherPlayersRV.setAdapter(myAdapter);
+
+        fascistDialog.show();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button.setEnabled(false);
+                button.setVisibility(View.INVISIBLE);
+                ImageView team = (ImageView) fascistDialog.findViewById(R.id.fascistDialogTeamFront);
+                ImageView back = (ImageView) fascistDialog.findViewById(R.id.fascistDialogTeamBack);
+                AnimatorSet front_anim, back_anim;
+
+                double scale = getResources().getDisplayMetrics().density;
+                team.setCameraDistance((float) (8000 * scale));
+                back.setCameraDistance((float) (8000 * scale));
+
+                front_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.front_animator);
+                back_anim = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.back_animator);
+
+                front_anim.setTarget(back);
+                back_anim.setTarget(team);
+
+                front_anim.start();
+                back_anim.start();
+
+                int index = -1;
+                boolean flag = false;
+                for(int i = 0; i < otherPlayers.size(); i++){
+                    if (fCheckBoxes.get(i).isChecked()){
+                        index = i;
+                        flag = true;
+                        break;
+                    }
+                }
+                if(!flag){
+                    Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(otherPlayers.get(index).getTeam()==Team.LIBERAL) team.setImageDrawable(getResources().getDrawable(R.drawable.liberal_team));
+                    else team.setImageDrawable(getResources().getDrawable(R.drawable.fascist_team));
+                }
+            }
+        });
     }
 }
