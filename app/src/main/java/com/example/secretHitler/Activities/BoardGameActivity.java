@@ -167,6 +167,7 @@ public class BoardGameActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
+//                System.out.println(choosePolicyCard.getType().name());
                 Toast.makeText(this, choosePolicyCard.getType().toString(), Toast.LENGTH_SHORT).show();
             }
             if (resultCode == RESULT_CANCELED) {

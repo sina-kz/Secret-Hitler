@@ -16,6 +16,8 @@ public class PolicyCard implements Parcelable {
     }
 
     protected PolicyCard(Parcel in) {
+        state = PolicyState.valueOf(in.readString());
+        type = Team.valueOf(in.readString());
     }
 
     public static final Creator<PolicyCard> CREATOR = new Creator<PolicyCard>() {
