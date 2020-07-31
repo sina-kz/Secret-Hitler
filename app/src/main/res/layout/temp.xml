@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_2"
-    android:orientation="vertical">
+    android:background="@drawable/background_2">
 
     <TextView
         android:id="@+id/rules_header"
@@ -17,14 +17,18 @@
         android:text="قوانین بازی"
         android:textSize="24sp"
         android:textStyle="bold" />
+    <FrameLayout
+        android:id="@+id/rules_container"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="4"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/frame"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:orientation="horizontal"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_weight="8">
-
+        android:layout_weight="2">
         <ImageView
             android:id="@+id/rules_hitlerPicture"
             android:layout_width="1dp"
@@ -32,24 +36,6 @@
             android:layout_gravity="bottom"
             android:layout_weight="2"
             android:src="@drawable/hitler_rules1" />
-
-        <FrameLayout
-            android:id="@+id/rules_container"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/frame"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="16dp">
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/rules_previous"
             android:layout_width="1dp"
@@ -72,4 +58,5 @@
             android:layout_weight="1"
             android:src="@drawable/next" />
     </LinearLayout>
+
 </LinearLayout>
