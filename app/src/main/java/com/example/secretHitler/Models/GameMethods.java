@@ -85,7 +85,7 @@ public class GameMethods {
 
     public static void usePolicy(PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
-        if(policyCard.getType() == Team.LIBERAL)
+        if (policyCard.getType() == Team.LIBERAL)
             numberOfLiberalsUsedPolicies++;
         else
             numberOfFascistsUsedPolicies++;
@@ -290,8 +290,7 @@ public class GameMethods {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             try {
                 others.remove(previousChancellor);
             } catch (Exception e) {
@@ -311,5 +310,13 @@ public class GameMethods {
 
     public static void setFirstTimeCreated(boolean firstTimeCreated) {
         GameMethods.firstTimeCreated = firstTimeCreated;
+    }
+
+    public static int getNumberOfFascistsUsedPolicies() {
+        return numberOfFascistsUsedPolicies;
+    }
+
+    public static int getNumberOfLiberalsUsedPolicies() {
+        return numberOfLiberalsUsedPolicies;
     }
 }

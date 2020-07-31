@@ -44,6 +44,7 @@ public class BoardGameActivity extends AppCompatActivity {
     TextView showPresidentTextView;
     Button activateButton;
     Dialog mDialog;
+    ImageView fascistMap, liberalMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,8 @@ public class BoardGameActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview_chanceler);
         showPresidentTextView = findViewById(R.id.chanceler_text);
         activateButton = findViewById(R.id.activate_button);
+        fascistMap = findViewById(R.id.facscist_board);
+        liberalMap = findViewById(R.id.liberal_board);
     }
 
     @SuppressLint("SetTextI18n")
@@ -167,12 +170,63 @@ public class BoardGameActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
-//                System.out.println(choosePolicyCard.getType().name());
                 Toast.makeText(this, choosePolicyCard.getType().toString(), Toast.LENGTH_SHORT).show();
+                mDialog.dismiss();
+                switch (choosePolicyCard.getType()) {
+                    case LIBERAL:
+                        handleLiberalMap();
+                        break;
+                    case FASCIST:
+                        handleFascistMap();
+                        break;
+                }
             }
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Nothing Selected", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void handleLiberalMap() {
+        switch (GameMethods.getNumberOfLiberalsUsedPolicies()) {
+            case 0:
+                liberalMap.setImageResource(R.drawable.lib_board);
+                break;
+            case 1:
+                liberalMap.setImageResource(R.drawable.liberal_board_one_success);
+                break;
+            case 2:
+                liberalMap.setImageResource(R.drawable.liberal_board_two_success);
+                break;
+            case 3:
+                liberalMap.setImageResource(R.drawable.liberal_board_three_success);
+                break;
+            case 4:
+                liberalMap.setImageResource(R.drawable.liberal_board_four_success);
+                break;
+        }
+    }
+
+    private void handleFascistMap() {
+        switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
+            case 0:
+                fascistMap.setImageResource(R.drawable.facist_board);
+                break;
+            case 1:
+                fascistMap.setImageResource(R.drawable.facist_board_one_fail_7_8);
+                break;
+            case 2:
+                fascistMap.setImageResource(R.drawable.facist_board_two_fail_7_8);
+                break;
+            case 3:
+                fascistMap.setImageResource(R.drawable.facist_board_three_fail_7_8);
+                break;
+            case 4:
+                fascistMap.setImageResource(R.drawable.facist_board_four_fail_7_8);
+                break;
+            case 5:
+                fascistMap.setImageResource(R.drawable.facist_board_five_fail_7_8);
+                break;
         }
     }
 }

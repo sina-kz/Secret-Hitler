@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.secretHitler.Enums.Team;
+import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
 
@@ -119,6 +120,10 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     Intent intent = new Intent();
                     intent.putExtra("RESULT", policyCardArrayList.get(0));
 
+                    GameMethods.skipPolicy(policyCardArrayList.get(1));
+                    GameMethods.usePolicy(policyCardArrayList.get(0));
+
+
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 }
@@ -131,6 +136,9 @@ public class Chancellor_Policy_Fragment extends Fragment {
                 if (eliminate) {
                     Intent intent = new Intent();
                     intent.putExtra("RESULT", policyCardArrayList.get(1));
+
+                    GameMethods.skipPolicy(policyCardArrayList.get(0));
+                    GameMethods.usePolicy(policyCardArrayList.get(1));
 
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
