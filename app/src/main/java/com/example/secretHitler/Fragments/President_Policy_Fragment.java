@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Models.GameMethods;
@@ -24,20 +26,15 @@ import com.example.secretHitler.R;
 import java.util.ArrayList;
 
 public class President_Policy_Fragment extends Fragment {
-    ImageView card1_front, card2_front, card3_front;
-    ImageView card1_back, card2_back, card3_back;
-    Button reverse;
-    AnimatorSet front_anim1, front_anim2, front_anim3;
-    AnimatorSet back_anim1, back_anim2, back_anim3;
-    boolean isFront = true;
-    boolean eliminate = false;
-    TextView showMessage;
-    ArrayList<PolicyCard> threeTops;
-    private PresidentFragmentListener listener;
-
-    public interface PresidentFragmentListener {
-        void onInputPresidentSent(ArrayList<PolicyCard> policyCardArrayList);
-    }
+    private ImageView card1_front, card2_front, card3_front;
+    private ImageView card1_back, card2_back, card3_back;
+    private Button reverse;
+    private AnimatorSet front_anim1, front_anim2, front_anim3;
+    private AnimatorSet back_anim1, back_anim2, back_anim3;
+    private boolean isFront = true;
+    private boolean eliminate = false;
+    private TextView showMessage;
+    private ArrayList<PolicyCard> threeTops;
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -138,8 +135,13 @@ public class President_Policy_Fragment extends Fragment {
                     card1_front.setVisibility(View.INVISIBLE);
                     GameMethods.skipPolicy(threeTops.get(0));
                     threeTops.remove(0);
-                    ArrayList<PolicyCard> policyCardArrayList = threeTops;
-                    listener.onInputPresidentSent(policyCardArrayList);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("POLICY", threeTops);
+                    Chancellor_Policy_Fragment chancellorPolicyFragment = new Chancellor_Policy_Fragment();
+                    chancellorPolicyFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.policy_container, chancellorPolicyFragment)
+                            .commit();
+
                 }
             }
         });
@@ -151,8 +153,12 @@ public class President_Policy_Fragment extends Fragment {
                     card2_front.setVisibility(View.INVISIBLE);
                     GameMethods.skipPolicy(threeTops.get(1));
                     threeTops.remove(1);
-                    ArrayList<PolicyCard> policyCardArrayList = threeTops;
-                    listener.onInputPresidentSent(policyCardArrayList);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("POLICY", threeTops);
+                    Chancellor_Policy_Fragment chancellorPolicyFragment = new Chancellor_Policy_Fragment();
+                    chancellorPolicyFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.policy_container, chancellorPolicyFragment)
+                            .commit();
                 }
             }
         });
@@ -164,8 +170,12 @@ public class President_Policy_Fragment extends Fragment {
                     card3_front.setVisibility(View.INVISIBLE);
                     GameMethods.skipPolicy(threeTops.get(2));
                     threeTops.remove(2);
-                    ArrayList<PolicyCard> policyCardArrayList = threeTops;
-                    listener.onInputPresidentSent(policyCardArrayList);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("POLICY", threeTops);
+                    Chancellor_Policy_Fragment chancellorPolicyFragment = new Chancellor_Policy_Fragment();
+                    chancellorPolicyFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.policy_container, chancellorPolicyFragment)
+                            .commit();
                 }
             }
         });
@@ -189,22 +199,6 @@ public class President_Policy_Fragment extends Fragment {
         } else {
             card3_back.setImageResource(R.drawable.facist_card);
         }
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof PresidentFragmentListener) {
-            listener = (PresidentFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement PresidentFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
     }
 }
 

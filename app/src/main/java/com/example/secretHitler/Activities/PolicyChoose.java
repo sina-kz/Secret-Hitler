@@ -11,7 +11,7 @@ import com.example.secretHitler.R;
 
 import java.util.ArrayList;
 
-public class PolicyChoose extends AppCompatActivity implements President_Policy_Fragment.PresidentFragmentListener {
+public class PolicyChoose extends AppCompatActivity {
 
     private President_Policy_Fragment presidentPolicyFragment;
     private Chancellor_Policy_Fragment chancellorPolicyFragment;
@@ -27,11 +27,4 @@ public class PolicyChoose extends AppCompatActivity implements President_Policy_
                 .add(R.id.policy_container, presidentPolicyFragment).addToBackStack(null).commit();
     }
 
-    @Override
-    public void onInputPresidentSent(ArrayList<PolicyCard> policyCardArrayList) {
-        chancellorPolicyFragment = new Chancellor_Policy_Fragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.policy_container, chancellorPolicyFragment).addToBackStack(null).commit();
-        chancellorPolicyFragment.updateImageViews(policyCardArrayList);
-    }
 }
