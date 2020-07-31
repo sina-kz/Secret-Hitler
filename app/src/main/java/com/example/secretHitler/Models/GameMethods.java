@@ -20,6 +20,7 @@ public class GameMethods {
     private static int numberOfFascistsUsedPolicies = 0;
     private static int numberOfLiberalsUsedPolicies = 0;
     private static boolean firstTimeCreated = true;
+    private static ArrayList<Player> allPlayers;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
         ArrayList<Player> newPlayers = new ArrayList<>();
@@ -85,6 +86,7 @@ public class GameMethods {
 
     public static void usePolicy(PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
+        numberOfRejects = 0;
         if (policyCard.getType() == Team.LIBERAL)
             numberOfLiberalsUsedPolicies++;
         else
@@ -97,6 +99,9 @@ public class GameMethods {
     }
 
     public static ArrayList<PolicyCard> reorderPolicies(ArrayList<PolicyCard> policyCards) {
+        for (PolicyCard policyCard:skippedPolicies) {
+            policyCard.setState(PolicyState.UNUSED);
+        }
         policyCards.addAll(skippedPolicies);
         skippedPolicies.clear();
         Collections.shuffle(policyCards);
@@ -168,7 +173,7 @@ public class GameMethods {
         return pickedPolicies;
     }
 
-    public static boolean checkWinStateForLiberals(ArrayList<PolicyCard> policyCards, ArrayList<Player> players) {
+    public static boolean checkWinStateForLiberals(ArrayList<Player> players) {
         if (numberOfLiberalsUsedPolicies == Numbers.liberalPoliciesToWin) {
             return true;
         }
@@ -182,7 +187,7 @@ public class GameMethods {
         return !hitler.isActive();
     }
 
-    public static boolean checkWinStateForFascists(ArrayList<PolicyCard> policyCards) {
+    public static boolean checkWinStateForFascists() {
         if (numberOfFascistsUsedPolicies == Numbers.fascistsPoliciesToWin) {
             return true;
         }
@@ -304,6 +309,10 @@ public class GameMethods {
         return allPolicies;
     }
 
+    public static void setAllPolicies(ArrayList<PolicyCard> allPolicies) {
+        GameMethods.allPolicies = allPolicies;
+    }
+
     public static boolean isFirstTimeCreated() {
         return firstTimeCreated;
     }
@@ -318,5 +327,13 @@ public class GameMethods {
 
     public static int getNumberOfLiberalsUsedPolicies() {
         return numberOfLiberalsUsedPolicies;
+    }
+
+    public static ArrayList<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
+    public static void setAllPlayers(ArrayList<Player> allPlayers) {
+        GameMethods.allPlayers = allPlayers;
     }
 }

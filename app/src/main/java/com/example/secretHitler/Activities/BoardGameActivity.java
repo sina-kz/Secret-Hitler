@@ -12,7 +12,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +25,7 @@ import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
+import com.example.secretHitler.Utils.Numbers;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -57,8 +57,9 @@ public class BoardGameActivity extends AppCompatActivity {
         }.getType();
         lstPlayer = gson.fromJson(json, type);
         assert lstPlayer != null;
+        GameMethods.setAllPlayers(lstPlayer);
         if (GameMethods.isFirstTimeCreated()) {
-            GameMethods.initializePresident(lstPlayer);
+            GameMethods.initializePresident(GameMethods.getAllPlayers());
             GameMethods.setFirstTimeCreated(false);
         }
         showChancellors();
@@ -84,9 +85,14 @@ public class BoardGameActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void showChancellors() {
-        activePlayers = GameMethods.activePlayers(lstPlayer);
+        activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
         assignableChancellors = GameMethods.assignableChancellors(activePlayers);
         activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
+        if (activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
+            ArrayList<PolicyCard> newPolicies = GameMethods.reorderPolicies(activePolicies);
+            GameMethods.setAllPolicies(newPolicies);
+            activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
+        }
         RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(this, assignableChancellors, lstCheckBoxes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
@@ -154,11 +160,12 @@ public class BoardGameActivity extends AppCompatActivity {
             Toast.makeText(BoardGameActivity.this, "تعداد ریجکت های متوالی از حد مجاز عبور کرد، بنابراین آخرین سیاست استفاده نشده به صورت خودکار تصویب شد.", Toast.LENGTH_LONG).show();
             mDialog.dismiss();
             initializeActivity();
-            showChancellors();
             if (rejectResult.getType() == Team.LIBERAL) {
-                //to be decided
+                handleLiberalMap();
+                checkLiberalCardApproval();
             } else {
-                //to be decided
+                handleFascistMap();
+                showChancellors();
             }
         }
     }
@@ -169,12 +176,15 @@ public class BoardGameActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
+                assert data != null;
                 PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
-                Toast.makeText(this, choosePolicyCard.getType().toString(), Toast.LENGTH_SHORT).show();
+                assert choosePolicyCard != null;
+                Toast.makeText(this, "سیاست " + choosePolicyCard.getType().toString().toLowerCase() + " تصویب شد", Toast.LENGTH_LONG).show();
                 mDialog.dismiss();
                 switch (choosePolicyCard.getType()) {
                     case LIBERAL:
                         handleLiberalMap();
+                        checkLiberalCardApproval();
                         break;
                     case FASCIST:
                         handleFascistMap();
@@ -184,6 +194,20 @@ public class BoardGameActivity extends AppCompatActivity {
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Nothing Selected", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public void checkFascistCardApproval() {
+        //to be done
+    }
+
+    public void checkLiberalCardApproval() {
+        boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
+        if (liberalsWon) {
+            //to be done
+        } else {
+            GameMethods.nextPresident(activePlayers);
+            showChancellors();
         }
     }
 

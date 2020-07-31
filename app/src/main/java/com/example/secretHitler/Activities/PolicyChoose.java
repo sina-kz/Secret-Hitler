@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.secretHitler.Fragments.Chancellor_Policy_Fragment;
 import com.example.secretHitler.Fragments.President_Policy_Fragment;
-import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
 
-import java.util.ArrayList;
 
 public class PolicyChoose extends AppCompatActivity {
 

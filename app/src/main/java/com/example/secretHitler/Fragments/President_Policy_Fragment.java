@@ -22,6 +22,7 @@ import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
+import com.example.secretHitler.Utils.Numbers;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,11 @@ public class President_Policy_Fragment extends Fragment {
         reverse = (Button) view.findViewById(R.id.president_reverse_cards_button);
         showMessage = view.findViewById(R.id.president_message);
         ArrayList<PolicyCard> activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
+        if(activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
+            ArrayList<PolicyCard> newPolicies = GameMethods.reorderPolicies(activePolicies);
+            GameMethods.setAllPolicies(newPolicies);
+            activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
+        }
         threeTops = GameMethods.pickThreePolicies(activePolicies);
         showMessage.setText("رییس جمهور (" + GameMethods.getCurrentPresident().getName() + ") کارت ها را برگردان");
         setImages(threeTops);
