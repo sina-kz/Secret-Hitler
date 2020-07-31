@@ -6,9 +6,12 @@ import android.os.Bundle;
 
 import com.example.secretHitler.Fragments.Chancellor_Policy_Fragment;
 import com.example.secretHitler.Fragments.President_Policy_Fragment;
+import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
 
-public class PolicyChoose extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class PolicyChoose extends AppCompatActivity implements President_Policy_Fragment.PresidentFragmentListener {
 
     private President_Policy_Fragment presidentPolicyFragment;
     private Chancellor_Policy_Fragment chancellorPolicyFragment;
@@ -19,9 +22,16 @@ public class PolicyChoose extends AppCompatActivity {
         setContentView(R.layout.activity_policy_choose);
 
         presidentPolicyFragment = new President_Policy_Fragment();
-        chancellorPolicyFragment = new Chancellor_Policy_Fragment();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.policy_container, presidentPolicyFragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onInputPresidentSent(ArrayList<PolicyCard> policyCardArrayList) {
+        chancellorPolicyFragment = new Chancellor_Policy_Fragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.policy_container, chancellorPolicyFragment).addToBackStack(null).commit();
+        chancellorPolicyFragment.updateImageViews(policyCardArrayList);
     }
 }

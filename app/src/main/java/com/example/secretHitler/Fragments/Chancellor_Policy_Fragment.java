@@ -2,6 +2,7 @@ package com.example.secretHitler.Fragments;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.secretHitler.Enums.Team;
+import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Chancellor_Policy_Fragment extends Fragment {
@@ -25,7 +29,6 @@ public class Chancellor_Policy_Fragment extends Fragment {
     AnimatorSet front_anim1, front_anim2;
     AnimatorSet back_anim1, back_anim2;
     boolean isFront = true;
-
 
     @Nullable
     @Override
@@ -84,5 +87,18 @@ public class Chancellor_Policy_Fragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void updateImageViews(ArrayList<PolicyCard> policyCards) {
+        if (policyCards.get(0).getType() == Team.LIBERAL) {
+            card1_back.setImageResource(R.drawable.liberal_card);
+        } else {
+            card1_back.setImageResource(R.drawable.facist_card);
+        }
+        if (policyCards.get(1).getType() == Team.LIBERAL) {
+            card2_back.setImageResource(R.drawable.liberal_card);
+        } else {
+            card2_back.setImageResource(R.drawable.facist_card);
+        }
     }
 }

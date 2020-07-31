@@ -3,6 +3,7 @@ package com.example.secretHitler.Fragments;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,11 @@ public class President_Policy_Fragment extends Fragment {
     boolean eliminate = false;
     TextView showMessage;
     ArrayList<PolicyCard> threeTops;
+    private PresidentFragmentListener listener;
+
+    public interface PresidentFragmentListener {
+        void onInputPresidentSent(ArrayList<PolicyCard> policyCardArrayList);
+    }
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -132,6 +138,8 @@ public class President_Policy_Fragment extends Fragment {
                     card1_front.setVisibility(View.INVISIBLE);
                     GameMethods.skipPolicy(threeTops.get(0));
                     threeTops.remove(0);
+                    ArrayList<PolicyCard> policyCardArrayList = threeTops;
+                    listener.onInputPresidentSent(policyCardArrayList);
                 }
             }
         });
@@ -143,6 +151,8 @@ public class President_Policy_Fragment extends Fragment {
                     card2_front.setVisibility(View.INVISIBLE);
                     GameMethods.skipPolicy(threeTops.get(1));
                     threeTops.remove(1);
+                    ArrayList<PolicyCard> policyCardArrayList = threeTops;
+                    listener.onInputPresidentSent(policyCardArrayList);
                 }
             }
         });
@@ -154,6 +164,8 @@ public class President_Policy_Fragment extends Fragment {
                     card3_front.setVisibility(View.INVISIBLE);
                     GameMethods.skipPolicy(threeTops.get(2));
                     threeTops.remove(2);
+                    ArrayList<PolicyCard> policyCardArrayList = threeTops;
+                    listener.onInputPresidentSent(policyCardArrayList);
                 }
             }
         });
@@ -178,4 +190,21 @@ public class President_Policy_Fragment extends Fragment {
             card3_back.setImageResource(R.drawable.facist_card);
         }
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof PresidentFragmentListener) {
+            listener = (PresidentFragmentListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement PresidentFragmentListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 }
+
