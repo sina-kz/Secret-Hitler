@@ -26,7 +26,7 @@ public class GameRulesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_rules);
+        setContentView(R.layout.temp);
 
         next = (AppCompatImageView) findViewById(R.id.rules_next);
         previous = (AppCompatImageView) findViewById(R.id.rules_previous);
@@ -96,5 +96,10 @@ public class GameRulesActivity extends AppCompatActivity {
                 break;
         }
         pageNumber.setText(Integer.toString(index) + " of 6");
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
