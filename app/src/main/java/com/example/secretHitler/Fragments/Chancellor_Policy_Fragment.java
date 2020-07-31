@@ -2,7 +2,9 @@ package com.example.secretHitler.Fragments;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +31,8 @@ public class Chancellor_Policy_Fragment extends Fragment {
     private AnimatorSet front_anim1, front_anim2;
     private AnimatorSet back_anim1, back_anim2;
     private boolean isFront = true;
+    private boolean eliminate = false;
+    ArrayList<PolicyCard> policyCardArrayList;
 
     @Nullable
     @Override
@@ -36,7 +40,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.chancellor_policy_card_fragment, container, false);
 
         Bundle bundle = this.getArguments();
-        ArrayList<PolicyCard> policyCardArrayList = bundle.getParcelableArrayList("POLICY");
+        policyCardArrayList = bundle.getParcelableArrayList("POLICY");
 
         card1_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_front);
         card2_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_front);
@@ -67,9 +71,13 @@ public class Chancellor_Policy_Fragment extends Fragment {
         front_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
         back_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
 
+        card1_back.setClickable(false);
+        card2_back.setClickable(false);
+
         reverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                eliminate = true;
                 if (isFront) {
                     front_anim1.setTarget(card2_front);
                     back_anim1.setTarget(card2_back);
@@ -81,6 +89,8 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     front_anim2.start();
                     back_anim2.start();
 
+                    card1_back.setClickable(true);
+                    card2_back.setClickable(true);
 
                     isFront = false;
                 } else {
@@ -94,8 +104,36 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     back_anim2.start();
                     front_anim2.start();
 
+                    card1_back.setClickable(false);
+                    card2_back.setClickable(false);
 
                     isFront = true;
+                }
+            }
+        });
+
+        card1_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (eliminate) {
+                    Intent intent = new Intent();
+                    intent.putExtra("RESULT", policyCardArrayList.get(0));
+
+                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().finish();
+                }
+            }
+        });
+
+        card2_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (eliminate) {
+                    Intent intent = new Intent();
+                    intent.putExtra("RESULT", policyCardArrayList.get(1));
+
+                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().finish();
                 }
             }
         });

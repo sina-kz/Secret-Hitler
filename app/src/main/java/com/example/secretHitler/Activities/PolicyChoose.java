@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class PolicyChoose extends AppCompatActivity {
 
     private President_Policy_Fragment presidentPolicyFragment;
-    private Chancellor_Policy_Fragment chancellorPolicyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +24,7 @@ public class PolicyChoose extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.policy_container, presidentPolicyFragment).addToBackStack(null).commit();
+
     }
 
 }

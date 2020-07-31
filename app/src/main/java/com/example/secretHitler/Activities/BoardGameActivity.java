@@ -1,5 +1,6 @@
 package com.example.secretHitler.Activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -126,7 +127,7 @@ public class BoardGameActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         GameMethods.completeAssignChancellor();
                         Intent intent = new Intent(getBaseContext(), PolicyChoose.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }
                 });
                 dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +156,21 @@ public class BoardGameActivity extends AppCompatActivity {
                 //to be decided
             } else {
                 //to be decided
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
+                Toast.makeText(this, choosePolicyCard.getType().toString(), Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Nothing Selected", Toast.LENGTH_SHORT).show();
             }
         }
     }
