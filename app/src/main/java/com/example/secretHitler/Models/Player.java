@@ -3,7 +3,6 @@ package com.example.secretHitler.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.secretHitler.Enums.Role;
 import com.example.secretHitler.Enums.Team;
 
 import java.util.ArrayList;
@@ -13,19 +12,12 @@ public class Player implements Parcelable {
     private Team team;
     private boolean isHitler;
     private boolean isActive;
-    private Role role;
+    private boolean won;
 
     public Player() {
         isHitler = false;
         isActive = true;
-    }
-
-    public Player(String name, Team team, boolean isHitler, boolean isActive, Role role) {
-        this.name = name;
-        this.team = team;
-        this.isHitler = isHitler;
-        this.isActive = isActive;
-        this.role = role;
+        won = false;
     }
 
     protected Player(Parcel in) {
@@ -79,14 +71,6 @@ public class Player implements Parcelable {
         isActive = active;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -122,5 +106,13 @@ public class Player implements Parcelable {
         teammates.append(" هستند.\n");
         teammates.append("هیتلر ").append(hitler.getName()).append(" هست!");
         return teammates.toString();
+    }
+
+    public boolean isWon() {
+        return won;
+    }
+
+    public void setWon(boolean won) {
+        won = won;
     }
 }

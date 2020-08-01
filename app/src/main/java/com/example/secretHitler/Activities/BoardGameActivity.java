@@ -89,6 +89,7 @@ public class BoardGameActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void showChancellors() {
         activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+        lstCheckBoxes.clear();
         assignableChancellors = GameMethods.assignableChancellors(activePlayers);
         activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
         if (activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
@@ -228,11 +229,10 @@ public class BoardGameActivity extends AppCompatActivity {
 
     public void checkLiberalCardApproval() {
         boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
+        GameMethods.nextPresident(activePlayers);
+        showChancellors();
         if (liberalsWon) {
-            //to be done
-        } else {
-            GameMethods.nextPresident(activePlayers);
-            showChancellors();
+            startActivity(new Intent(getBaseContext(), ShowResultsActivity.class));
         }
     }
 

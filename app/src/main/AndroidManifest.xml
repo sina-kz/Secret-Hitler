@@ -18,6 +18,7 @@
         <activity android:name=".Activities.GameRulesActivity" />
         <activity android:name=".Activities.Show_Role" />
         <activity android:name=".Activities.addNameActivity" />
+        <activity android:name=".Activities.ShowResultsActivity" />
         <activity android:name=".Activities.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
