@@ -90,6 +90,14 @@ public class BoardGameActivity extends AppCompatActivity {
     public void showChancellors() {
         activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
         lstCheckBoxes.clear();
+        System.out.println(GameMethods.getPresidentPointer());
+        for (Player player:activePlayers) {
+            System.out.println(player.getName());;
+        }
+        if(!GameMethods.getCurrentPresident().isActive()) {
+            System.out.println(GameMethods.getPresidentPointer());
+            GameMethods.nextPresidentWhenKill(activePlayers);
+        }
         assignableChancellors = GameMethods.assignableChancellors(activePlayers);
         activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
         if (activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
@@ -140,13 +148,14 @@ public class BoardGameActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         GameMethods.completeAssignChancellor();
                         boolean fascistsWon = GameMethods.checkWinStateForFascists();
-                        if (fascistsWon) {
+                        if (fascistsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
                             Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
                             intent.putExtra("LIBERAL_WON", false);
                             startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(getBaseContext(), PolicyChoose.class);
+                            startActivityForResult(intent, 1);
                         }
-                        Intent intent = new Intent(getBaseContext(), PolicyChoose.class);
-                        startActivityForResult(intent, 1);
                     }
                 });
                 dialog_vote_no_image.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +229,7 @@ public class BoardGameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         boolean fascistIsWon = GameMethods.checkWinStateForFascists();
-        if (fascistIsWon) {
+        if (fascistIsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
             Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
             intent.putExtra("LIBERAL_WON", false);
             startActivity(intent);
@@ -412,9 +421,11 @@ public class BoardGameActivity extends AppCompatActivity {
                     if (round == 3) {
                         GameMethods.selectPresident(otherPlayers.get(index));
                         fascistDialog.dismiss();
-                        showChancellors();// TODO Not Working Correctly
                     } else {
-                        GameMethods.kill(otherPlayers.get(index), activePlayers);
+                        GameMethods.kill(otherPlayers.get(index));
+                        for (Player player : activePlayers) {
+                            System.out.println(player.getName());
+                        }
                         if (round == 5) {
                             GameMethods.setVetoEnable(true);
                         }
@@ -425,8 +436,9 @@ public class BoardGameActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         fascistDialog.dismiss();
-                        showChancellors();
+                        activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
                     }
+                    showChancellors();// TODO Not Working Correctly
                 }
             }
         });

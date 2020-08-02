@@ -34,12 +34,8 @@ public class GameMethods {
         return newPlayers;
     }
 
-    public static void kill(Player player, ArrayList<Player> activePlayers) {
+    public static void kill(Player player) {
         player.setActive(false);
-        if (currentPresident == player) {
-            nextPresident(activePlayers);
-        }
-        activePlayers = activePlayers(allPlayers);
     }
 
     public static void initializePolicies() {
@@ -226,6 +222,10 @@ public class GameMethods {
         currentPresident = players.get(presidentPointer);
     }
 
+    public static void nextPresidentWhenKill(ArrayList<Player> activePlayers) {
+        currentPresident = activePlayers.get(presidentPointer);
+    }
+
     public static void selectPresident(Player player) {
         currentPresident = player;
         presidentPointer = (presidentPointer - 1) % activePlayers(allPlayers).size();
@@ -269,7 +269,7 @@ public class GameMethods {
     public static void usePresidentPower(String power, Player selectedPlayer, ArrayList<PolicyCard> activePolicies, ArrayList<PolicyCard> peekPolicies, Team selectedPlayerTeam) {
         switch (power) {
             case "EXECUTE":
-                kill(selectedPlayer, activePlayers(allPlayers));
+                kill(selectedPlayer);
                 break;
             case "INVESTIGATE":
                 selectedPlayerTeam = askPlayersTeam(selectedPlayer);
@@ -357,5 +357,9 @@ public class GameMethods {
 
     public static void setLiberalsWon(boolean liberalsWon) {
         GameMethods.liberalsWon = liberalsWon;
+    }
+
+    public static int getPresidentPointer() {
+        return presidentPointer;
     }
 }
