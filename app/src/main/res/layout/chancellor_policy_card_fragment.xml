@@ -85,4 +85,19 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/veto_button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/r2"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@id/chancellor_reverse_cards_button"
+        android:background="@drawable/veto_custom_button"
+        android:enabled="false"
+        android:text="حق وتو"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
 </RelativeLayout>

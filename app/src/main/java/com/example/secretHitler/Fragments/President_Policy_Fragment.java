@@ -52,7 +52,7 @@ public class President_Policy_Fragment extends Fragment {
         reverse = (Button) view.findViewById(R.id.president_reverse_cards_button);
         showMessage = view.findViewById(R.id.president_message);
         ArrayList<PolicyCard> activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
-        if(activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
+        if (activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
             ArrayList<PolicyCard> newPolicies = GameMethods.reorderPolicies(activePolicies);
             GameMethods.setAllPolicies(newPolicies);
             activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
@@ -145,7 +145,10 @@ public class President_Policy_Fragment extends Fragment {
                     bundle.putParcelableArrayList("POLICY", threeTops);
                     Chancellor_Policy_Fragment chancellorPolicyFragment = new Chancellor_Policy_Fragment();
                     chancellorPolicyFragment.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.policy_container, chancellorPolicyFragment)
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                                    R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                            .replace(R.id.policy_container, chancellorPolicyFragment)
                             .commit();
 
                 }
@@ -163,7 +166,10 @@ public class President_Policy_Fragment extends Fragment {
                     bundle.putParcelableArrayList("POLICY", threeTops);
                     Chancellor_Policy_Fragment chancellorPolicyFragment = new Chancellor_Policy_Fragment();
                     chancellorPolicyFragment.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.policy_container, chancellorPolicyFragment)
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                                    R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                            .replace(R.id.policy_container, chancellorPolicyFragment)
                             .commit();
                 }
             }
@@ -180,7 +186,10 @@ public class President_Policy_Fragment extends Fragment {
                     bundle.putParcelableArrayList("POLICY", threeTops);
                     Chancellor_Policy_Fragment chancellorPolicyFragment = new Chancellor_Policy_Fragment();
                     chancellorPolicyFragment.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.policy_container, chancellorPolicyFragment)
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                                    R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                            .replace(R.id.policy_container, chancellorPolicyFragment)
                             .commit();
                 }
             }
