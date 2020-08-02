@@ -217,9 +217,13 @@ public class BoardGameActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 assert data != null;
                 PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
-                assert choosePolicyCard != null;
-                Toast.makeText(this, "سیاست " + choosePolicyCard.getType().toString().toLowerCase() + " تصویب شد", Toast.LENGTH_LONG).show();
                 mDialog.dismiss();
+                if(choosePolicyCard == null) {
+                    GameMethods.nextPresident(activePlayers);
+                    showChancellors();
+                    return;
+                }
+                Toast.makeText(this, "سیاست " + choosePolicyCard.getType().toString().toLowerCase() + " تصویب شد", Toast.LENGTH_LONG).show();
                 switch (choosePolicyCard.getType()) {
                     case LIBERAL:
                         handleLiberalMap();

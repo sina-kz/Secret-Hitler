@@ -5,12 +5,10 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +24,7 @@ import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
+import com.example.secretHitler.Utils.Numbers;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -69,6 +68,10 @@ public class Chancellor_Policy_Fragment extends Fragment {
             card2_back.setImageResource(R.drawable.liberal_card);
         } else {
             card2_back.setImageResource(R.drawable.facist_card);
+        }
+        if (GameMethods.getNumberOfFascistsUsedPolicies() == Numbers.fascistsPoliciesToWin - 1) {
+            vetoButton.setVisibility(View.VISIBLE);
+            vetoButton.setEnabled(true);
         }
 
         double scale = getResources().getDisplayMetrics().density;
@@ -138,7 +141,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     GameMethods.usePolicy(policyCardArrayList.get(0));
 
 
-                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    Objects.requireNonNull(getActivity()).setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 }
             }
@@ -154,7 +157,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     GameMethods.skipPolicy(policyCardArrayList.get(0));
                     GameMethods.usePolicy(policyCardArrayList.get(1));
 
-                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    Objects.requireNonNull(getActivity()).setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 }
             }
@@ -163,10 +166,11 @@ public class Chancellor_Policy_Fragment extends Fragment {
         vetoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vetoDialog = new Dialog(getContext());
-                vetoDialog.setContentView(R.layout.dialog_vote);
-                vetoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                TextView presidentText = (TextView) vetoDialog.findViewById(R.id.president_veto_text);
+                vetoDialog = new Dialog(Objects.requireNonNull(getContext()));
+                vetoDialog.setContentView(R.layout.dialog_box_veto);
+                Objects.requireNonNull(vetoDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                TextView presidentText = (TextView) vetoDialog.findViewById(R.id.president_id_in_dialog_veto);
+                presidentText.setText("رئیس جمهور: " + GameMethods.getCurrentPresident().getName());
                 ImageView yesButton = (ImageView) vetoDialog.findViewById(R.id.yes_veto_button);
                 ImageView noButton = (ImageView) vetoDialog.findViewById(R.id.no_veto_button);
                 vetoDialog.show();
@@ -175,7 +179,10 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         vetoDialog.dismiss();
-                        // yes action
+                        GameMethods.useVetoPower(policyCardArrayList);
+                        System.out.println(GameMethods.activePolicies(GameMethods.getAllPolicies()).size());
+                        Objects.requireNonNull(getActivity()).setResult(Activity.RESULT_OK, new Intent());
+                        getActivity().finish();
                     }
                 });
 
@@ -183,7 +190,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         vetoDialog.dismiss();
-                        // no action
+                        vetoButton.setEnabled(false);
                     }
                 });
             }

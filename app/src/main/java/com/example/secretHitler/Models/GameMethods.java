@@ -347,10 +347,6 @@ public class GameMethods {
         GameMethods.allPlayers = allPlayers;
     }
 
-    public static boolean isVetoEnable() {
-        return vetoEnable;
-    }
-
     public static void setVetoEnable(boolean vetoEnable) {
         GameMethods.vetoEnable = vetoEnable;
     }
@@ -381,6 +377,6 @@ public class GameMethods {
         firstTimeCreated = true;
         allPlayers = null;
         vetoEnable = false;
-        liberalsWon = true;
+        liberalsWon = false;
     }
 }
