@@ -169,7 +169,7 @@ public class BoardGameActivity extends AppCompatActivity {
     }
 
     public void onRejectChancellor() {
-        PolicyCard rejectResult = GameMethods.threeRejectsPolicy(activePlayers, activePolicies);
+        final PolicyCard rejectResult = GameMethods.threeRejectsPolicy(activePlayers, activePolicies);
         if (rejectResult == null) {
             mDialog.dismiss();
             activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
@@ -177,18 +177,35 @@ public class BoardGameActivity extends AppCompatActivity {
             showChancellors();
         } else {
             GameMethods.usePolicy(rejectResult);
-            Toast.makeText(BoardGameActivity.this, "تعداد ریجکت های متوالی از حد مجاز عبور کرد، بنابراین آخرین سیاست استفاده نشده به صورت خودکار تصویب شد.", Toast.LENGTH_LONG).show();
+
             mDialog.dismiss();
-            initializeActivity();
-            if (rejectResult.getType() == Team.LIBERAL) {
-                handleLiberalMap();
-                handleFascistMap();
-                checkLiberalCardApproval();
-            } else {
-                handleFascistMap();
-                handleLiberalMap();
-                checkFascistCardApproval();
+            mDialog = new Dialog(this);
+            mDialog.setContentView(R.layout.dialog_three_rejects);
+            Objects.requireNonNull(mDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            Button back = mDialog.findViewById(R.id.threeRejectsButton);
+            ImageView imageView = mDialog.findViewById(R.id.threeRejectsImage);
+            if(rejectResult.getType() == Team.FASCIST){
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.facist_card));
+            } else{
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.liberal_card));
             }
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDialog.dismiss();
+
+                    initializeActivity();
+                    handleLiberalMap();
+                    handleFascistMap();
+                    if (rejectResult.getType() == Team.LIBERAL) {
+                        checkLiberalCardApproval();
+                    } else {
+                        checkFascistCardApproval();
+                    }
+                }
+            });
+            mDialog.show();
         }
     }
 
