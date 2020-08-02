@@ -1,6 +1,7 @@
 package com.example.secretHitler.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,15 +30,9 @@ public class ShowResultsActivity extends AppCompatActivity {
         ArrayList<Player> players = GameMethods.getAllPlayers();
         ArrayList<Player> liberals = GameMethods.liberalsTeam(players);
         ArrayList<Player> fascists = GameMethods.fascistsTeam(players);
-        Boolean liberalsWon = Objects.requireNonNull(getIntent().getExtras()).getBoolean("LIBERAL_WON");
-        if(liberalsWon) {
-            for (Player liberal: liberals)
-                liberal.setWon(true);
-        }
-        else {
-            for (Player fascist: fascists)
-                fascist.setWon(true);
-        }
+        boolean liberalsWon = Objects.requireNonNull(getIntent().getExtras()).getBoolean("LIBERAL_WON");
+        setFinishOnTouchOutside(liberalsWon);
+        GameMethods.setLiberalsWon(liberalsWon);
         Button endGameButton = findViewById(R.id.end_game);
         ArrayList<TextView> liberalsTextViews = new ArrayList<>();
         ArrayList<TextView> fascistsTextViews = new ArrayList<>();
@@ -49,6 +44,8 @@ public class ShowResultsActivity extends AppCompatActivity {
         ResultsRecyclerViewAdapter fascistsAdapter = new ResultsRecyclerViewAdapter(this, fascists, fascistsTextViews);
         fascistsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         fascistsRecyclerView.setAdapter(fascistsAdapter);
+        System.out.println(liberalsTextViews.size());
+        System.out.println(fascistsTextViews.size());
         endGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

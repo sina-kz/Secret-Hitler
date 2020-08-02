@@ -22,6 +22,7 @@ public class GameMethods {
     private static boolean firstTimeCreated = true;
     private static ArrayList<Player> allPlayers;
     private static boolean vetoEnable;
+    private static boolean liberalsWon;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
         ArrayList<Player> newPlayers = new ArrayList<>();
@@ -348,5 +349,13 @@ public class GameMethods {
 
     public static void setVetoEnable(boolean vetoEnable) {
         GameMethods.vetoEnable = vetoEnable;
+    }
+
+    public static boolean isLiberalsWon() {
+        return liberalsWon;
+    }
+
+    public static void setLiberalsWon(boolean liberalsWon) {
+        GameMethods.liberalsWon = liberalsWon;
     }
 }

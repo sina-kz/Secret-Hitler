@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.secretHitler.Enums.Team;
+import com.example.secretHitler.Models.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 
@@ -38,12 +40,25 @@ public class ResultsRecyclerViewAdapter extends RecyclerView.Adapter<ResultsRecy
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolderResult holder, int position) {
         holder.playerName.setText(mData.get(position).getName());
-        if (mData.get(position).isWon()) {
-            holder.playerWinningResult.setText("برنده");
-            holder.playerWinningResult.setTextColor(Color.GREEN);
+        System.out.println(position + mData.get(position).getName() + mData.get(position).isWon());
+        if (mData.get(position).getTeam() == Team.LIBERAL) {
+            if(GameMethods.isLiberalsWon()) {
+                holder.playerWinningResult.setText("برنده");
+                holder.playerWinningResult.setTextColor(Color.GREEN);
+            }
+            else {
+                holder.playerWinningResult.setText("بازنده");
+                holder.playerWinningResult.setTextColor(Color.RED);
+            }
         } else {
-            holder.playerWinningResult.setText("بازنده");
-            holder.playerWinningResult.setTextColor(Color.RED);
+            if(!GameMethods.isLiberalsWon()) {
+                holder.playerWinningResult.setText("برنده");
+                holder.playerWinningResult.setTextColor(Color.GREEN);
+            }
+            else {
+                holder.playerWinningResult.setText("بازنده");
+                holder.playerWinningResult.setTextColor(Color.RED);
+            }
         }
         winningTextViews.add(holder.playerWinningResult);
     }
