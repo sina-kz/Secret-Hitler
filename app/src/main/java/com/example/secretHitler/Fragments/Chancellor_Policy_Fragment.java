@@ -2,6 +2,7 @@ package com.example.secretHitler.Fragments;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -38,14 +39,17 @@ public class Chancellor_Policy_Fragment extends Fragment {
     private boolean isFront = true;
     private boolean eliminate = false;
     private Dialog vetoDialog;
+    private TextView showMessage;
     ArrayList<PolicyCard> policyCardArrayList;
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chancellor_policy_card_fragment, container, false);
 
         Bundle bundle = this.getArguments();
+        assert bundle != null;
         policyCardArrayList = bundle.getParcelableArrayList("POLICY");
 
         card1_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_front);
@@ -54,6 +58,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
         card2_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_back);
         reverse = (Button) view.findViewById(R.id.chancellor_reverse_cards_button);
         vetoButton = (Button) view.findViewById(R.id.veto_button);
+        showMessage = view.findViewById(R.id.chancellor_message);
 
         if (policyCardArrayList.get(0).getType() == Team.LIBERAL) {
             card1_back.setImageResource(R.drawable.liberal_card);
@@ -77,6 +82,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
 
         front_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
         back_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
+        showMessage.setText("نخست وزیر (" + GameMethods.getCurrentChancellor().getName() + ") کارت ها را برگردان");
 
         card1_back.setClickable(false);
         card2_back.setClickable(false);
@@ -86,6 +92,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
             public void onClick(View view) {
                 eliminate = true;
                 if (isFront) {
+                    showMessage.setText("نخست وزیر (" + GameMethods.getCurrentChancellor().getName() + ") سیاست دلخواهت را تصویب کن.");
                     front_anim1.setTarget(card2_front);
                     back_anim1.setTarget(card2_back);
                     front_anim1.start();
@@ -101,6 +108,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
 
                     isFront = false;
                 } else {
+                    showMessage.setText("نخست وزیر (" + GameMethods.getCurrentChancellor().getName() + ") کارت ها را برگردان");
                     front_anim1.setTarget(card2_back);
                     back_anim1.setTarget(card2_front);
                     back_anim1.start();

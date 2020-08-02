@@ -218,12 +218,16 @@ public class GameMethods {
     }
 
     public static void nextPresident(ArrayList<Player> players) {
-        presidentPointer = (presidentPointer + 1) % players.size();
+        if (presidentPointer >= players.size()) {
+            presidentPointer = 0;
+            System.out.println("NIMA");
+        } else
+            presidentPointer = (presidentPointer + 1) % players.size();
         currentPresident = players.get(presidentPointer);
     }
 
     public static void nextPresidentWhenKill(ArrayList<Player> activePlayers) {
-        currentPresident = activePlayers.get(presidentPointer);
+        currentPresident = activePlayers.get(presidentPointer % activePlayers.size());
     }
 
     public static void selectPresident(Player player) {
@@ -361,5 +365,22 @@ public class GameMethods {
 
     public static int getPresidentPointer() {
         return presidentPointer;
+    }
+
+    public static void reinitialize() {
+        currentPresident = null;
+        currentChancellor = null;
+        previousPresident = null;
+        previousChancellor = null;
+        presidentPointer = 0;
+        numberOfRejects = 0;
+        skippedPolicies = null;
+        allPolicies = null;
+        numberOfFascistsUsedPolicies = 0;
+        numberOfLiberalsUsedPolicies = 0;
+        firstTimeCreated = true;
+        allPlayers = null;
+        vetoEnable = false;
+        liberalsWon = true;
     }
 }

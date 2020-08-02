@@ -67,7 +67,7 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="580dp"
         android:background="@drawable/custom_button_2"
         android:text="اتمام بازی"
         android:textSize="24sp"

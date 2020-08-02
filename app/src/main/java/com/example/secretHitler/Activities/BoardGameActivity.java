@@ -91,10 +91,10 @@ public class BoardGameActivity extends AppCompatActivity {
         activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
         lstCheckBoxes.clear();
         System.out.println(GameMethods.getPresidentPointer());
-        for (Player player:activePlayers) {
-            System.out.println(player.getName());;
+        for (Player player : activePlayers) {
+            System.out.println(player.getName());
         }
-        if(!GameMethods.getCurrentPresident().isActive()) {
+        if (!GameMethods.getCurrentPresident().isActive()) {
             System.out.println(GameMethods.getPresidentPointer());
             GameMethods.nextPresidentWhenKill(activePlayers);
         }
@@ -149,7 +149,7 @@ public class BoardGameActivity extends AppCompatActivity {
                         GameMethods.completeAssignChancellor();
                         boolean fascistsWon = GameMethods.checkWinStateForFascists();
                         if (fascistsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
-                            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+                            final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
                             intent.putExtra("LIBERAL_WON", false);
                             startActivity(intent);
                         } else {
@@ -230,7 +230,7 @@ public class BoardGameActivity extends AppCompatActivity {
         }
         boolean fascistIsWon = GameMethods.checkWinStateForFascists();
         if (fascistIsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
-            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+            final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
             intent.putExtra("LIBERAL_WON", false);
             startActivity(intent);
         } else {
@@ -259,7 +259,7 @@ public class BoardGameActivity extends AppCompatActivity {
         GameMethods.nextPresident(activePlayers);
         showChancellors();
         if (liberalsWon) {
-            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+            final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
             intent.putExtra("LIBERAL_WON", true);
             startActivity(intent);
         }
@@ -431,14 +431,14 @@ public class BoardGameActivity extends AppCompatActivity {
                         }
                         boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
                         if (liberalsWon) {
-                            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+                            final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
                             intent.putExtra("LIBERAL_WON", true);
                             startActivity(intent);
                         }
                         fascistDialog.dismiss();
                         activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
                     }
-                    showChancellors();// TODO Not Working Correctly
+                    showChancellors();
                 }
             }
         });

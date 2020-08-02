@@ -49,6 +49,7 @@ public class ShowResultsActivity extends AppCompatActivity {
         endGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GameMethods.reinitialize();
                 startActivity(new Intent(getApplicationContext(), SetupActivity.class));
             }
         });
