@@ -252,6 +252,11 @@ public class BoardGameActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
+                case 1:
+                    activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+                    GameMethods.nextPresident(activePlayers);
+                    showChancellors();
+                    break;
                 case 2:
                     showFascistDialogBoxSecondOrder();
                     break;
@@ -265,9 +270,9 @@ public class BoardGameActivity extends AppCompatActivity {
                     showFascistDialogBoxUpperOrder(5);
                     break;
             }
-            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
-            GameMethods.nextPresident(activePlayers);
-            showChancellors();
+//            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+//            GameMethods.nextPresident(activePlayers);
+//            showChancellors();
         }
     }
 
@@ -349,8 +354,6 @@ public class BoardGameActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                button.setEnabled(false);
-                button.setVisibility(View.INVISIBLE);
                 ImageView team = (ImageView) fascistDialog.findViewById(R.id.fascistDialogTeamFront);
                 ImageView back = (ImageView) fascistDialog.findViewById(R.id.fascistDialogTeamBack);
                 AnimatorSet front_anim, back_anim;
@@ -365,25 +368,36 @@ public class BoardGameActivity extends AppCompatActivity {
                 front_anim.setTarget(back);
                 back_anim.setTarget(team);
 
-                front_anim.start();
-                back_anim.start();
-
-                int index = -1;
-                boolean flag = false;
-                for (int i = 0; i < otherPlayers.size(); i++) {
-                    if (fCheckBoxes.get(i).isChecked()) {
-                        index = i;
-                        flag = true;
-                        break;
+                if (button.getText().equals("تایید")){
+                    int index = -1;
+                    boolean flag = false;
+                    for (int i = 0; i < otherPlayers.size(); i++) {
+                        if (fCheckBoxes.get(i).isChecked()) {
+                            index = i;
+                            flag = true;
+                            break;
+                        }
                     }
+                    if (!flag) {
+                        Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                    } else {
+                        front_anim.start();
+                        back_anim.start();
+                        if (otherPlayers.get(index).getTeam() == Team.LIBERAL)
+                            team.setImageDrawable(getResources().getDrawable(R.drawable.liberal_team));
+                        else team.setImageDrawable(getResources().getDrawable(R.drawable.fascist_team));
+                        button.setText("بستن");
+                    }
+
+                } else if (button.getText().equals("بستن")){
+                    fascistDialog.dismiss();
+                    activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+                    GameMethods.nextPresident(activePlayers);
+                    showChancellors();
                 }
-                if (!flag) {
-                    Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (otherPlayers.get(index).getTeam() == Team.LIBERAL)
-                        team.setImageDrawable(getResources().getDrawable(R.drawable.liberal_team));
-                    else team.setImageDrawable(getResources().getDrawable(R.drawable.fascist_team));
-                }
+
+
+
             }
         });
     }
@@ -419,41 +433,43 @@ public class BoardGameActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                button.setEnabled(false);
-                button.setVisibility(View.INVISIBLE);
+                if(button.getText().equals("تایید")){
 
-                int index = -1;
-                boolean flag = false;
-                for (int i = 0; i < otherPlayers.size(); i++) {
-                    if (fCheckBoxes.get(i).isChecked()) {
-                        index = i;
-                        flag = true;
-                        break;
+                    int index = -1;
+                    boolean flag = false;
+                    for (int i = 0; i < otherPlayers.size(); i++) {
+                        if (fCheckBoxes.get(i).isChecked()) {
+                            index = i;
+                            flag = true;
+                            break;
+                        }
                     }
-                }
-                if (!flag) {
-                    Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
-                    button.setVisibility(View.VISIBLE);
-                } else {
-                    if (round == 3) {
-                        GameMethods.selectPresident(otherPlayers.get(index));
-                        fascistDialog.dismiss();
+                    if (!flag) {
+                        Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                        button.setVisibility(View.VISIBLE);
                     } else {
-                        GameMethods.kill(otherPlayers.get(index));
-                        for (Player player : activePlayers) {
-                            System.out.println(player.getName());
+                        if (round == 3) {
+                            GameMethods.selectPresident(otherPlayers.get(index));
+                        } else {
+                            GameMethods.kill(otherPlayers.get(index));
+                            if (round == 5) {
+                                GameMethods.setVetoEnable(true);
+                            }
+                            boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
+                            if (liberalsWon) {
+                                final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+                                intent.putExtra("LIBERAL_WON", true);
+                                startActivity(intent);
+                            }
+                            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
                         }
-                        if (round == 5) {
-                            GameMethods.setVetoEnable(true);
-                        }
-                        boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
-                        if (liberalsWon) {
-                            final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
-                            intent.putExtra("LIBERAL_WON", true);
-                            startActivity(intent);
-                        }
-                        fascistDialog.dismiss();
-                        activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+                        button.setText("بستن");
+                    }
+                } else if(button.getText().equals("بستن")){
+                    fascistDialog.dismiss();
+                    activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+                    if(round != 3){
+                        GameMethods.nextPresident(activePlayers);
                     }
                     showChancellors();
                 }
