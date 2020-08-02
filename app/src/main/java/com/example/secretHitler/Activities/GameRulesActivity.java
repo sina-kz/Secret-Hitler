@@ -28,9 +28,9 @@ public class GameRulesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temp);
 
-        next = (AppCompatImageView) findViewById(R.id.rules_next);
-        previous = (AppCompatImageView) findViewById(R.id.rules_previous);
-        pageNumber = (TextView) findViewById(R.id.rules_pageNumber);
+        next = findViewById(R.id.rules_next);
+        previous = findViewById(R.id.rules_previous);
+        pageNumber = findViewById(R.id.rules_pageNumber);
         index = 1;
 
         checkPage();

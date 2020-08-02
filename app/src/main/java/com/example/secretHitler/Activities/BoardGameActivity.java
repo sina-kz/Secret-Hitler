@@ -139,6 +139,12 @@ public class BoardGameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         GameMethods.completeAssignChancellor();
+                        boolean fascistsWon = GameMethods.checkWinStateForFascists();
+                        if (fascistsWon) {
+                            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+                            intent.putExtra("LIBERAL_WON", false);
+                            startActivity(intent);
+                        }
                         Intent intent = new Intent(getBaseContext(), PolicyChoose.class);
                         startActivityForResult(intent, 1);
                     }
@@ -215,7 +221,9 @@ public class BoardGameActivity extends AppCompatActivity {
         }
         boolean fascistIsWon = GameMethods.checkWinStateForFascists();
         if (fascistIsWon) {
-            startActivity(new Intent(getBaseContext(), ShowResultsActivity.class));
+            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+            intent.putExtra("LIBERAL_WON", false);
+            startActivity(intent);
         } else {
             switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
                 case 2:
@@ -242,7 +250,9 @@ public class BoardGameActivity extends AppCompatActivity {
         GameMethods.nextPresident(activePlayers);
         showChancellors();
         if (liberalsWon) {
-            startActivity(new Intent(getBaseContext(), ShowResultsActivity.class));
+            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+            intent.putExtra("LIBERAL_WON", true);
+            startActivity(intent);
         }
     }
 
@@ -294,9 +304,9 @@ public class BoardGameActivity extends AppCompatActivity {
         fascistDialog.setContentView(R.layout.dialog_player_team);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        TextView subject = (TextView) fascistDialog.findViewById(R.id.fascistDialogHeader);
-        final Button button = (Button) fascistDialog.findViewById(R.id.fascistDialogButton);
-        RecyclerView otherPlayersRV = (RecyclerView) fascistDialog.findViewById(R.id.fascistDialogPlayers);
+        TextView subject = fascistDialog.findViewById(R.id.fascistDialogHeader);
+        final Button button = fascistDialog.findViewById(R.id.fascistDialogButton);
+        RecyclerView otherPlayersRV = fascistDialog.findViewById(R.id.fascistDialogPlayers);
 
         final ArrayList<CheckBox> fCheckBoxes = new ArrayList<>();
         for (CheckBox checkBox : fCheckBoxes) {
@@ -357,9 +367,9 @@ public class BoardGameActivity extends AppCompatActivity {
         fascistDialog.setContentView(R.layout.dialog_choose_player);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        TextView subject = (TextView) fascistDialog.findViewById(R.id.fascistDialogHeaderAct);
-        final Button button = (Button) fascistDialog.findViewById(R.id.fascistDialogButtonAct);
-        RecyclerView otherPlayersRV = (RecyclerView) fascistDialog.findViewById(R.id.fascistDialogPlayersAct);
+        TextView subject = fascistDialog.findViewById(R.id.fascistDialogHeaderAct);
+        final Button button = fascistDialog.findViewById(R.id.fascistDialogButtonAct);
+        RecyclerView otherPlayersRV = fascistDialog.findViewById(R.id.fascistDialogPlayersAct);
 
         final ArrayList<CheckBox> fCheckBoxes = new ArrayList<>();
         for (CheckBox checkBox : fCheckBoxes) {
@@ -397,16 +407,25 @@ public class BoardGameActivity extends AppCompatActivity {
                 }
                 if (!flag) {
                     Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                    button.setVisibility(View.VISIBLE);
                 } else {
                     if (round == 3) {
                         GameMethods.selectPresident(otherPlayers.get(index));
                         fascistDialog.dismiss();
                         showChancellors();// TODO Not Working Correctly
                     } else {
-                        GameMethods.kill(otherPlayers.get(index));
+                        GameMethods.kill(otherPlayers.get(index), activePlayers);
                         if (round == 5) {
-                            //TODO  Veto Power
+                            GameMethods.setVetoEnable(true);
                         }
+                        boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
+                        if (liberalsWon) {
+                            Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
+                            intent.putExtra("LIBERAL_WON", true);
+                            startActivity(intent);
+                        }
+                        fascistDialog.dismiss();
+                        showChancellors();
                     }
                 }
             }

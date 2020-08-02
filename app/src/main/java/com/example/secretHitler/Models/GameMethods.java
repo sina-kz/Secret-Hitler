@@ -21,6 +21,7 @@ public class GameMethods {
     private static int numberOfLiberalsUsedPolicies = 0;
     private static boolean firstTimeCreated = true;
     private static ArrayList<Player> allPlayers;
+    private static boolean vetoEnable;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
         ArrayList<Player> newPlayers = new ArrayList<>();
@@ -32,8 +33,12 @@ public class GameMethods {
         return newPlayers;
     }
 
-    public static void kill(Player player) {
+    public static void kill(Player player, ArrayList<Player> activePlayers) {
         player.setActive(false);
+        if (currentPresident == player) {
+            nextPresident(activePlayers);
+        }
+        activePlayers = activePlayers(allPlayers);
     }
 
     public static void initializePolicies() {
@@ -174,10 +179,7 @@ public class GameMethods {
     }
 
     public static boolean checkWinStateForLiberals(ArrayList<Player> players) {
-        ArrayList<Player> liberals = liberalsTeam(allPlayers);
         if (numberOfLiberalsUsedPolicies == Numbers.liberalPoliciesToWin) {
-            for (Player player : liberals)
-                player.setWon(true);
             return true;
         }
         Player hitler = new Player();
@@ -187,27 +189,14 @@ public class GameMethods {
                 break;
             }
         }
-        if (!hitler.isActive()) {
-            for (Player player : liberals)
-                player.setWon(true);
-            return true;
-        }
-        return false;
+        return !hitler.isActive();
     }
 
     public static boolean checkWinStateForFascists() {
-        ArrayList<Player> fascists = fascistsTeam(allPlayers);
         if (numberOfFascistsUsedPolicies == Numbers.fascistsPoliciesToWin) {
-            for (Player player : fascists)
-                player.setWon(true);
             return true;
         }
-        if (numberOfFascistsUsedPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler()) {
-            for (Player player : fascists)
-                player.setWon(true);
-            return true;
-        }
-        return false;
+        return numberOfFascistsUsedPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler();
     }
 
     public static void initializePresident(ArrayList<Player> players) {
@@ -216,7 +205,7 @@ public class GameMethods {
     }
 
     public static Player assignChancellor(ArrayList<Player> players, Player player) {
-        if (players.size() != Numbers.minNumberOfPlayers) {
+        if (players.size() > Numbers.minNumberOfPlayers) {
             if (previousChancellor == player || previousPresident == player) {
                 return null;
             }
@@ -238,6 +227,7 @@ public class GameMethods {
 
     public static void selectPresident(Player player) {
         currentPresident = player;
+        presidentPointer = (presidentPointer - 1) % activePlayers(allPlayers).size();
     }
 
     public static Team askPlayersTeam(Player player) {
@@ -278,7 +268,7 @@ public class GameMethods {
     public static void usePresidentPower(String power, Player selectedPlayer, ArrayList<PolicyCard> activePolicies, ArrayList<PolicyCard> peekPolicies, Team selectedPlayerTeam) {
         switch (power) {
             case "EXECUTE":
-                kill(selectedPlayer);
+                kill(selectedPlayer, activePlayers(allPlayers));
                 break;
             case "INVESTIGATE":
                 selectedPlayerTeam = askPlayersTeam(selectedPlayer);
@@ -303,7 +293,7 @@ public class GameMethods {
 
     public static ArrayList<Player> assignableChancellors(ArrayList<Player> activePlayers) {
         ArrayList<Player> others = otherPlayers(activePlayers, currentPresident);
-        if (activePlayers.size() != Numbers.minNumberOfPlayers) {
+        if (activePlayers.size() > Numbers.minNumberOfPlayers) {
             try {
                 others.remove(previousPresident);
                 others.remove(previousChancellor);
@@ -350,5 +340,13 @@ public class GameMethods {
 
     public static void setAllPlayers(ArrayList<Player> allPlayers) {
         GameMethods.allPlayers = allPlayers;
+    }
+
+    public static boolean isVetoEnable() {
+        return vetoEnable;
+    }
+
+    public static void setVetoEnable(boolean vetoEnable) {
+        GameMethods.vetoEnable = vetoEnable;
     }
 }

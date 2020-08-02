@@ -17,6 +17,7 @@ import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ShowResultsActivity extends AppCompatActivity {
 
@@ -28,6 +29,15 @@ public class ShowResultsActivity extends AppCompatActivity {
         ArrayList<Player> players = GameMethods.getAllPlayers();
         ArrayList<Player> liberals = GameMethods.liberalsTeam(players);
         ArrayList<Player> fascists = GameMethods.fascistsTeam(players);
+        Boolean liberalsWon = Objects.requireNonNull(getIntent().getExtras()).getBoolean("LIBERAL_WON");
+        if(liberalsWon) {
+            for (Player liberal: liberals)
+                liberal.setWon(true);
+        }
+        else {
+            for (Player fascist: fascists)
+                fascist.setWon(true);
+        }
         Button endGameButton = findViewById(R.id.end_game);
         ArrayList<TextView> liberalsTextViews = new ArrayList<>();
         ArrayList<TextView> fascistsTextViews = new ArrayList<>();
