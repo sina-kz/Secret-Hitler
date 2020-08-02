@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.secretHitler.Enums.Team;
-import com.example.secretHitler.Models.GameMethods;
+import com.example.secretHitler.Controller.GameMethods;
 import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
 import com.example.secretHitler.Utils.Numbers;

@@ -1,7 +1,6 @@
 package com.example.secretHitler.Activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.secretHitler.Adapters.ResultsRecyclerViewAdapter;
-import com.example.secretHitler.Models.GameMethods;
+import com.example.secretHitler.Controller.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 

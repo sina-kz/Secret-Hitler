@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.secretHitler.Enums.Team;
-import com.example.secretHitler.Models.GameMethods;
+import com.example.secretHitler.Controller.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 

@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.example.secretHitler.Adapters.RecyclerViewAdapterChanceler;
 import com.example.secretHitler.Enums.Team;
-import com.example.secretHitler.Models.GameMethods;
+import com.example.secretHitler.Controller.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.R;
@@ -90,12 +90,7 @@ public class BoardGameActivity extends AppCompatActivity {
     public void showChancellors() {
         activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
         lstCheckBoxes.clear();
-        System.out.println(GameMethods.getPresidentPointer());
-        for (Player player : activePlayers) {
-            System.out.println(player.getName());
-        }
         if (!GameMethods.getCurrentPresident().isActive()) {
-            System.out.println(GameMethods.getPresidentPointer());
             GameMethods.nextPresidentWhenKill(activePlayers);
         }
         assignableChancellors = GameMethods.assignableChancellors(activePlayers);
@@ -185,9 +180,9 @@ public class BoardGameActivity extends AppCompatActivity {
 
             Button back = mDialog.findViewById(R.id.threeRejectsButton);
             ImageView imageView = mDialog.findViewById(R.id.threeRejectsImage);
-            if(rejectResult.getType() == Team.FASCIST){
+            if (rejectResult.getType() == Team.FASCIST) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.facist_card));
-            } else{
+            } else {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.liberal_card));
             }
             back.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +213,7 @@ public class BoardGameActivity extends AppCompatActivity {
                 assert data != null;
                 PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
                 mDialog.dismiss();
-                if(choosePolicyCard == null) {
+                if (choosePolicyCard == null) {
                     GameMethods.nextPresident(activePlayers);
                     showChancellors();
                     return;
@@ -372,7 +367,7 @@ public class BoardGameActivity extends AppCompatActivity {
                 front_anim.setTarget(back);
                 back_anim.setTarget(team);
 
-                if (button.getText().equals("تایید")){
+                if (button.getText().equals("تایید")) {
                     int index = -1;
                     boolean flag = false;
                     for (int i = 0; i < otherPlayers.size(); i++) {
@@ -389,17 +384,17 @@ public class BoardGameActivity extends AppCompatActivity {
                         back_anim.start();
                         if (otherPlayers.get(index).getTeam() == Team.LIBERAL)
                             team.setImageDrawable(getResources().getDrawable(R.drawable.liberal_team));
-                        else team.setImageDrawable(getResources().getDrawable(R.drawable.fascist_team));
+                        else
+                            team.setImageDrawable(getResources().getDrawable(R.drawable.fascist_team));
                         button.setText("بستن");
                     }
 
-                } else if (button.getText().equals("بستن")){
+                } else if (button.getText().equals("بستن")) {
                     fascistDialog.dismiss();
                     activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
                     GameMethods.nextPresident(activePlayers);
                     showChancellors();
                 }
-
 
 
             }
@@ -437,7 +432,7 @@ public class BoardGameActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(button.getText().equals("تایید")){
+                if (button.getText().equals("تایید")) {
 
                     int index = -1;
                     boolean flag = false;
@@ -469,10 +464,10 @@ public class BoardGameActivity extends AppCompatActivity {
                         }
                         button.setText("بستن");
                     }
-                } else if(button.getText().equals("بستن")){
+                } else if (button.getText().equals("بستن")) {
                     fascistDialog.dismiss();
                     activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
-                    if(round != 3){
+                    if (round != 3) {
                         GameMethods.nextPresident(activePlayers);
                     }
                     showChancellors();

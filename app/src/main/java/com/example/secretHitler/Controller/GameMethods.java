@@ -1,7 +1,9 @@
-package com.example.secretHitler.Models;
+package com.example.secretHitler.Controller;
 
 import com.example.secretHitler.Enums.PolicyState;
 import com.example.secretHitler.Enums.Team;
+import com.example.secretHitler.Models.Player;
+import com.example.secretHitler.Models.PolicyCard;
 import com.example.secretHitler.Utils.Numbers;
 
 import java.util.ArrayList;
@@ -232,7 +234,6 @@ public class GameMethods {
 
     public static void selectPresident(Player player) {
         currentPresident = player;
-        presidentPointer = (presidentPointer - 1) % activePlayers(allPlayers).size();
     }
 
     public static Team askPlayersTeam(Player player) {

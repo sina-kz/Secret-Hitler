@@ -7,20 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.secretHitler.Adapters.RecyclerViewAdapter;
-import com.example.secretHitler.Models.GameMethods;
+import com.example.secretHitler.Controller.GameMethods;
 import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 import com.example.secretHitler.Utils.Numbers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class addNameActivity extends AppCompatActivity {
 
