@@ -61,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="8dp"
-                android:button="@drawable/checkbox"
-                android:checked="true" />
+                android:button="@drawable/checkbox_selector"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,8 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="8dp"
-                android:button="@drawable/checkbox"
-                android:checked="true" />
+                android:button="@drawable/checkbox_selector"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="8dp"
-                android:button="@drawable/checkbox"
-                android:checked="true" />
+                android:button="@drawable/checkbox_selector"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,8 +136,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="8dp"
-                android:button="@drawable/checkbox"
-                android:checked="true" />
+                android:button="@drawable/checkbox_selector"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -161,8 +161,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="8dp"
-                android:button="@drawable/checkbox"
-                android:checked="true" />
+                android:button="@drawable/checkbox_selector"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
