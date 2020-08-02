@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/president_id_in_dialog"
+        android:id="@+id/president_id_in_dialog_veto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -20,12 +20,12 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/chanceler_id_in_dialog"
+        android:id="@+id/president_veto_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:gravity="center"
-        android:text="چنسلر : نیما"
+        android:text="آیا با رای وتو موافق هستی؟"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -37,7 +37,7 @@
         android:weightSum="2">
 
         <ImageView
-            android:id="@+id/yes_vote_button"
+            android:id="@+id/yes_veto_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
@@ -45,7 +45,7 @@
             android:src="@drawable/yes_vote" />
 
         <ImageView
-            android:id="@+id/no_vote_button"
+            android:id="@+id/no_veto_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="16dp"

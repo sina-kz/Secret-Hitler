@@ -3,8 +3,11 @@ package com.example.secretHitler.Fragments;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,11 +32,12 @@ import java.util.Objects;
 public class Chancellor_Policy_Fragment extends Fragment {
     private ImageView card1_front, card2_front;
     private ImageView card1_back, card2_back;
-    private Button reverse;
+    private Button reverse, vetoButton;
     private AnimatorSet front_anim1, front_anim2;
     private AnimatorSet back_anim1, back_anim2;
     private boolean isFront = true;
     private boolean eliminate = false;
+    private Dialog vetoDialog;
     ArrayList<PolicyCard> policyCardArrayList;
 
     @Nullable
@@ -48,6 +53,7 @@ public class Chancellor_Policy_Fragment extends Fragment {
         card1_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_back);
         card2_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_back);
         reverse = (Button) view.findViewById(R.id.chancellor_reverse_cards_button);
+        vetoButton = (Button) view.findViewById(R.id.veto_button);
 
         if (policyCardArrayList.get(0).getType() == Team.LIBERAL) {
             card1_back.setImageResource(R.drawable.liberal_card);
@@ -143,6 +149,35 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 }
+            }
+        });
+
+        vetoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vetoDialog = new Dialog(getContext());
+                vetoDialog.setContentView(R.layout.dialog_vote);
+                vetoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                TextView presidentText = (TextView) vetoDialog.findViewById(R.id.president_veto_text);
+                ImageView yesButton = (ImageView) vetoDialog.findViewById(R.id.yes_veto_button);
+                ImageView noButton = (ImageView) vetoDialog.findViewById(R.id.no_veto_button);
+                vetoDialog.show();
+
+                yesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        vetoDialog.dismiss();
+                        // yes action
+                    }
+                });
+
+                noButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        vetoDialog.dismiss();
+                        // no action
+                    }
+                });
             }
         });
 

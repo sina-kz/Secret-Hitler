@@ -5,7 +5,7 @@
     android:layout_height="300dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_voting_backgraoung"
+    android:background="@drawable/dialog_voting_background"
     android:orientation="vertical">
 
     <TextView

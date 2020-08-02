@@ -34,7 +34,7 @@ public class Show_Role extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show__role);
+        setContentView(R.layout.activity_show_role);
 
         textView = findViewById(R.id.role_name);
         next = findViewById(R.id.next);
