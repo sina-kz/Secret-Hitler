@@ -99,7 +99,7 @@ public class GameMethods {
     }
 
     public static ArrayList<PolicyCard> reorderPolicies(ArrayList<PolicyCard> policyCards) {
-        for (PolicyCard policyCard:skippedPolicies) {
+        for (PolicyCard policyCard : skippedPolicies) {
             policyCard.setState(PolicyState.UNUSED);
         }
         policyCards.addAll(skippedPolicies);
@@ -174,7 +174,10 @@ public class GameMethods {
     }
 
     public static boolean checkWinStateForLiberals(ArrayList<Player> players) {
+        ArrayList<Player> liberals = liberalsTeam(allPlayers);
         if (numberOfLiberalsUsedPolicies == Numbers.liberalPoliciesToWin) {
+            for (Player player : liberals)
+                player.setWon(true);
             return true;
         }
         Player hitler = new Player();
@@ -184,14 +187,27 @@ public class GameMethods {
                 break;
             }
         }
-        return !hitler.isActive();
+        if (!hitler.isActive()) {
+            for (Player player : liberals)
+                player.setWon(true);
+            return true;
+        }
+        return false;
     }
 
     public static boolean checkWinStateForFascists() {
+        ArrayList<Player> fascists = fascistsTeam(allPlayers);
         if (numberOfFascistsUsedPolicies == Numbers.fascistsPoliciesToWin) {
+            for (Player player : fascists)
+                player.setWon(true);
             return true;
         }
-        return numberOfFascistsUsedPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler();
+        if (numberOfFascistsUsedPolicies >= Numbers.fascistsPolicesToActiveHitler && currentChancellor.isHitler()) {
+            for (Player player : fascists)
+                player.setWon(true);
+            return true;
+        }
+        return false;
     }
 
     public static void initializePresident(ArrayList<Player> players) {
@@ -277,7 +293,6 @@ public class GameMethods {
     }
 
     public static PolicyCard threeRejectsPolicy(ArrayList<Player> activePlayers, ArrayList<PolicyCard> activePolicies) {
-        nextPresident(activePlayers);
         numberOfRejects++;
         if (numberOfRejects < Numbers.maxNumberOfRejectedPresidents) {
             return null;

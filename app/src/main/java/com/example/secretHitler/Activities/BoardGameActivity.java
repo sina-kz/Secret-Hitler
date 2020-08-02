@@ -157,7 +157,8 @@ public class BoardGameActivity extends AppCompatActivity {
         PolicyCard rejectResult = GameMethods.threeRejectsPolicy(activePlayers, activePolicies);
         if (rejectResult == null) {
             mDialog.dismiss();
-            initializeActivity();
+            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+            GameMethods.nextPresident(activePlayers);
             showChancellors();
         } else {
             GameMethods.usePolicy(rejectResult);
@@ -166,10 +167,12 @@ public class BoardGameActivity extends AppCompatActivity {
             initializeActivity();
             if (rejectResult.getType() == Team.LIBERAL) {
                 handleLiberalMap();
+                handleFascistMap();
                 checkLiberalCardApproval();
             } else {
                 handleFascistMap();
-                showChancellors();
+                handleLiberalMap();
+                checkFascistCardApproval();
             }
         }
     }
@@ -188,10 +191,12 @@ public class BoardGameActivity extends AppCompatActivity {
                 switch (choosePolicyCard.getType()) {
                     case LIBERAL:
                         handleLiberalMap();
+                        handleFascistMap();
                         checkLiberalCardApproval();
                         break;
                     case FASCIST:
                         handleFascistMap();
+                        handleLiberalMap();
                         checkFascistCardApproval();
                         break;
                 }
@@ -203,11 +208,16 @@ public class BoardGameActivity extends AppCompatActivity {
     }
 
     public void checkFascistCardApproval() {
+        try {
+            fascistDialog.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         boolean fascistIsWon = GameMethods.checkWinStateForFascists();
-        if (fascistIsWon){
-            //TODO
-        }else {
-            switch (GameMethods.getNumberOfFascistsUsedPolicies()){
+        if (fascistIsWon) {
+            startActivity(new Intent(getBaseContext(), ShowResultsActivity.class));
+        } else {
+            switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
                 case 2:
                     showFascistDialogBoxSecondOrder();
                     break;
@@ -221,8 +231,8 @@ public class BoardGameActivity extends AppCompatActivity {
                     showFascistDialogBoxUpperOrder(5);
                     break;
             }
-            if (GameMethods.getNumberOfFascistsUsedPolicies() != 3)
-                GameMethods.nextPresident(activePlayers);
+            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+            GameMethods.nextPresident(activePlayers);
             showChancellors();
         }
     }
@@ -279,7 +289,7 @@ public class BoardGameActivity extends AppCompatActivity {
         }
     }
 
-    public void showFascistDialogBoxSecondOrder(){
+    public void showFascistDialogBoxSecondOrder() {
         fascistDialog = new Dialog(this);
         fascistDialog.setContentView(R.layout.dialog_player_team);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -289,7 +299,7 @@ public class BoardGameActivity extends AppCompatActivity {
         RecyclerView otherPlayersRV = (RecyclerView) fascistDialog.findViewById(R.id.fascistDialogPlayers);
 
         final ArrayList<CheckBox> fCheckBoxes = new ArrayList<>();
-        for (CheckBox checkBox: fCheckBoxes) {
+        for (CheckBox checkBox : fCheckBoxes) {
             checkBox.setChecked(false);
         }
 
@@ -324,24 +334,25 @@ public class BoardGameActivity extends AppCompatActivity {
 
                 int index = -1;
                 boolean flag = false;
-                for(int i = 0; i < otherPlayers.size(); i++){
-                    if (fCheckBoxes.get(i).isChecked()){
+                for (int i = 0; i < otherPlayers.size(); i++) {
+                    if (fCheckBoxes.get(i).isChecked()) {
                         index = i;
                         flag = true;
                         break;
                     }
                 }
-                if(!flag){
+                if (!flag) {
                     Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if(otherPlayers.get(index).getTeam()==Team.LIBERAL) team.setImageDrawable(getResources().getDrawable(R.drawable.liberal_team));
+                } else {
+                    if (otherPlayers.get(index).getTeam() == Team.LIBERAL)
+                        team.setImageDrawable(getResources().getDrawable(R.drawable.liberal_team));
                     else team.setImageDrawable(getResources().getDrawable(R.drawable.fascist_team));
                 }
             }
         });
     }
-    public void showFascistDialogBoxUpperOrder(final int round){
+
+    public void showFascistDialogBoxUpperOrder(final int round) {
         fascistDialog = new Dialog(this);
         fascistDialog.setContentView(R.layout.dialog_choose_player);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -351,7 +362,7 @@ public class BoardGameActivity extends AppCompatActivity {
         RecyclerView otherPlayersRV = (RecyclerView) fascistDialog.findViewById(R.id.fascistDialogPlayersAct);
 
         final ArrayList<CheckBox> fCheckBoxes = new ArrayList<>();
-        for (CheckBox checkBox: fCheckBoxes) {
+        for (CheckBox checkBox : fCheckBoxes) {
             checkBox.setChecked(false);
         }
 
@@ -359,12 +370,11 @@ public class BoardGameActivity extends AppCompatActivity {
         RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(this, otherPlayers, fCheckBoxes);
         otherPlayersRV.setLayoutManager(new LinearLayoutManager(this));
         otherPlayersRV.setAdapter(myAdapter);
-        if(round == 3) {
+        if (round == 3) {
             subject.setText("رئیس جمهور باید رئیس جمهور بعدی را انتخاب کند");
-        }
-        else {
+        } else {
             subject.setText("رئیس جمهور باید یک نفر را بکشد");
-            if (round == 5){
+            if (round == 5) {
                 subject.append("\nقدرت وتو نیز فعال شد");
             }
         }
@@ -378,23 +388,23 @@ public class BoardGameActivity extends AppCompatActivity {
 
                 int index = -1;
                 boolean flag = false;
-                for(int i = 0; i < otherPlayers.size(); i++){
-                    if (fCheckBoxes.get(i).isChecked()){
+                for (int i = 0; i < otherPlayers.size(); i++) {
+                    if (fCheckBoxes.get(i).isChecked()) {
                         index = i;
                         flag = true;
                         break;
                     }
                 }
-                if(!flag){
+                if (!flag) {
                     Toast.makeText(BoardGameActivity.this, "لطفا یک بازیکن را انتخاب کنید", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if(round == 3) {
-                        GameMethods.selectPresident(otherPlayers.get(index)); // TODO Not Working Correctly
-                    }
-                    else {
+                } else {
+                    if (round == 3) {
+                        GameMethods.selectPresident(otherPlayers.get(index));
+                        fascistDialog.dismiss();
+                        showChancellors();// TODO Not Working Correctly
+                    } else {
                         GameMethods.kill(otherPlayers.get(index));
-                        if (round == 5){
+                        if (round == 5) {
                             //TODO  Veto Power
                         }
                     }
