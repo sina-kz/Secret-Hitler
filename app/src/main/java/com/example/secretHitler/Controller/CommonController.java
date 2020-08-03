@@ -103,7 +103,7 @@ public class CommonController {
                         GameMethods.completeAssignChancellor();
                         handleRejectImage(0, reject1, reject2, reject3);
                         boolean fascistsWon = GameMethods.checkWinStateForFascists();
-                        if (fascistsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
+                        if (fascistsWon) {
                             final Intent intent = new Intent(activity, ShowResultsActivity.class);
                             intent.putExtra("LIBERAL_WON", false);
                             activity.startActivity(intent);
@@ -179,6 +179,9 @@ public class CommonController {
         } else {
             switch (GameMethods.getNumberOfRejects()) {
                 case 0:
+                    reject1.setImageResource(R.drawable.checkbox);
+                    reject2.setImageResource(R.drawable.checkbox);
+                    reject3.setImageResource(R.drawable.checkbox);
                     break;
                 case 1:
                     reject1.setImageResource(R.drawable.reject_image);
@@ -282,7 +285,7 @@ public class CommonController {
             e.printStackTrace();
         }
         boolean fascistIsWon = GameMethods.checkWinStateForFascists();
-        if (fascistIsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
+        if (fascistIsWon && !GameMethods.getCurrentChancellor().isHitler()) {
             final Intent intent = new Intent(activity.getBaseContext(), ShowResultsActivity.class);
             intent.putExtra("LIBERAL_WON", false);
             activity.startActivity(intent);
