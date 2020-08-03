@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.secretHitler.Adapters.RecyclerViewAdapterChanceler;
+import com.example.secretHitler.Controller.CommonController;
 import com.example.secretHitler.Enums.Team;
 import com.example.secretHitler.Controller.GameMethods;
 import com.example.secretHitler.Models.Player;
@@ -66,7 +67,8 @@ public class BoardGameActivity extends AppCompatActivity {
             GameMethods.initializePresident(GameMethods.getAllPlayers());
             GameMethods.setFirstTimeCreated(false);
         }
-        showChancellors();
+        CommonController.showChancellors(this, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton
+                , mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
     }
 
     public void initializeActivity() {
@@ -89,6 +91,7 @@ public class BoardGameActivity extends AppCompatActivity {
         reject1 = (ImageView) findViewById(R.id.reject_image_1);
         reject2 = (ImageView) findViewById(R.id.reject_image_2);
         reject3 = (ImageView) findViewById(R.id.reject_image_3);
+        fascistDialog = new Dialog(this);
     }
 
     @SuppressLint("SetTextI18n")
@@ -247,20 +250,25 @@ public class BoardGameActivity extends AppCompatActivity {
                 mDialog.dismiss();
                 if (choosePolicyCard == null) {
                     GameMethods.nextPresident(activePlayers);
-                    showChancellors();
+                    CommonController.showChancellors(this, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton
+                            , mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
                     return;
                 }
                 Toast.makeText(this, "سیاست " + choosePolicyCard.getType().toString().toLowerCase() + " تصویب شد", Toast.LENGTH_LONG).show();
                 switch (choosePolicyCard.getType()) {
                     case LIBERAL:
-                        handleLiberalMap();
-                        handleFascistMap();
-                        checkLiberalCardApproval();
+                        CommonController.handleLiberalMap(liberalMap);
+                        CommonController.handleFascistMap(fascistMap);
+                        CommonController.checkLiberalCardApproval(this, lstCheckBoxes, recyclerView,
+                                showPresidentTextView, activateButton, mDialog, liberalMap, fascistMap,
+                                reject1, reject2, reject3, fascistDialog);
                         break;
                     case FASCIST:
-                        handleFascistMap();
-                        handleLiberalMap();
-                        checkFascistCardApproval();
+                        CommonController.handleLiberalMap(liberalMap);
+                        CommonController.handleFascistMap(fascistMap);
+                        CommonController.checkFascistCardApproval(this, lstCheckBoxes, recyclerView,
+                                showPresidentTextView, activateButton, mDialog, liberalMap, fascistMap,
+                                reject1, reject2, reject3, fascistDialog);
                         break;
                 }
             }
@@ -362,7 +370,6 @@ public class BoardGameActivity extends AppCompatActivity {
     }
 
     public void showFascistDialogBoxSecondOrder() {
-        fascistDialog = new Dialog(this);
         fascistDialog.setContentView(R.layout.dialog_player_team);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -434,7 +441,6 @@ public class BoardGameActivity extends AppCompatActivity {
     }
 
     public void showFascistDialogBoxUpperOrder(final int round) {
-        fascistDialog = new Dialog(this);
         fascistDialog.setContentView(R.layout.dialog_choose_player);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
