@@ -17,7 +17,6 @@ import java.util.List;
 
 public class SetupActivity extends AppCompatActivity {
     private CheckBox ch5, ch6, ch7, ch8, ch9, ch10;
-    private Button startGameButton, gameRuleButton;
     private int numOfPlayer = 5;
 
     @Override
@@ -31,8 +30,8 @@ public class SetupActivity extends AppCompatActivity {
         ch9 = findViewById(R.id.check9);
         ch10 = findViewById(R.id.check10);
 
-        startGameButton = findViewById(R.id.startButton);
-        gameRuleButton = findViewById(R.id.gameRule);
+        Button startGameButton = findViewById(R.id.startButton);
+        Button gameRuleButton = findViewById(R.id.gameRule);
         final List<CheckBox> checkBoxes = new ArrayList<>();
         checkBoxes.add(ch5);
         checkBoxes.add(ch6);

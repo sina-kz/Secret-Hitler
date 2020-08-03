@@ -19,7 +19,6 @@ import com.wajahatkarim3.easyflipview.EasyFlipView;
 import java.util.ArrayList;
 
 public class Show_Hitler_Fragment extends Fragment {
-    private EasyFlipView hitlerFlipView;
     private int counter;
     private ArrayList<Player> players;
     private Player player;
@@ -29,7 +28,7 @@ public class Show_Hitler_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.role_hitler_fragment, container, false);
-        hitlerFlipView = view.findViewById(R.id.hitler_flipview);
+        EasyFlipView hitlerFlipView = view.findViewById(R.id.hitler_flipview);
         hitlerFlipView.setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
             @SuppressLint("SetTextI18n")
             @Override

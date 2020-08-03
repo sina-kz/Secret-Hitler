@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import com.example.secretHitler.Fragments.RulesPageFragment6;
 import com.example.secretHitler.R;
 
 public class GameRulesActivity extends AppCompatActivity {
-    private AppCompatImageView next, previous;
+    private AppCompatImageView previous;
     private TextView pageNumber;
     private Fragment fragment;
     private int index;
@@ -28,7 +29,7 @@ public class GameRulesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temp);
 
-        next = findViewById(R.id.rules_next);
+        AppCompatImageView next = findViewById(R.id.rules_next);
         previous = findViewById(R.id.rules_previous);
         pageNumber = findViewById(R.id.rules_pageNumber);
         index = 1;
@@ -72,6 +73,7 @@ public class GameRulesActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     protected void checkPage(){
         switch (index){
             case 1:
@@ -95,7 +97,7 @@ public class GameRulesActivity extends AppCompatActivity {
                 fragment = new RulesPageFragment6();
                 break;
         }
-        pageNumber.setText(Integer.toString(index) + " of 6");
+        pageNumber.setText(index + " of 6");
     }
 
     @Override

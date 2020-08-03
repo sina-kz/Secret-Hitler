@@ -78,16 +78,6 @@ public class GameMethods {
         return newPolicyCards;
     }
 
-    public static ArrayList<PolicyCard> usedPolicies(ArrayList<PolicyCard> policyCards) {
-        ArrayList<PolicyCard> usedPolicyCards = new ArrayList<>();
-        for (PolicyCard policyCard : policyCards) {
-            if (policyCard.getState() == PolicyState.USED) {
-                usedPolicyCards.add(policyCard);
-            }
-        }
-        return usedPolicyCards;
-    }
-
     public static void usePolicy(PolicyCard policyCard) {
         policyCard.setState(PolicyState.USED);
         numberOfRejects = 0;
@@ -236,24 +226,12 @@ public class GameMethods {
         currentPresident = player;
     }
 
-    public static Team askPlayersTeam(Player player) {
-        return player.getTeam();
-    }
-
     public static Player getCurrentPresident() {
         return currentPresident;
     }
 
     public static Player getCurrentChancellor() {
         return currentChancellor;
-    }
-
-    public static Player getPreviousPresident() {
-        return previousPresident;
-    }
-
-    public static Player getPreviousChancellor() {
-        return previousChancellor;
     }
 
     public static ArrayList<Player> otherPlayers(ArrayList<Player> players, Player player) {
@@ -271,24 +249,7 @@ public class GameMethods {
         skipPolicy(policyCards.get(1));
     }
 
-    public static void usePresidentPower(String power, Player selectedPlayer, ArrayList<PolicyCard> activePolicies, ArrayList<PolicyCard> peekPolicies, Team selectedPlayerTeam) {
-        switch (power) {
-            case "EXECUTE":
-                kill(selectedPlayer);
-                break;
-            case "INVESTIGATE":
-                selectedPlayerTeam = askPlayersTeam(selectedPlayer);
-                break;
-            case "ELECTION":
-                selectPresident(selectedPlayer);
-                break;
-            case "POLICY_PEEK":
-                peekPolicies = pickThreePolicies(activePolicies);
-                break;
-        }
-    }
-
-    public static PolicyCard threeRejectsPolicy(ArrayList<Player> activePlayers, ArrayList<PolicyCard> activePolicies) {
+    public static PolicyCard threeRejectsPolicy(ArrayList<PolicyCard> activePolicies) {
         numberOfRejects++;
         if (numberOfRejects < Numbers.maxNumberOfRejectedPresidents) {
             return null;
@@ -358,10 +319,6 @@ public class GameMethods {
 
     public static void setLiberalsWon(boolean liberalsWon) {
         GameMethods.liberalsWon = liberalsWon;
-    }
-
-    public static int getPresidentPointer() {
-        return presidentPointer;
     }
 
     public static int getNumberOfRejects() {

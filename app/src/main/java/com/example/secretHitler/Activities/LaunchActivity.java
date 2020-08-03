@@ -16,7 +16,7 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBarID); // 5 seconds to complete
+        progressBar = findViewById(R.id.progressBarID); // 5 seconds to complete
         handler = new Handler();
 
         new Thread(new Runnable() {

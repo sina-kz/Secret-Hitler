@@ -36,10 +36,6 @@ public class PolicyCard implements Parcelable {
         return type;
     }
 
-    public void setType(Team type) {
-        this.type = type;
-    }
-
     public PolicyState getState() {
         return state;
     }

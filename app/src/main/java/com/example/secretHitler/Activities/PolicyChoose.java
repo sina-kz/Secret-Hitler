@@ -10,14 +10,12 @@ import com.example.secretHitler.R;
 
 public class PolicyChoose extends AppCompatActivity {
 
-    private President_Policy_Fragment presidentPolicyFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy_choose);
 
-        presidentPolicyFragment = new President_Policy_Fragment();
+        President_Policy_Fragment presidentPolicyFragment = new President_Policy_Fragment();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.policy_container, presidentPolicyFragment).addToBackStack(null).commit();

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class Show_Role extends AppCompatActivity {
 
     private TextView textView;
-    private AppCompatImageView next, previous;
+    private AppCompatImageView previous;
     private Fragment fragment;
     private int index;
     private ArrayList<Player> players;
@@ -37,7 +37,7 @@ public class Show_Role extends AppCompatActivity {
         setContentView(R.layout.activity_show_role);
 
         textView = findViewById(R.id.role_name);
-        next = findViewById(R.id.next);
+        AppCompatImageView next = findViewById(R.id.next);
         previous = findViewById(R.id.previous);
         index = 0;
 

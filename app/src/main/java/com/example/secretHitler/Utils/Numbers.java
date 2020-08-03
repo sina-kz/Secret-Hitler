@@ -13,7 +13,6 @@ public class Numbers {
     public static final int ninePlayersGameNumberOfFascists = 4;
     public static final int tenPlayersGameNumberOfLiberals = 6;
     public static final int tenPlayersGameNumberOfFascists = 4;
-    public static final int numberOfPolicies = 17;
     public static final int numberOfLiberalPolicies = 6;
     public static final int numberOfFascistPolicies = 11;
     public static final int accessibleNumberOfPolicies = 3;

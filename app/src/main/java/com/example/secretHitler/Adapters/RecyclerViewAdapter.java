@@ -22,6 +22,7 @@ import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
@@ -51,9 +52,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View view) {
                 myDialog = new Dialog(mContext);
                 myDialog.setContentView(R.layout.dialog_edit);
-                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                final EditText dialog_text = (EditText) myDialog.findViewById(R.id.dialog_edit_text);
-                Button dialog_button = (Button) myDialog.findViewById(R.id.done);
+                Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                final EditText dialog_text = myDialog.findViewById(R.id.dialog_edit_text);
+                Button dialog_button = myDialog.findViewById(R.id.done);
                 dialog_text.setText(mData.get(holder.getAdapterPosition()).getName());
                 myDialog.show();
                 dialog_button.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +80,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 removeAt(position);
-                Button button = (Button) ((Activity) mContext).findViewById(R.id.addButton);
-                Button startRoleButton = (Button) ((Activity) mContext).findViewById(R.id.start_showing_role);
+                Button button = ((Activity) mContext).findViewById(R.id.addButton);
+                Button startRoleButton = ((Activity) mContext).findViewById(R.id.start_showing_role);
                 button.setEnabled(true);
                 startRoleButton.setEnabled(false);
             }
@@ -103,10 +104,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            playerName = (TextView) itemView.findViewById(R.id.name_text);
-            imageDelete = (ImageView) itemView.findViewById(R.id.delete_button);
-            imageEdit = (ImageView) itemView.findViewById(R.id.edit_button);
-            cardView = (CardView) itemView.findViewById(R.id.cardView_id);
+            playerName = itemView.findViewById(R.id.name_text);
+            imageDelete = itemView.findViewById(R.id.delete_button);
+            imageEdit = itemView.findViewById(R.id.edit_button);
+            cardView = itemView.findViewById(R.id.cardView_id);
         }
     }
 

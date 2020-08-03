@@ -11,7 +11,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".Activities.PolicyChoose"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Activities.BoardGameActivity"
             android:screenOrientation="landscape" />

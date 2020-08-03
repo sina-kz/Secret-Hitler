@@ -89,12 +89,12 @@ public class CommonController {
             if (selectedChancellor == null) {
                 Toast.makeText(activity, "چنسلر قابل انتخاب نیست", Toast.LENGTH_SHORT).show();
             } else {
-                TextView dialog_president = (TextView) mDialog.findViewById(R.id.president_id_in_dialog);
-                TextView dialog_chancellor = (TextView) mDialog.findViewById(R.id.chanceler_id_in_dialog);
+                TextView dialog_president = mDialog.findViewById(R.id.president_id_in_dialog);
+                TextView dialog_chancellor = mDialog.findViewById(R.id.chanceler_id_in_dialog);
                 dialog_president.setText("رئیس جمهور: " + GameMethods.getCurrentPresident().getName());
                 dialog_chancellor.setText("چنسلر: " + GameMethods.getCurrentChancellor().getName());
-                ImageView dialog_vote_yes_image = (ImageView) mDialog.findViewById(R.id.yes_vote_button);
-                ImageView dialog_vote_no_image = (ImageView) mDialog.findViewById(R.id.no_vote_button);
+                ImageView dialog_vote_yes_image = mDialog.findViewById(R.id.yes_vote_button);
+                ImageView dialog_vote_no_image = mDialog.findViewById(R.id.no_vote_button);
                 mDialog.show();
 
                 dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +130,7 @@ public class CommonController {
                                            final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
                                            final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
                                            final ImageView reject3, final Dialog fascistDialog) {
-        final PolicyCard rejectResult = GameMethods.threeRejectsPolicy(activePlayers, activePolicies);
+        final PolicyCard rejectResult = GameMethods.threeRejectsPolicy(activePolicies);
         if (rejectResult == null) {
             mDialog.dismiss();
             activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
@@ -200,36 +200,47 @@ public class CommonController {
     }
 
     public static void handleLiberalMap(ImageView liberalMap) {
-        if (GameMethods.getAllPlayers().size() == 5 || GameMethods.getAllPlayers().size() == 6) {
-
-        }
-        if (GameMethods.getAllPlayers().size() == 7 || GameMethods.getAllPlayers().size() == 8) {
-            switch (GameMethods.getNumberOfLiberalsUsedPolicies()) {
-                case 0:
-                    liberalMap.setImageResource(R.drawable.lib_board);
-                    break;
-                case 1:
-                    liberalMap.setImageResource(R.drawable.liberal_board_one_success);
-                    break;
-                case 2:
-                    liberalMap.setImageResource(R.drawable.liberal_board_two_success);
-                    break;
-                case 3:
-                    liberalMap.setImageResource(R.drawable.liberal_board_three_success);
-                    break;
-                case 4:
-                    liberalMap.setImageResource(R.drawable.liberal_board_four_success);
-                    break;
-            }
-        }
-        if (GameMethods.getAllPlayers().size() == 9 || GameMethods.getAllPlayers().size() == 10) {
-
+        switch (GameMethods.getNumberOfLiberalsUsedPolicies()) {
+            case 0:
+                liberalMap.setImageResource(R.drawable.lib_board);
+                break;
+            case 1:
+                liberalMap.setImageResource(R.drawable.liberal_board_one_success);
+                break;
+            case 2:
+                liberalMap.setImageResource(R.drawable.liberal_board_two_success);
+                break;
+            case 3:
+                liberalMap.setImageResource(R.drawable.liberal_board_three_success);
+                break;
+            case 4:
+                liberalMap.setImageResource(R.drawable.liberal_board_four_success);
+                break;
         }
     }
 
     public static void handleFascistMap(ImageView fascistMap) {
         if (GameMethods.getAllPlayers().size() == 5 || GameMethods.getAllPlayers().size() == 6) {
-
+            switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
+                case 0:
+                    fascistMap.setImageResource(R.drawable.fascist_board_5_6);
+                    break;
+                case 1:
+                    fascistMap.setImageResource(R.drawable.fascist_board_5_6_one_fail);
+                    break;
+                case 2:
+                    fascistMap.setImageResource(R.drawable.fascist_board_5_6_two_fail);
+                    break;
+                case 3:
+                    fascistMap.setImageResource(R.drawable.fascist_board_5_6_three_fail);
+                    break;
+                case 4:
+                    fascistMap.setImageResource(R.drawable.fascist_board_5_6_four_fail);
+                    break;
+                case 5:
+                    fascistMap.setImageResource(R.drawable.fascist_board_5_6_five_fail);
+                    break;
+            }
         }
         if (GameMethods.getAllPlayers().size() == 7 || GameMethods.getAllPlayers().size() == 8) {
             switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
@@ -254,15 +265,34 @@ public class CommonController {
             }
         }
         if (GameMethods.getAllPlayers().size() == 9 || GameMethods.getAllPlayers().size() == 10) {
-
+            switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
+                case 0:
+                    fascistMap.setImageResource(R.drawable.fascist_board_9_10);
+                    break;
+                case 1:
+                    fascistMap.setImageResource(R.drawable.fascist_board_9_10_one_fail);
+                    break;
+                case 2:
+                    fascistMap.setImageResource(R.drawable.fascist_board_9_10_two_fail);
+                    break;
+                case 3:
+                    fascistMap.setImageResource(R.drawable.fascist_board_9_10_three_fail);
+                    break;
+                case 4:
+                    fascistMap.setImageResource(R.drawable.fascist_board_9_10_four_fail);
+                    break;
+                case 5:
+                    fascistMap.setImageResource(R.drawable.fascist_board_9_10_five_fail);
+                    break;
+            }
         }
     }
 
     public static void checkLiberalCardApproval(final Activity activity, final ArrayList<CheckBox> lstCheckBoxes,
-                                                 final RecyclerView recyclerView, final TextView showPresidentTextView,
-                                                 final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
-                                                 final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
-                                                 final ImageView reject3, final Dialog fascistDialog) {
+                                                final RecyclerView recyclerView, final TextView showPresidentTextView,
+                                                final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
+                                                final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
+                                                final ImageView reject3, final Dialog fascistDialog) {
         boolean liberalsWon = GameMethods.checkWinStateForLiberals(GameMethods.getAllPlayers());
         GameMethods.nextPresident(activePlayers);
         showChancellors(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
@@ -275,10 +305,10 @@ public class CommonController {
     }
 
     public static void checkFascistCardApproval(final Activity activity, final ArrayList<CheckBox> lstCheckBoxes,
-                                                 final RecyclerView recyclerView, final TextView showPresidentTextView,
-                                                 final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
-                                                 final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
-                                                 final ImageView reject3, final Dialog fascistDialog) {
+                                                final RecyclerView recyclerView, final TextView showPresidentTextView,
+                                                final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
+                                                final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
+                                                final ImageView reject3, final Dialog fascistDialog) {
         try {
             fascistDialog.dismiss();
         } catch (Exception e) {
@@ -320,7 +350,25 @@ public class CommonController {
                 }
             }
             if (GameMethods.getAllPlayers().size() == 9 || GameMethods.getAllPlayers().size() == 10) {
-
+                switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
+                    case 1:
+                    case 2:
+                        showFascistDialogBoxSecondOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
+                        break;
+                    case 3:
+                        showFascistDialogBoxUpperOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 3);
+                        break;
+                    case 4:
+                        showFascistDialogBoxUpperOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 4);
+                        break;
+                    case 5:
+                        showFascistDialogBoxUpperOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 5);
+                        break;
+                }
             }
 //            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
 //            GameMethods.nextPresident(activePlayers);
@@ -336,7 +384,6 @@ public class CommonController {
         fascistDialog.setContentView(R.layout.dialog_player_team);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        TextView subject = fascistDialog.findViewById(R.id.fascistDialogHeader);
         final Button button = fascistDialog.findViewById(R.id.fascistDialogButton);
         RecyclerView otherPlayersRV = fascistDialog.findViewById(R.id.fascistDialogPlayers);
 
@@ -355,8 +402,8 @@ public class CommonController {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView team = (ImageView) fascistDialog.findViewById(R.id.fascistDialogTeamFront);
-                ImageView back = (ImageView) fascistDialog.findViewById(R.id.fascistDialogTeamBack);
+                ImageView team = fascistDialog.findViewById(R.id.fascistDialogTeamFront);
+                ImageView back = fascistDialog.findViewById(R.id.fascistDialogTeamBack);
                 AnimatorSet front_anim, back_anim;
 
                 double scale = activity.getResources().getDisplayMetrics().density;

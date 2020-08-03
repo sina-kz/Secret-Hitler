@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +36,7 @@ public class addNameActivity extends AppCompatActivity {
         start_showing_role = findViewById(R.id.start_showing_role);
         start_showing_role.setEnabled(false);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstPlayer);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(myAdapter);
@@ -99,7 +98,7 @@ public class addNameActivity extends AppCompatActivity {
                             break;
                     }
                     Intent intent = new Intent(getBaseContext(), Show_Role.class);
-                    intent.putParcelableArrayListExtra("Players", (ArrayList<? extends Parcelable>) lstPlayer);
+                    intent.putParcelableArrayListExtra("Players", lstPlayer);
                     startActivity(intent);
                 }
             }

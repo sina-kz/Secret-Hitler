@@ -15,7 +15,6 @@ import com.example.secretHitler.Models.Player;
 import com.example.secretHitler.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecyclerViewAdapterChanceler extends RecyclerView.Adapter<RecyclerViewAdapterChanceler.MyViewHolderChanceler> {
 
@@ -73,8 +72,8 @@ public class RecyclerViewAdapterChanceler extends RecyclerView.Adapter<RecyclerV
         public MyViewHolderChanceler(@NonNull View itemView) {
             super(itemView);
 
-            player_name = (TextView) itemView.findViewById(R.id.chanceler_text_view);
-            player_checkbox = (CheckBox) itemView.findViewById(R.id.chanceler_checkbox);
+            player_name = itemView.findViewById(R.id.chanceler_text_view);
+            player_checkbox = itemView.findViewById(R.id.chanceler_checkbox);
         }
     }
 

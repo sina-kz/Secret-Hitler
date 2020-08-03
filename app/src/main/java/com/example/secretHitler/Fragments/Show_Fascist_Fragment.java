@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 
 public class Show_Fascist_Fragment extends Fragment {
-    private EasyFlipView fascistFlipView;
     private int counter;
     private ArrayList<Player> players;
     private Player player;
@@ -32,7 +31,7 @@ public class Show_Fascist_Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.role_fascist_fragment, container, false);
         counter = 0;
-        fascistFlipView = view.findViewById(R.id.fascist_flipview);
+        EasyFlipView fascistFlipView = view.findViewById(R.id.fascist_flipview);
         fascistFlipView.setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
             @SuppressLint("SetTextI18n")
             @Override

@@ -111,8 +111,4 @@ public class Player implements Parcelable {
     public boolean isWon() {
         return won;
     }
-
-    public void setWon(boolean won) {
-        won = won;
-    }
 }
