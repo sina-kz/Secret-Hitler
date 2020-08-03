@@ -364,6 +364,10 @@ public class GameMethods {
         return presidentPointer;
     }
 
+    public static int getNumberOfRejects() {
+        return numberOfRejects;
+    }
+
     public static void reinitialize() {
         currentPresident = null;
         currentChancellor = null;

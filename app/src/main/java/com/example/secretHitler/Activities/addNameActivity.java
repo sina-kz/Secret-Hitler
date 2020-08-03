@@ -35,6 +35,7 @@ public class addNameActivity extends AppCompatActivity {
         addButton = findViewById(R.id.addButton);
         nameText = findViewById(R.id.name);
         start_showing_role = findViewById(R.id.start_showing_role);
+        start_showing_role.setEnabled(false);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         final RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstPlayer);
@@ -53,7 +54,7 @@ public class addNameActivity extends AppCompatActivity {
                         flag = false;
                     }
                 }
-                if(nameText.getText().toString().equals("")) {
+                if (nameText.getText().toString().equals("")) {
                     Toast.makeText(addNameActivity.this, "نام بازیکن خالی است", Toast.LENGTH_SHORT).show();
                     flag = false;
                 }
@@ -65,6 +66,7 @@ public class addNameActivity extends AppCompatActivity {
                     myAdapter.notifyItemInserted(lstPlayer.size() - 1);
                     if (numberOfPlayers == lstPlayer.size()) {
                         addButton.setEnabled(false);
+                        start_showing_role.setEnabled(true);
                     }
                 }
             }

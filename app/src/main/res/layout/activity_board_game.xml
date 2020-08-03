@@ -59,16 +59,56 @@
             android:layout_weight="8"
             tools:listitem="@layout/chanceler_item" />
 
-        <Button
-            android:id="@+id/activate_button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_below="@id/recyclerview_chanceler"
             android:layout_weight="1"
-            android:background="@drawable/custom_button_2"
-            android:text="تایید"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/reject_image_1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/checkbox" />
+
+                <ImageView
+                    android:id="@+id/reject_image_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="4dp"
+                    android:layout_toRightOf="@id/reject_image_1"
+                    android:background="@drawable/checkbox" />
+
+                <ImageView
+                    android:id="@+id/reject_image_3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="4dp"
+                    android:layout_toRightOf="@id/reject_image_2"
+                    android:background="@drawable/checkbox" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/activate_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/custom_button_2"
+                android:text="تایید"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

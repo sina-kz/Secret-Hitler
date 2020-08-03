@@ -80,7 +80,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View view) {
                 removeAt(position);
                 Button button = (Button) ((Activity) mContext).findViewById(R.id.addButton);
+                Button startRoleButton = (Button) ((Activity) mContext).findViewById(R.id.start_showing_role);
                 button.setEnabled(true);
+                startRoleButton.setEnabled(false);
             }
         });
     }

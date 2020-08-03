@@ -48,6 +48,7 @@ public class BoardGameActivity extends AppCompatActivity {
     Dialog mDialog;
     Dialog fascistDialog;
     ImageView fascistMap, liberalMap;
+    ImageView reject1, reject2, reject3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,10 @@ public class BoardGameActivity extends AppCompatActivity {
         activateButton = findViewById(R.id.activate_button);
         fascistMap = findViewById(R.id.facscist_board);
         liberalMap = findViewById(R.id.liberal_board);
+
+        reject1 = (ImageView) findViewById(R.id.reject_image_1);
+        reject2 = (ImageView) findViewById(R.id.reject_image_2);
+        reject3 = (ImageView) findViewById(R.id.reject_image_3);
     }
 
     @SuppressLint("SetTextI18n")
@@ -142,6 +147,7 @@ public class BoardGameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         GameMethods.completeAssignChancellor();
+                        handleRejectImage(0);
                         boolean fascistsWon = GameMethods.checkWinStateForFascists();
                         if (fascistsWon && GameMethods.getNumberOfFascistsUsedPolicies() != Numbers.fascistsPolicesToActiveHitler) {
                             final Intent intent = new Intent(getBaseContext(), ShowResultsActivity.class);
@@ -157,8 +163,34 @@ public class BoardGameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         onRejectChancellor();
+                        handleRejectImage(1);
                     }
                 });
+            }
+        }
+    }
+
+    private void handleRejectImage(int code) {
+        if (code == 0) {
+            reject1.setImageResource(R.drawable.checkbox);
+            reject2.setImageResource(R.drawable.checkbox);
+            reject3.setImageResource(R.drawable.checkbox);
+        } else {
+            switch (GameMethods.getNumberOfRejects()) {
+                case 0:
+                    break;
+                case 1:
+                    reject1.setImageResource(R.drawable.reject_image);
+                    break;
+                case 2:
+                    reject1.setImageResource(R.drawable.reject_image);
+                    reject2.setImageResource(R.drawable.reject_image);
+                    break;
+                case 3:
+                    reject1.setImageResource(R.drawable.reject_image);
+                    reject2.setImageResource(R.drawable.reject_image);
+                    reject3.setImageResource(R.drawable.reject_image);
+                    break;
             }
         }
     }
