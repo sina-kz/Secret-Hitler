@@ -8,7 +8,18 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/second_policy"
+        android:id="@+id/first_policy_front"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_of_policy" />
+
+
+    <ImageView
+        android:id="@+id/second_policy_front"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginStart="165dp"
@@ -18,24 +29,48 @@
         app:srcCompat="@drawable/back_of_policy" />
 
     <ImageView
-        android:id="@+id/third_policy"
+        android:id="@+id/third_policy_front"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginStart="180dp"
         android:layout_marginTop="90dp"
-        app:layout_constraintStart_toEndOf="@+id/first_policy"
+        app:layout_constraintStart_toEndOf="@+id/first_policy_front"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_of_policy" />
 
     <ImageView
-        android:id="@+id/first_policy"
+        android:id="@+id/first_policy_back"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="90dp"
+        android:alpha="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_of_policy" />
+        app:srcCompat="@drawable/facist_card" />
+
+
+    <ImageView
+        android:id="@+id/second_policy_back"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="90dp"
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/facist_card" />
+
+    <ImageView
+        android:id="@+id/third_policy_back"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="90dp"
+        android:alpha="0"
+        app:layout_constraintStart_toEndOf="@+id/first_policy_front"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/facist_card" />
 
     <Button
         android:id="@+id/policy_peek_button"

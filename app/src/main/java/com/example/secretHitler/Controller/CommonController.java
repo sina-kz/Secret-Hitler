@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -556,9 +557,37 @@ public class CommonController {
         fascistDialog.setContentView(R.layout.dialog_policy_peek);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         final Button button = fascistDialog.findViewById(R.id.policy_peek_button);
-        final ImageView policy1 = fascistDialog.findViewById(R.id.first_policy);
-        final ImageView policy2 = fascistDialog.findViewById(R.id.second_policy);
-        final ImageView policy3 = fascistDialog.findViewById(R.id.third_policy);
+        final ImageView card1_front = (ImageView) fascistDialog.findViewById(R.id.first_policy_front);
+        final ImageView card1_back = (ImageView) fascistDialog.findViewById(R.id.first_policy_back);
+        final ImageView card2_front = (ImageView) fascistDialog.findViewById(R.id.second_policy_front);
+        final ImageView card2_back = (ImageView) fascistDialog.findViewById(R.id.second_policy_back);
+        final ImageView card3_front = (ImageView) fascistDialog.findViewById(R.id.third_policy_front);
+        final ImageView card3_back = (ImageView) fascistDialog.findViewById(R.id.third_policy_back);
+
+        final AnimatorSet front_anim1, front_anim2, front_anim3;
+        final AnimatorSet back_anim1, back_anim2, back_anim3;
+
+        double scale = activity.getResources().getDisplayMetrics().density;
+        card1_front.setCameraDistance((float) (8000 * scale));
+        card2_front.setCameraDistance((float) (8000 * scale));
+        card3_front.setCameraDistance((float) (8000 * scale));
+        card1_back.setCameraDistance((float) (8000 * scale));
+        card2_back.setCameraDistance((float) (8000 * scale));
+        card3_back.setCameraDistance((float) (8000 * scale));
+
+        front_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(activity.getApplicationContext(), R.animator.front_animator);
+        back_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(activity.getApplicationContext(), R.animator.back_animator);
+
+        front_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(activity.getApplicationContext(), R.animator.front_animator);
+        back_anim2 = (AnimatorSet) AnimatorInflater.loadAnimator(activity.getApplicationContext(), R.animator.back_animator);
+
+        front_anim3 = (AnimatorSet) AnimatorInflater.loadAnimator(activity.getApplicationContext(), R.animator.front_animator);
+        back_anim3 = (AnimatorSet) AnimatorInflater.loadAnimator(activity.getApplicationContext(), R.animator.back_animator);
+
+        card1_back.setClickable(false);
+        card2_back.setClickable(false);
+        card3_back.setClickable(false);
+
         fascistDialog.show();
         final ArrayList<PolicyCard> topThree = GameMethods.pickThreePolicies(activePolicies);
 
@@ -567,20 +596,36 @@ public class CommonController {
             public void onClick(View v) {
                 if (button.getText().equals("برگرداندن کارت ها")) {
                     if (topThree.get(0).getType() == Team.LIBERAL) {
-                        policy1.setImageResource(R.drawable.liberal_card);
+                        card1_back.setImageResource(R.drawable.liberal_card);
                     } else {
-                        policy1.setImageResource(R.drawable.facist_card);
+                        card1_back.setImageResource(R.drawable.facist_card);
                     }
                     if (topThree.get(1).getType() == Team.LIBERAL) {
-                        policy2.setImageResource(R.drawable.liberal_card);
+                        card2_back.setImageResource(R.drawable.liberal_card);
                     } else {
-                        policy2.setImageResource(R.drawable.facist_card);
+                        card2_back.setImageResource(R.drawable.facist_card);
                     }
                     if (topThree.get(2).getType() == Team.LIBERAL) {
-                        policy3.setImageResource(R.drawable.liberal_card);
+                        card3_back.setImageResource(R.drawable.liberal_card);
                     } else {
-                        policy3.setImageResource(R.drawable.facist_card);
+                        card3_back.setImageResource(R.drawable.facist_card);
                     }
+
+                    front_anim1.setTarget(card1_front);
+                    back_anim1.setTarget(card1_back);
+                    front_anim1.start();
+                    back_anim1.start();
+
+                    front_anim2.setTarget(card2_front);
+                    back_anim2.setTarget(card2_back);
+                    front_anim2.start();
+                    back_anim2.start();
+
+                    front_anim3.setTarget(card3_front);
+                    back_anim3.setTarget(card3_back);
+                    front_anim3.start();
+                    back_anim3.start();
+
                     button.setText("بستن");
                 } else if (button.getText().equals("بستن")) {
                     fascistDialog.dismiss();
