@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -331,8 +330,9 @@ public class CommonController {
                                 mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
                         break;
                     case 3:
+                        activePolicies = GameMethods.activePolicies(activePolicies);
                         showPolicyPeekDialogBox(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
-                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 3);
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
                         break;
                     case 4:
                         showFascistDialogBoxUpperOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
@@ -553,7 +553,7 @@ public class CommonController {
                                                 final RecyclerView recyclerView, final TextView showPresidentTextView,
                                                 final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
                                                 final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
-                                                final ImageView reject3, final Dialog fascistDialog, final int round) {
+                                                final ImageView reject3, final Dialog fascistDialog) {
         fascistDialog.setContentView(R.layout.dialog_policy_peek);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         final Button button = fascistDialog.findViewById(R.id.policy_peek_button);
@@ -630,9 +630,7 @@ public class CommonController {
                 } else if (button.getText().equals("بستن")) {
                     fascistDialog.dismiss();
                     activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
-                    if (round != 3) {
-                        GameMethods.nextPresident(activePlayers);
-                    }
+                    GameMethods.nextPresident(activePlayers);
                     showChancellors(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
                             mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
                 }
