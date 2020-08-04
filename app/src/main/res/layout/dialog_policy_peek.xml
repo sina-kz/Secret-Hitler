@@ -1,0 +1,63 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="450dp"
+    android:layout_height="360dp"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_voting_background"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/second_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_of_policy" />
+
+    <ImageView
+        android:id="@+id/third_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintStart_toEndOf="@+id/first_policy"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_of_policy" />
+
+    <ImageView
+        android:id="@+id/first_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_of_policy" />
+
+    <Button
+        android:id="@+id/policy_peek_button"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/custom_button_2"
+        android:text="برگرداندن کارت ها"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        android:gravity="center"
+        android:text="رئیس جمهور می تواند سه سیاست رویی را مشاهده کند"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

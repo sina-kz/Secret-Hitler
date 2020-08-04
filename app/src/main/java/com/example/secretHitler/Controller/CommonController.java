@@ -321,7 +321,27 @@ public class CommonController {
             activity.startActivity(intent);
         } else {
             if (GameMethods.getAllPlayers().size() == 5 || GameMethods.getAllPlayers().size() == 6) {
-
+                switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
+                    case 1:
+                    case 2:
+                        activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+                        GameMethods.nextPresident(activePlayers);
+                        showChancellors(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
+                        break;
+                    case 3:
+                        showPolicyPeekDialogBox(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 3);
+                        break;
+                    case 4:
+                        showFascistDialogBoxUpperOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 4);
+                        break;
+                    case 5:
+                        showFascistDialogBoxUpperOrder(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                                mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog, 5);
+                        break;
+                }
             }
             if (GameMethods.getAllPlayers().size() == 7 || GameMethods.getAllPlayers().size() == 8) {
                 switch (GameMethods.getNumberOfFascistsUsedPolicies()) {
@@ -520,6 +540,51 @@ public class CommonController {
                 } else if (button.getText().equals("بستن")) {
                     fascistDialog.dismiss();
                     activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
+                    GameMethods.nextPresident(activePlayers);
+                    showChancellors(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
+                            mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
+                }
+            }
+        });
+    }
+
+    private static void showPolicyPeekDialogBox(final Activity activity, final ArrayList<CheckBox> lstCheckBoxes,
+                                                final RecyclerView recyclerView, final TextView showPresidentTextView,
+                                                final Button activateButton, final Dialog mDialog, final ImageView liberalMap,
+                                                final ImageView fascistMap, final ImageView reject1, final ImageView reject2,
+                                                final ImageView reject3, final Dialog fascistDialog, final int round) {
+        fascistDialog.setContentView(R.layout.dialog_policy_peek);
+        Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        final Button button = fascistDialog.findViewById(R.id.policy_peek_button);
+        final ImageView policy1 = fascistDialog.findViewById(R.id.first_policy);
+        final ImageView policy2 = fascistDialog.findViewById(R.id.second_policy);
+        final ImageView policy3 = fascistDialog.findViewById(R.id.third_policy);
+        fascistDialog.show();
+        final ArrayList<PolicyCard> topThree = GameMethods.pickThreePolicies(activePolicies);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button.getText().equals("برگرداندن کارت ها")) {
+                    if (topThree.get(0).getType() == Team.LIBERAL) {
+                        policy1.setImageResource(R.drawable.liberal_card);
+                    } else {
+                        policy1.setImageResource(R.drawable.facist_card);
+                    }
+                    if (topThree.get(1).getType() == Team.LIBERAL) {
+                        policy2.setImageResource(R.drawable.liberal_card);
+                    } else {
+                        policy2.setImageResource(R.drawable.facist_card);
+                    }
+                    if (topThree.get(2).getType() == Team.LIBERAL) {
+                        policy3.setImageResource(R.drawable.liberal_card);
+                    } else {
+                        policy3.setImageResource(R.drawable.facist_card);
+                    }
+                    button.setText("بستن");
+                } else if (button.getText().equals("بستن")) {
+                    fascistDialog.dismiss();
+                    activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
                     if (round != 3) {
                         GameMethods.nextPresident(activePlayers);
                     }
@@ -529,4 +594,5 @@ public class CommonController {
             }
         });
     }
+
 }
