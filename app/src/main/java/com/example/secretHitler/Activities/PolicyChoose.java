@@ -22,4 +22,8 @@ public class PolicyChoose extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

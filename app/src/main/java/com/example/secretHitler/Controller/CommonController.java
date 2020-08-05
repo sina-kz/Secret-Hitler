@@ -95,6 +95,7 @@ public class CommonController {
                 dialog_chancellor.setText("چنسلر: " + GameMethods.getCurrentChancellor().getName());
                 ImageView dialog_vote_yes_image = mDialog.findViewById(R.id.yes_vote_button);
                 ImageView dialog_vote_no_image = mDialog.findViewById(R.id.no_vote_button);
+                mDialog.setCanceledOnTouchOutside(false);
                 mDialog.show();
 
                 dialog_vote_yes_image.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +168,7 @@ public class CommonController {
                     }
                 }
             });
+            dialog.setCanceledOnTouchOutside(false);
             dialog.show();
         }
     }
@@ -417,7 +419,7 @@ public class CommonController {
         RecyclerViewAdapterChanceler myAdapter = new RecyclerViewAdapterChanceler(activity, otherPlayers, fCheckBoxes);
         otherPlayersRV.setLayoutManager(new LinearLayoutManager(activity));
         otherPlayersRV.setAdapter(myAdapter);
-
+        fascistDialog.setCanceledOnTouchOutside(false);
         fascistDialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -501,6 +503,7 @@ public class CommonController {
                 subject.append("\nقدرت وتو نیز فعال شد");
             }
         }
+        fascistDialog.setCanceledOnTouchOutside(false);
         fascistDialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -541,7 +544,9 @@ public class CommonController {
                 } else if (button.getText().equals("بستن")) {
                     fascistDialog.dismiss();
                     activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
-                    GameMethods.nextPresident(activePlayers);
+                    if (round != 3) {
+                        GameMethods.nextPresident(activePlayers);
+                    }
                     showChancellors(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
                             mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
                 }
@@ -587,7 +592,7 @@ public class CommonController {
         card1_back.setClickable(false);
         card2_back.setClickable(false);
         card3_back.setClickable(false);
-
+        fascistDialog.setCanceledOnTouchOutside(false);
         fascistDialog.show();
         final ArrayList<PolicyCard> topThree = GameMethods.pickThreePolicies(activePolicies);
 

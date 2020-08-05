@@ -128,4 +128,9 @@ public class BoardGameActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

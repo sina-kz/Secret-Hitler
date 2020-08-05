@@ -53,4 +53,9 @@ public class ShowResultsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

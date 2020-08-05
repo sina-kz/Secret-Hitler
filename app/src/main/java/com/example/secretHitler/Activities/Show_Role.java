@@ -121,4 +121,8 @@ public class Show_Role extends AppCompatActivity {
         if (index == 0) previous.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

@@ -27,7 +27,7 @@ public class GameRulesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.temp);
+        setContentView(R.layout.activity_game_rules);
 
         AppCompatImageView next = findViewById(R.id.rules_next);
         previous = findViewById(R.id.rules_previous);

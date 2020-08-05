@@ -39,4 +39,9 @@ public class LaunchActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
