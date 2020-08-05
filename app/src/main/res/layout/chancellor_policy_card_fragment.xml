@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/chancellor_message"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/r2"
         android:layout_centerHorizontal="true"

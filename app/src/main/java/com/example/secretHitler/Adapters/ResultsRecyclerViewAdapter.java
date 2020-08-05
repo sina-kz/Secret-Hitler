@@ -2,9 +2,11 @@ package com.example.secretHitler.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,22 +43,22 @@ public class ResultsRecyclerViewAdapter extends RecyclerView.Adapter<ResultsRecy
     public void onBindViewHolder(@NonNull final MyViewHolderResult holder, int position) {
         holder.playerName.setText(mData.get(position).getName());
         if (mData.get(position).getTeam() == Team.LIBERAL) {
-            if(GameMethods.isLiberalsWon()) {
+            if (GameMethods.isLiberalsWon()) {
                 holder.playerWinningResult.setText("برنده");
                 holder.playerWinningResult.setTextColor(Color.GREEN);
-            }
-            else {
+            } else {
                 holder.playerWinningResult.setText("بازنده");
                 holder.playerWinningResult.setTextColor(Color.RED);
+                holder.state.setVisibility(View.INVISIBLE);
             }
         } else {
-            if(!GameMethods.isLiberalsWon()) {
+            if (!GameMethods.isLiberalsWon()) {
                 holder.playerWinningResult.setText("برنده");
                 holder.playerWinningResult.setTextColor(Color.GREEN);
-            }
-            else {
+            } else {
                 holder.playerWinningResult.setText("بازنده");
                 holder.playerWinningResult.setTextColor(Color.RED);
+                holder.state.setVisibility(View.INVISIBLE);
             }
         }
         winningTextViews.add(holder.playerWinningResult);
@@ -70,11 +72,13 @@ public class ResultsRecyclerViewAdapter extends RecyclerView.Adapter<ResultsRecy
     public static class MyViewHolderResult extends RecyclerView.ViewHolder {
         TextView playerName;
         TextView playerWinningResult;
+        ImageView state;
 
         public MyViewHolderResult(@NonNull View itemView) {
             super(itemView);
             playerName = itemView.findViewById(R.id.player_name);
             playerWinningResult = itemView.findViewById(R.id.winning_textview);
+            state = itemView.findViewById(R.id.state);
         }
     }
 }
