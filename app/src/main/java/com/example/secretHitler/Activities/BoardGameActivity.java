@@ -99,6 +99,7 @@ public class BoardGameActivity extends AppCompatActivity {
                 assert data != null;
                 PolicyCard choosePolicyCard = data.getParcelableExtra("RESULT");
                 mDialog.dismiss();
+                activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
                 if (choosePolicyCard == null) {
                     GameMethods.nextPresident(activePlayers);
                     CommonController.showChancellors(this, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton
