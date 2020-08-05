@@ -562,12 +562,12 @@ public class CommonController {
         fascistDialog.setContentView(R.layout.dialog_policy_peek);
         Objects.requireNonNull(fascistDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         final Button button = fascistDialog.findViewById(R.id.policy_peek_button);
-        final ImageView card1_front = (ImageView) fascistDialog.findViewById(R.id.first_policy_front);
-        final ImageView card1_back = (ImageView) fascistDialog.findViewById(R.id.first_policy_back);
-        final ImageView card2_front = (ImageView) fascistDialog.findViewById(R.id.second_policy_front);
-        final ImageView card2_back = (ImageView) fascistDialog.findViewById(R.id.second_policy_back);
-        final ImageView card3_front = (ImageView) fascistDialog.findViewById(R.id.third_policy_front);
-        final ImageView card3_back = (ImageView) fascistDialog.findViewById(R.id.third_policy_back);
+        final ImageView card1_front = fascistDialog.findViewById(R.id.first_policy_front);
+        final ImageView card1_back = fascistDialog.findViewById(R.id.first_policy_back);
+        final ImageView card2_front = fascistDialog.findViewById(R.id.second_policy_front);
+        final ImageView card2_back = fascistDialog.findViewById(R.id.second_policy_back);
+        final ImageView card3_front = fascistDialog.findViewById(R.id.third_policy_front);
+        final ImageView card3_back = fascistDialog.findViewById(R.id.third_policy_back);
 
         final AnimatorSet front_anim1, front_anim2, front_anim3;
         final AnimatorSet back_anim1, back_anim2, back_anim3;

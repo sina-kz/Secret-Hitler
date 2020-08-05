@@ -212,7 +212,6 @@ public class GameMethods {
     public static void nextPresident(ArrayList<Player> players) {
         if (presidentPointer >= players.size()) {
             presidentPointer = 0;
-            System.out.println("NIMA");
         } else
             presidentPointer = (presidentPointer + 1) % players.size();
         currentPresident = players.get(presidentPointer);

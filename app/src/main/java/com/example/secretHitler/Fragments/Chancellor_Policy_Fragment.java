@@ -51,12 +51,12 @@ public class Chancellor_Policy_Fragment extends Fragment {
         assert bundle != null;
         policyCardArrayList = bundle.getParcelableArrayList("POLICY");
 
-        card1_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_front);
-        card2_front = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_front);
-        card1_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_1_back);
-        card2_back = (ImageView) view.findViewById(R.id.chancellor_policy_card_2_back);
-        reverse = (Button) view.findViewById(R.id.chancellor_reverse_cards_button);
-        vetoButton = (Button) view.findViewById(R.id.veto_button);
+        card1_front = view.findViewById(R.id.chancellor_policy_card_1_front);
+        card2_front = view.findViewById(R.id.chancellor_policy_card_2_front);
+        card1_back = view.findViewById(R.id.chancellor_policy_card_1_back);
+        card2_back = view.findViewById(R.id.chancellor_policy_card_2_back);
+        reverse = view.findViewById(R.id.chancellor_reverse_cards_button);
+        vetoButton = view.findViewById(R.id.veto_button);
         showMessage = view.findViewById(R.id.chancellor_message);
 
         if (policyCardArrayList.get(0).getType() == Team.LIBERAL) {
@@ -169,10 +169,10 @@ public class Chancellor_Policy_Fragment extends Fragment {
                 vetoDialog = new Dialog(Objects.requireNonNull(getContext()));
                 vetoDialog.setContentView(R.layout.dialog_box_veto);
                 Objects.requireNonNull(vetoDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                TextView presidentText = (TextView) vetoDialog.findViewById(R.id.president_id_in_dialog_veto);
+                TextView presidentText = vetoDialog.findViewById(R.id.president_id_in_dialog_veto);
                 presidentText.setText("رئیس جمهور: " + GameMethods.getCurrentPresident().getName());
-                ImageView yesButton = (ImageView) vetoDialog.findViewById(R.id.yes_veto_button);
-                ImageView noButton = (ImageView) vetoDialog.findViewById(R.id.no_veto_button);
+                ImageView yesButton = vetoDialog.findViewById(R.id.yes_veto_button);
+                ImageView noButton = vetoDialog.findViewById(R.id.no_veto_button);
                 vetoDialog.show();
 
                 yesButton.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +180,6 @@ public class Chancellor_Policy_Fragment extends Fragment {
                     public void onClick(View view) {
                         vetoDialog.dismiss();
                         GameMethods.useVetoPower(policyCardArrayList);
-                        System.out.println(GameMethods.activePolicies(GameMethods.getAllPolicies()).size());
                         Objects.requireNonNull(getActivity()).setResult(Activity.RESULT_OK, new Intent());
                         getActivity().finish();
                     }

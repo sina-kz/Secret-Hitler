@@ -40,13 +40,13 @@ public class President_Policy_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.president_policy_card_fragment, container, false);
 
-        card1_front = (ImageView) view.findViewById(R.id.president_policy_card_1_front);
-        card2_front = (ImageView) view.findViewById(R.id.president_policy_card_2_front);
-        card3_front = (ImageView) view.findViewById(R.id.president_policy_card_3_front);
-        card1_back = (ImageView) view.findViewById(R.id.president_policy_card_1_back);
-        card2_back = (ImageView) view.findViewById(R.id.president_policy_card_2_back);
-        card3_back = (ImageView) view.findViewById(R.id.president_policy_card_3_back);
-        reverse = (Button) view.findViewById(R.id.president_reverse_cards_button);
+        card1_front = view.findViewById(R.id.president_policy_card_1_front);
+        card2_front = view.findViewById(R.id.president_policy_card_2_front);
+        card3_front = view.findViewById(R.id.president_policy_card_3_front);
+        card1_back = view.findViewById(R.id.president_policy_card_1_back);
+        card2_back = view.findViewById(R.id.president_policy_card_2_back);
+        card3_back = view.findViewById(R.id.president_policy_card_3_back);
+        reverse = view.findViewById(R.id.president_reverse_cards_button);
         showMessage = view.findViewById(R.id.president_message);
         ArrayList<PolicyCard> activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
         if (activePolicies.size() < Numbers.accessibleNumberOfPolicies) {

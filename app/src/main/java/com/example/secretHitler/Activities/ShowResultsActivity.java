@@ -43,8 +43,6 @@ public class ShowResultsActivity extends AppCompatActivity {
         ResultsRecyclerViewAdapter fascistsAdapter = new ResultsRecyclerViewAdapter(this, fascists, fascistsTextViews);
         fascistsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         fascistsRecyclerView.setAdapter(fascistsAdapter);
-        System.out.println(liberalsTextViews.size());
-        System.out.println(fascistsTextViews.size());
         endGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

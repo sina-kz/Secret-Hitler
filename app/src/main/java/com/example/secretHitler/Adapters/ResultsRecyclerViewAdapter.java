@@ -40,7 +40,6 @@ public class ResultsRecyclerViewAdapter extends RecyclerView.Adapter<ResultsRecy
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolderResult holder, int position) {
         holder.playerName.setText(mData.get(position).getName());
-        System.out.println(position + mData.get(position).getName() + mData.get(position).isWon());
         if (mData.get(position).getTeam() == Team.LIBERAL) {
             if(GameMethods.isLiberalsWon()) {
                 holder.playerWinningResult.setText("برنده");
