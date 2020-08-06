@@ -393,9 +393,6 @@ public class CommonController {
                         break;
                 }
             }
-//            activePlayers = GameMethods.activePlayers(GameMethods.getAllPlayers());
-//            GameMethods.nextPresident(activePlayers);
-//            showChancellors();
         }
     }
 

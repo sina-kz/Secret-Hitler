@@ -25,6 +25,7 @@ public class GameMethods {
     private static ArrayList<Player> allPlayers;
     private static boolean vetoEnable;
     private static boolean liberalsWon;
+    private static int killedIndex;
 
     public static ArrayList<Player> activePlayers(ArrayList<Player> players) {
         ArrayList<Player> newPlayers = new ArrayList<>();
@@ -37,7 +38,14 @@ public class GameMethods {
     }
 
     public static void kill(Player player) {
+        ArrayList<Player> activePlayers = activePlayers(allPlayers);
         player.setActive(false);
+        for (int i = 0; i < activePlayers.size(); i++) {
+            if (player == activePlayers.get(i)) {
+                setKilledIndex(i);
+                break;
+            }
+        }
     }
 
     public static void initializePolicies() {
@@ -212,9 +220,16 @@ public class GameMethods {
     public static void nextPresident(ArrayList<Player> players) {
         if (presidentPointer >= players.size()) {
             presidentPointer = 0;
-        } else
-            presidentPointer = (presidentPointer + 1) % players.size();
+        } else {
+            if (killedIndex < presidentPointer) {
+                presidentPointer = presidentPointer % players.size();
+            }
+            else {
+                presidentPointer = (presidentPointer + 1) % players.size();
+            }
+        }
         currentPresident = players.get(presidentPointer);
+        setKilledIndex(players.size());
     }
 
     public static void nextPresidentWhenKill(ArrayList<Player> activePlayers) {
@@ -306,6 +321,7 @@ public class GameMethods {
 
     public static void setAllPlayers(ArrayList<Player> allPlayers) {
         GameMethods.allPlayers = allPlayers;
+        setKilledIndex(allPlayers.size());
     }
 
     public static void setVetoEnable(boolean vetoEnable) {
@@ -339,5 +355,10 @@ public class GameMethods {
         allPlayers = null;
         vetoEnable = false;
         liberalsWon = false;
+        killedIndex = 0;
+    }
+
+    public static void setKilledIndex(int killedIndex) {
+        GameMethods.killedIndex = killedIndex;
     }
 }
