@@ -333,6 +333,11 @@ public class CommonController {
                         break;
                     case 3:
                         activePolicies = GameMethods.activePolicies(activePolicies);
+                        if (activePolicies.size() < Numbers.accessibleNumberOfPolicies) {
+                            ArrayList<PolicyCard> newPolicies = GameMethods.reorderPolicies(activePolicies);
+                            GameMethods.setAllPolicies(newPolicies);
+                            activePolicies = GameMethods.activePolicies(GameMethods.getAllPolicies());
+                        }
                         showPolicyPeekDialogBox(activity, lstCheckBoxes, recyclerView, showPresidentTextView, activateButton,
                                 mDialog, liberalMap, fascistMap, reject1, reject2, reject3, fascistDialog);
                         break;
