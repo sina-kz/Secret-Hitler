@@ -12,6 +12,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="لطفا کارت مد نظر را بسوزانید"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -84,6 +85,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/custom_button_2"
         android:text="برگرداندن کارت ها"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold" />
 

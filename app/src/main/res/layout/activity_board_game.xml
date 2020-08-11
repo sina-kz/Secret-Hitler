@@ -48,6 +48,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="لطفا چنسلر را انتخاب کنید"
+            android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -106,6 +107,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_2"
                 android:text="تایید"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>

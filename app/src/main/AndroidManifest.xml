@@ -11,22 +11,36 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".Activities.PolicyChoose"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".Activities.BoardGameActivity"
-            android:screenOrientation="landscape" />
-        <activity android:name=".Activities.GameRulesActivity" />
-        <activity android:name=".Activities.Show_Role" />
-        <activity android:name=".Activities.addNameActivity" />
-        <activity android:name=".Activities.ShowResultsActivity" />
-        <activity android:name=".Activities.LaunchActivity">
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".Activities.GameRulesActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".Activities.Show_Role"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".Activities.addNameActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".Activities.ShowResultsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".Activities.LaunchActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.SetupActivity">
+        <activity
+            android:name=".Activities.SetupActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
