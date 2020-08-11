@@ -21,6 +21,9 @@
             android:name=".Activities.GameRulesActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
+            android:name=".Activities.ScrollingRulesActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
             android:name=".Activities.Show_Role"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity

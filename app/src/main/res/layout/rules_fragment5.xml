@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/zar"
         android:gravity="center"
-        android:text="یکی از قدرتهای ریاست جمهوری پرسیدن حزب یک فرد دلخواه است که تنها رئیس جمهور آن را می بیند. در طول بازی تنها یک بار حزب یک نفر دلخواه را میتوان پرسید"
+        android:text="یکی از قدرت\u200cهای ریاست جمهوری، پرسیدن حزب یک فرد دلخواه است که تنها رئیس\u200cجمهور آن را می\u200cبیند."
         android:textColor="@color/black"
         android:textSize="18sp" />
 
@@ -21,7 +21,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/zar"
         android:gravity="center"
-        android:text="در صورتی که رئیس جمهور از قابلیت ترور استفاده کند و شخص ترور شده هیتلر نباشد، حزب فرد ترور شده نباید محرز شود"
+        android:text="در صورتی که رئیس\u200cجمهور از قابلیت ترور استفاده کند و شخص ترور شده هیتلر نباشد، حزب فرد ترور شده نباید محرز شود."
         android:textColor="@color/black"
         android:textSize="18sp" />
 
@@ -31,7 +31,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/zar"
         android:gravity="center"
-        android:text="در صورتی که سه رئیس جمهور به صورت پشت سر هم رای نیاورند، آخرین سیاست موجود در سیاست های سوزانده نشده به عنوان سیاست آن مرحله تصویب میگردد"
+        android:text="در صورتی که سه رئیس\u200cجمهور به صورت پشت سر هم رای نیاورند، آخرین سیاست موجود در سیاست\u200cهای سوزانده نشده به عنوان سیاست آن مرحله تصویب می\u200cگردد."
         android:textColor="@color/black"
         android:textSize="18sp" />
 </LinearLayout>

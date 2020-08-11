@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_2">
+
+    <Button
+        android:id="@+id/exit_rules"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/custom_button_2"
+        android:fontFamily="@font/yekan"
+        android:text="خروج"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/yekan"
+        android:gravity="center"
+        android:text="قوانین بازی"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="350dp"
+        android:layout_height="440dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="تعداد بازیکنان حداقل 5 نفر و حداکثر 10 نفر است و هر فرد در یکی از دو گروه لیبرال یا فاشیست قرار می\u200cگیرد."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="یکی از فاشیست\u200cها، با نقش هیتلر مشخص می\u200cشود. سایر فاشیست\u200cها یکدیگر و هیتلر را می\u200cشناسند (دقیقا می\u200cدانند هیتلر کیست) اما هیتلر دیگر فاشیست\u200cها را نمی\u200cشناسد (البته در بازی\u200cهای زیر 7 نفر می\u200cشناسد). لیبرال\u200cها نیز یکدیگر را نمی\u200cشناسند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="تعداد فاشیست\u200cها در بازی\u200cهای 5 و 6 نفره، 2 نفر، در بازی\u200cهای 7 و 8 نفره، 3 نفر، و در بازی\u200cهای 9 و 10 نفره، 4 نفر می\u200cباشد."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="بازی از تعدادی mission تشکیل شده، یک نفر به عنوان اولین رئیس\u200cجمهور انتخاب می\u200cشود و رئیس\u200cجمهورهای بعدی به ترتیب شماره انتخاب می\u200cشوند. رئیس\u200cجمهور یک فرد را به عنوان نخست\u200cوزیر انتخاب می\u200cکند و در صورتی که بیشتر از 50 درصد افراد بازی موافق این ترکیب باشند، رئیس\u200cجمهور و صدراعظم mission را انجام می\u200cدهند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="رئیس\u200cجمهور و صدراعظمی که آخرین mission را انجام داده\u200cاند، نمی\u200cتوانند در mission بعدی به عنوان صدراعظم انتخاب شوند. اگر فقط 5 نفر در بازی باقی مانده بودند، رئیس\u200cجمهور آخرین mission می\u200cتواند صدراعظم شود."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="بازی از 17 عدد سیاست یا Policy تشکیل شده است. 11 عدد از این سیاست\u200cها فاشیستی و 6 عدد لیبرالی هستند. این سیاست\u200cها به صورت رندوم چیده می\u200cشوند و هر رئیس\u200cجمهور 3 سیاست رویی را می\u200cبیند (سایر افراد اطلاعی ندارند). سپس یکی از این سیاست\u200cها را به انتخاب خود می\u200cسوزاند و دو سیاست دیگر را به صدراعظم میسپارد. سپس صدراعظم یک سیاست را سوزانده و سیاست دیگر را به عنوان نتیجه mission تصویب می\u200cکند. سپس رئیس\u200cجمهور و صدراعظم می\u200cتوانند راجع به سیاست\u200cهایی که مشاهده کردند، دروغ نیز بگویند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="لیبرال\u200cها در صورتی بازی را می\u200cبرند که یا پنج سیاست لیبرال تصویب گردد و یا هیتلر ترور شود.\nفاشیست\u200cها در صورتی بازی را می\u200cبرند که یا شش سیاست فاشیست تصویب گردد و یا پس از تصویب سه سیاست فاشیست، ترکیبی که هیتلر صدراعظم آن هست، رای بیاورد."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="سیاست\u200cهای سوزانده شده به سایر افراد نمایش داده نمی\u200cشوند. در صورتی که تعداد سیاست\u200cهای باقی\u200cمانده کمتر از 2 باشد، سیاست\u200cهای سوزانده شده به آنها اضافه شده و ریست می\u200cشوند. سیاست\u200cهای تصویب شده نیز هرگز به بازی بر نمی\u200cگردند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="رئیس\u200cجمهور پس از تصویب سیاست فاشیست می\u200cتواند از قدرت ریاست جمهوری که در آن مرحله برایش تعریف شده، استفاده کند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="یکی از قدرت\u200cهای ریاست جمهوری، پرسیدن حزب یک فرد دلخواه است که تنها رئیس\u200cجمهور آن را می\u200cبیند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="در صورتی که رئیس\u200cجمهور از قابلیت ترور استفاده کند و شخص ترور شده هیتلر نباشد، حزب فرد ترور شده نباید محرز شود."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="در صورتی که سه رئیس\u200cجمهور به صورت پشت سر هم رای نیاورند، آخرین سیاست موجود در سیاست\u200cهای سوزانده نشده به عنوان سیاست آن مرحله تصویب می\u200cگردد."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="یکی دیگر از قدرت\u200cهای ریاست جمهوری، انتخاب رئیس\u200cجمهور بعدی است، اما پس از این انتخاب رئیس\u200cجمهورهای بعدی مجددا از جای قبلی انتخاب می\u200cشوند."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/background_item"
+                android:fontFamily="@font/zar"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingTop="6dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="6dp"
+                android:text="پس از تصویب پنجمین سیاست فاشیست، قدرت وتو برای mission های بعدی فعال می\u200cشود. بدین صورت که پس از حذف یکی از سیاست\u200cها توسط رئیس\u200cجمهور، نخست\u200cوزیر می\u200cتواند با دیدن دو سیاست مانده، درخواست وتو بدهد و در صورت موافقت رئیس\u200cجمهور، هر 3 سیاست سوزانده می\u200cشوند. اما در صورت عدم موافقت رئیس\u200cجمهور، یک سیاست باید تصویب شود."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

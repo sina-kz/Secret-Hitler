@@ -149,7 +149,7 @@ public class SetupActivity extends AppCompatActivity {
         gameRuleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), GameRulesActivity.class));
+                startActivity(new Intent(getBaseContext(), ScrollingRulesActivity.class));
             }
         });
 

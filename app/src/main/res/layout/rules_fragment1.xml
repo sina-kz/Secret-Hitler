@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/zar"
         android:gravity="center"
-        android:text="تعداد بازیکنان حداقل 5 نفر و حداکثر 10 نفر است و هر فرد در یکی از دو گروه لیبرال یا فاشیست قرار میگیرد."
+        android:text="تعداد بازیکنان حداقل 5 نفر و حداکثر 10 نفر است و هر فرد در یکی از دو گروه لیبرال یا فاشیست قرار می\u200cگیرد."
         android:textColor="@color/black"
         android:textSize="18sp" />
 
@@ -21,7 +21,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/zar"
         android:gravity="center"
-        android:text="یکی از فاشیستها، با نقش هیتلر مشخص میشود. سایر فاشیستها یکدیگر و هیتلر را میشناسند (دقیقا میدانند هیتلر کیست) اما هیتلر دیگر فاشیستها را نمیشناسد (البته در بازیهای زیر 7 نفر میشناسد). لیبرال ها نیز یکدیگر را نمیشناسند"
+        android:text="یکی از فاشیست\u200cها، با نقش هیتلر مشخص می\u200cشود. سایر فاشیست\u200cها یکدیگر و هیتلر را می\u200cشناسند (دقیقا می\u200cدانند هیتلر کیست) اما هیتلر دیگر فاشیست\u200cها را نمی\u200cشناسد (البته در بازی\u200cهای زیر 7 نفر می\u200cشناسد). لیبرال\u200cها نیز یکدیگر را نمی\u200cشناسند."
         android:textColor="@color/black"
         android:textSize="18sp" />
 
@@ -31,7 +31,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/zar"
         android:gravity="center"
-        android:text="تعداد فاشیست ها در بازی های 5 و 6 نفره، 2عدد، در بازی های 7 و 8 نفره، 3 عدد، و در بازی های 9 و 10 نفره، 4 عدد میباشد"
+        android:text="تعداد فاشیست\u200cها در بازی\u200cهای 5 و 6 نفره، 2 نفر، در بازی\u200cهای 7 و 8 نفره، 3 نفر، و در بازی\u200cهای 9 و 10 نفره، 4 نفر می\u200cباشد."
         android:textColor="@color/black"
         android:textSize="18sp" />
 
