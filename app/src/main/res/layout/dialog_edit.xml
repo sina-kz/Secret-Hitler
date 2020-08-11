@@ -24,6 +24,7 @@
             android:layout_toEndOf="@id/dialog_edit_text"
             android:layout_weight="1"
             android:background="@drawable/custom_button_2"
+            android:fontFamily="@font/yekan"
             android:text="تغییر"
             android:textColor="@color/black"
             android:textStyle="bold" />

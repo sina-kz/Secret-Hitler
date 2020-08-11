@@ -4,31 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:text="تعداد بازیکنان حداقل 5 نفر و حداکثر 10 نفر است و هر فرد در یکی از دو گروه لیبرال یا فاشیست قرار میگیرد." />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="تعداد بازیکنان حداقل 5 نفر و حداکثر 10 نفر است و هر فرد در یکی از دو گروه لیبرال یا فاشیست قرار میگیرد."
         android:textColor="@color/black"
-        android:text="یکی از فاشیستها، با نقش هیتلر مشخص میشود. سایر فاشیستها یکدیگر و هیتلر را میشناسند (دقیقا میدانند هیتلر کیست) اما هیتلر دیگر فاشیستها را نمیشناسد (البته در بازیهای زیر 7 نفر میشناسد). لیبرال ها نیز یکدیگر را نمیشناسند" />
+        android:textSize="18sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="یکی از فاشیستها، با نقش هیتلر مشخص میشود. سایر فاشیستها یکدیگر و هیتلر را میشناسند (دقیقا میدانند هیتلر کیست) اما هیتلر دیگر فاشیستها را نمیشناسد (البته در بازیهای زیر 7 نفر میشناسد). لیبرال ها نیز یکدیگر را نمیشناسند"
         android:textColor="@color/black"
-        android:text="تعداد فاشیست ها در بازی های 5 و 6 نفره، 2عدد، در بازی های 7 و 8 نفره، 3 عدد، و در بازی های 9 و 10 نفره، 4 عدد میباشد" />
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/zar"
+        android:gravity="center"
+        android:text="تعداد فاشیست ها در بازی های 5 و 6 نفره، 2عدد، در بازی های 7 و 8 نفره، 3 عدد، و در بازی های 9 و 10 نفره، 4 عدد میباشد"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 
 </LinearLayout>

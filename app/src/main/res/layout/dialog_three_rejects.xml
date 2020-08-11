@@ -9,14 +9,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="3"
+        android:fontFamily="@font/yekan"
+        android:gravity="center"
+        android:text="سه مرتبه تیم های انتخابی رای نیاوردند. در نتیجه سیاست زیر تصویب میگردد"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="سه مرتبه تیم های انتخابی رای نیاوردند. در نتیجه سیاست زیر تصویب میگردد"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/threeRejectsImage"
@@ -39,7 +40,9 @@
         android:layout_marginBottom="5dp"
         android:layout_weight="2"
         android:background="@drawable/custom_button_2"
+        android:fontFamily="@font/yekan"
         android:text="بستن"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold" />
 

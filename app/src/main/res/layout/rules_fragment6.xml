@@ -4,20 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="یکی دیگر از قدرتهای ریاست جمهوری، انتخاب رئیس جمهور بعدی است، اما پس از این انتخاب رئیس جمهورهای بعدی مجددا از جای قبلی انتخاب میشوند"
         android:textColor="@color/black"
-        android:text="یکی دیگر از قدرتهای ریاست جمهوری، انتخاب رئیس جمهور بعدی است، اما پس از این انتخاب رئیس جمهورهای بعدی مجددا از جای قبلی انتخاب میشوند" />
+        android:textSize="18sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="پس از تصویب پنجمین سیاست فاشیست، قدرت وتو برای mission های بعدی فعال میشود. بدین صورت که پس از حذف یکی از سیاست ها توسط رئیس جمهور، نخست وزیر میتواند با دیدن دو سیاست مانده، درخواست وتو بدهد و در صورت موافقت رئیس جمهور، هر 3 کارت سوزانده میشوند. اما در صورت عدم موافقت رئیس جمهور، یک سیاست باید تصویب شود"
         android:textColor="@color/black"
-        android:text="پس از تصویب پنجمین سیاست فاشیست، قدرت وتو برای mission های بعدی فعال میشود. بدین صورت که پس از حذف یکی از سیاست ها توسط رئیس جمهور، نخست وزیر میتواند با دیدن دو سیاست مانده، درخواست وتو بدهد و در صورت موافقت رئیس جمهور، هر 3 کارت سوزانده میشوند. اما در صورت عدم موافقت رئیس جمهور، یک سیاست باید تصویب شود" />
+        android:textSize="18sp" />
 </LinearLayout>

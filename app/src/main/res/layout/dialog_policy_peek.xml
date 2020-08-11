@@ -79,7 +79,9 @@
         android:layout_marginStart="130dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/custom_button_2"
+        android:fontFamily="@font/yekan"
         android:text="برگرداندن کارت ها"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -89,6 +91,7 @@
         android:layout_width="330dp"
         android:layout_height="40dp"
         android:layout_marginStart="60dp"
+        android:fontFamily="@font/yekan"
         android:gravity="center"
         android:text="رئیس جمهور می تواند سه سیاست رویی را مشاهده کند"
         android:textColor="@color/black"

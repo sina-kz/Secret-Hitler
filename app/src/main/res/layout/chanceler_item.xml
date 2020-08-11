@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/chanceler_checkbox"
+        android:fontFamily="@font/yekan"
         android:gravity="center"
         android:text="سینا"
         android:textColor="@color/white"

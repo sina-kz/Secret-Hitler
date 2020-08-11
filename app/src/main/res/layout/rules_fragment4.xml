@@ -4,30 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="لیبرال ها در صورتی بازی را میبرند که یا پنج سیاست لیبرال تصویب گردد و یا هیتلر ترور گردد.\nفاشیست ها در صورتی بازی را میبرند که یا شش سیاست فاشیست تصویب گردد و یا پس از تصویب سه سیاست فاشیست، ترکیبی که هیتلر صدراعظم آن هست، رای بیاورد"
         android:textColor="@color/black"
-        android:text="لیبرال ها در صورتی بازی را میبرند که یا پنج سیاست لیبرال تصویب گردد و یا هیتلر ترور گردد.\nفاشیست ها در صورتی بازی را میبرند که یا شش سیاست فاشیست تصویب گردد و یا پس از تصویب سه سیاست فاشیست، ترکیبی که هیتلر صدراعظم آن هست، رای بیاورد" />
+        android:textSize="18sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="سیاست های سوزانده شده به سایر افراد نمایش داده نمیشود. در صورتی که تعداد سیاست های باقیمانده کمتر از 2 باشد، سیاست های سوزانده شده به آنها اضافه شده و ریست میشوند. سیاست های تصویب شده نیز هرگز به بازی بر نمیگردند"
         android:textColor="@color/black"
-        android:text="سیاست های سوزانده شده به سایر افراد نمایش داده نمیشود. در صورتی که تعداد سیاست های باقیمانده کمتر از 2 باشد، سیاست های سوزانده شده به آنها اضافه شده و ریست میشوند. سیاست های تصویب شده نیز هرگز به بازی بر نمیگردند" />
+        android:textSize="18sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/zar"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="رئیس جمهور پس از تصویب سیاست فاشیست میتواند از قدرت ریاست جمهوری که در آن مرحله برایش تعریف شده استفاده کند"
         android:textColor="@color/black"
-        android:text="رئیس جمهور پس از تصویب سیاست فاشیست میتواند از قدرت ریاست جمهوری که در آن مرحله برایش تعریف شده استفاده کند" />
+        android:textSize="18sp" />
 
 
 </LinearLayout>

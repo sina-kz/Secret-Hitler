@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="8dp"
         android:layout_weight="1"
+        android:fontFamily="@font/yekan"
         android:gravity="center"
         android:text="قوانین بازی"
         android:textSize="24sp"

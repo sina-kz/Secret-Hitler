@@ -13,11 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="@font/yekan"
+        android:gravity="center"
+        android:text="رئیس جمهور باید حزب یکی از افراد را چک کند"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="رئیس جمهور باید حزب یکی از افراد را چک کند" />
+        android:textStyle="bold" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -63,13 +64,15 @@
                 android:id="@+id/fascistDialogButton"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/custom_button_2"
+                android:fontFamily="@font/yekan"
                 android:text="تایید"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
