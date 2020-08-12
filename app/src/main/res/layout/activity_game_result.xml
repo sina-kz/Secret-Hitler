@@ -37,6 +37,7 @@
         android:fontFamily="@font/yekan"
         android:gravity="center"
         android:text="نتیجه بازی"
+        android:textColor="#FFFFFF"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +75,7 @@
         android:background="@drawable/custom_button_2"
         android:fontFamily="@font/yekan"
         android:text="اتمام بازی"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
