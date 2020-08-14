@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView_id"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_margin="8dp">
+    android:layout_height="50dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_item"
-        android:weightSum="5">
+        android:weightSum="6">
 
         <TextView
             android:id="@+id/name_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:fontFamily="@font/yekan"
             android:gravity="center"
             android:text="سینا"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatImageView

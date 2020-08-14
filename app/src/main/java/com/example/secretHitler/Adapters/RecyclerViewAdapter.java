@@ -83,7 +83,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Button button = ((Activity) mContext).findViewById(R.id.addButton);
                 Button startRoleButton = ((Activity) mContext).findViewById(R.id.start_showing_role);
                 button.setEnabled(true);
+                button.setClickable(true);
+                button.setAlpha((float) 1.0);
+
                 startRoleButton.setEnabled(false);
+                startRoleButton.setClickable(false);
+                startRoleButton.setAlpha((float) 0.5);
             }
         });
     }

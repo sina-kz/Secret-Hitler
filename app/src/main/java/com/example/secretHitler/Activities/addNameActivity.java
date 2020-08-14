@@ -43,6 +43,11 @@ public class addNameActivity extends AppCompatActivity {
 
 
         final int numberOfPlayers = getIntent().getIntExtra("NUM_OF_PLAYER", 10);
+
+        start_showing_role.setEnabled(false);
+        start_showing_role.setClickable(false);
+        start_showing_role.setAlpha((float) 0.5);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +70,12 @@ public class addNameActivity extends AppCompatActivity {
                     myAdapter.notifyItemInserted(lstPlayer.size() - 1);
                     if (numberOfPlayers == lstPlayer.size()) {
                         addButton.setEnabled(false);
+                        addButton.setClickable(false);
+                        addButton.setAlpha((float) 0.5);
+
                         start_showing_role.setEnabled(true);
+                        start_showing_role.setClickable(true);
+                        start_showing_role.setAlpha((float) 1.0);
                     }
                 }
             }
